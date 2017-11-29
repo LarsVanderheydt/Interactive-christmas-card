@@ -1,0 +1,18 @@
+#world {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: -webkit-linear-gradient(#79abd0, #76dbd4);
+  background: -o-linear-gradient(#79abd0, #76dbd4);
+  background: linear-gradient(#79abd0, #76dbd4);
+}
+
+:root {
+  --red: #f24647;
+  --white: #d8d0d1;
+  --brown: #59322e;
+  --pink: #f4996c;
+  --brownDark: #231a0f;
+  --blue: #67c6c0;
+}
