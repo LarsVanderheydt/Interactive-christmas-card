@@ -1,13 +1,3 @@
-#world {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: -webkit-linear-gradient(#79abd0, #76dbd4);
-  background: -o-linear-gradient(#79abd0, #76dbd4);
-  background: linear-gradient(#79abd0, #76dbd4);
-}
-
 :root {
   --red: #f24647;
   --white: #d8d0d1;
@@ -15,4 +5,66 @@
   --pink: #f4996c;
   --brownDark: #231a0f;
   --blue: #67c6c0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: -webkit-linear-gradient(#f0323f, #f0323f);
+  background: -o-linear-gradient(#f0323f, #f0323f);
+  background: linear-gradient(#f0323f, #f0323f);
+}
+
+canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+#snow {
+  background: none;
+  font-family: Androgyne;
+  background-image: url('http://www.wearewebstars.dk/codepen/img/s1.png'), url('http://www.wearewebstars.dk/codepen/img//s2.png'), url('http://www.wearewebstars.dk/codepen/img//s3.png');
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  -webkit-animation: snow 10s linear infinite;
+  -moz-animation: snow 10s linear infinite;
+  -ms-animation: snow 10s linear infinite;
+  animation: snow 10s linear infinite;
+}
+
+@keyframes snow {
+  0% { background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% { background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% { background-position: 500px 1000px, 200px 400px, -100px 300px;}
+}
+
+@-moz-keyframes snow {
+  0% { background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% { background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% { background-position: 400px 1000px, 200px 400px, 100px 300px;}
+}
+
+@-webkit-keyframes snow {
+  0% { background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% { background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% { background-position: 500px 1000px, 200px 400px, -100px 300px;}
+}
+
+@-ms-keyframes snow {
+  0% { background-position: 0px 0px, 0px 0px, 0px 0px;}
+  50% { background-position: 500px 500px, 100px 200px, -100px 150px;}
+  100% { background-position: 500px 1000px, 200px 400px, -100px 300px;}
 }
