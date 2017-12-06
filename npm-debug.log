@@ -1,0 +1,96 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'particlesjs',
+1 verbose cli   '—-save' ]
+2 info using npm@4.1.2
+3 info using node@v7.6.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData particlesjs
+8 silly fetchPackageMetaData —-save
+9 silly fetchNamedPackageData particlesjs
+10 silly mapToRegistry name particlesjs
+11 silly mapToRegistry using default registry
+12 silly mapToRegistry registry https://registry.npmjs.org/
+13 silly mapToRegistry data Result {
+13 silly mapToRegistry   raw: 'particlesjs',
+13 silly mapToRegistry   scope: null,
+13 silly mapToRegistry   escapedName: 'particlesjs',
+13 silly mapToRegistry   name: 'particlesjs',
+13 silly mapToRegistry   rawSpec: '',
+13 silly mapToRegistry   spec: 'latest',
+13 silly mapToRegistry   type: 'tag' }
+14 silly mapToRegistry uri https://registry.npmjs.org/particlesjs
+15 silly fetchOtherPackageData —-save
+16 silly cache add args [ '—-save', null ]
+17 verbose cache add spec —-save
+18 verbose request uri https://registry.npmjs.org/particlesjs
+19 verbose request no auth needed
+20 info attempt registry request try #1 at 6:26:30 PM
+21 verbose request id 64b0cd16a0c24d18
+22 http request GET https://registry.npmjs.org/particlesjs
+23 info retry will retry, error on last attempt: TypeError: The header content contains invalid characters
+24 silly cache add parsed spec Result {
+24 silly cache add   raw: '—-save',
+24 silly cache add   scope: null,
+24 silly cache add   escapedName: null,
+24 silly cache add   name: null,
+24 silly cache add   rawSpec: '—-save',
+24 silly cache add   spec: '/Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22/—-save',
+24 silly cache add   type: 'local' }
+25 error addLocal Could not install /Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22/—-save
+26 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open '/Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22/—-save'
+26 silly fetchPackageMetaData  error for —-save { Error: ENOENT: no such file or directory, open '/Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22/—-save'
+26 silly fetchPackageMetaData   errno: -2,
+26 silly fetchPackageMetaData   code: 'ENOENT',
+26 silly fetchPackageMetaData   syscall: 'open',
+26 silly fetchPackageMetaData   path: '/Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22/—-save' }
+27 info attempt registry request try #2 at 6:26:40 PM
+28 http request GET https://registry.npmjs.org/particlesjs
+29 info retry will retry, error on last attempt: TypeError: The header content contains invalid characters
+30 info attempt registry request try #3 at 6:27:40 PM
+31 http request GET https://registry.npmjs.org/particlesjs
+32 silly fetchPackageMetaData TypeError: The header content contains invalid characters
+32 silly fetchPackageMetaData     at ClientRequest.setHeader (_http_outgoing.js:370:11)
+32 silly fetchPackageMetaData     at new ClientRequest (_http_client.js:131:14)
+32 silly fetchPackageMetaData     at Object.request (http.js:26:10)
+32 silly fetchPackageMetaData     at Object.request (https.js:206:15)
+32 silly fetchPackageMetaData     at Request.start (/usr/local/lib/node_modules/npm/node_modules/request/request.js:744:32)
+32 silly fetchPackageMetaData     at Request.end (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1435:10)
+32 silly fetchPackageMetaData     at end (/usr/local/lib/node_modules/npm/node_modules/request/request.js:566:14)
+32 silly fetchPackageMetaData     at Immediate.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:580:7)
+32 silly fetchPackageMetaData     at runCallback (timers.js:651:20)
+32 silly fetchPackageMetaData     at tryOnImmediate (timers.js:624:5)
+32 silly fetchPackageMetaData  error for particlesjs TypeError: The header content contains invalid characters
+32 silly fetchPackageMetaData     at ClientRequest.setHeader (_http_outgoing.js:370:11)
+32 silly fetchPackageMetaData     at new ClientRequest (_http_client.js:131:14)
+32 silly fetchPackageMetaData     at Object.request (http.js:26:10)
+32 silly fetchPackageMetaData     at Object.request (https.js:206:15)
+32 silly fetchPackageMetaData     at Request.start (/usr/local/lib/node_modules/npm/node_modules/request/request.js:744:32)
+32 silly fetchPackageMetaData     at Request.end (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1435:10)
+32 silly fetchPackageMetaData     at end (/usr/local/lib/node_modules/npm/node_modules/request/request.js:566:14)
+32 silly fetchPackageMetaData     at Immediate.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:580:7)
+32 silly fetchPackageMetaData     at runCallback (timers.js:651:20)
+32 silly fetchPackageMetaData     at tryOnImmediate (timers.js:624:5)
+33 silly rollbackFailedOptional Starting
+34 silly rollbackFailedOptional Finishing
+35 silly runTopLevelLifecycles Finishing
+36 silly install printInstalled
+37 verbose stack Error: ENOENT: no such file or directory, open '/Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22/—-save'
+38 verbose cwd /Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22
+39 error Darwin 16.7.0
+40 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "particlesjs" "—-save"
+41 error node v7.6.0
+42 error npm  v4.1.2
+43 error path /Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22/—-save
+44 error code ENOENT
+45 error errno -2
+46 error syscall open
+47 error enoent ENOENT: no such file or directory, open '/Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22/—-save'
+48 error enoent ENOENT: no such file or directory, open '/Users/Louise/Desktop/Devine/jaar4/Ex_web/OPDRACHT/experimental_Group22/—-save'
+48 error enoent This is most likely not a problem with npm itself
+48 error enoent and is related to npm not being able to find a file.
+49 verbose exit [ -2, true ]

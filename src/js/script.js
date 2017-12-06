@@ -20,7 +20,9 @@ import Colors from './objects/colors';
     controls,
     loaded,
     head,
-    stars;
+    stars,
+    windowHalfX,
+    windowHalfY;
 
   let starArray = [];
 
@@ -111,10 +113,9 @@ import Colors from './objects/colors';
 
   const createLights = () => {
 
-    globalLight = new THREE.HemisphereLight(0xffffff, 0x555555, 1);
-    //light = new THREE.HemisphereLight(0xffffff, 0xffffff, .5)
+    globalLight = new THREE.HemisphereLight(0xffffff, 0x555555, .9);
 
-    shadowLight = new THREE.DirectionalLight(0xffffff, .2);
+    shadowLight = new THREE.DirectionalLight(0xffffff, .3);
     shadowLight.position.set(100, 250, 175);
     shadowLight.castShadow = true;
     // shadowLight.shadow.camera.left = -150;
@@ -137,7 +138,7 @@ import Colors from './objects/colors';
     scene.add(globalLight);
     scene.add(shadowLight);
     scene.add(backLight);
-    //scene.add( new THREE.AmbientLight( 0xffffff, 0.3 ));
+    scene.add( new THREE.AmbientLight( 0xeadead, 0.1 ));
   }
 
   // class Star {

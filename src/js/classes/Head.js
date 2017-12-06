@@ -10,6 +10,7 @@ export default class Head {
     let headGeom = new THREE.BoxBufferGeometry(16, 16, 16);
     this.head = new THREE.Mesh(headGeom, Mat.skinMat);
     this.head.castShadow = true;
+    this.head.receiveShadow = false;
     this.mesh.add(this.head);
 
     this.beard = new THREE.Object3D();
@@ -53,12 +54,12 @@ export default class Head {
 
     let beard1Geom = new THREE.BoxGeometry(2, 12, 16);
 
-    let beard1 = new THREE.Mesh(beard1Geom, Mat.auburnMat);
+    let beard1 = new THREE.Mesh(beard1Geom, Mat.whiteMat);
     beard1.applyMatrix(new THREE.Matrix4().makeTranslation(9, 0, 0));
     beard1.updateMatrix();
     beardGeomMerged.merge(beard1.geometry, beard1.matrix);
 
-    let beard2 = new THREE.Mesh(beard1Geom, Mat.auburnMat);
+    let beard2 = new THREE.Mesh(beard1Geom, Mat.whiteMat);
     beard2.applyMatrix(new THREE.Matrix4().makeTranslation(7, -3, 2));
     beard2.scale.z = 0.8;
     beard2.updateMatrix();
@@ -78,7 +79,7 @@ export default class Head {
     beard2Geom.vertices[2].z -= 2;
     beard2Geom.vertices[7].z -= 2;
 
-    let beard5 = new THREE.Mesh(beard2Geom, Mat.auburnMat);
+    let beard5 = new THREE.Mesh(beard2Geom, Mat.whiteMat);
     beard5.applyMatrix(new THREE.Matrix4().makeTranslation(5, -5, 5.5));
     beard5.updateMatrix();
     beardGeomMerged.merge(beard5.geometry, beard5.matrix);
@@ -87,7 +88,7 @@ export default class Head {
     beard3Geom.vertices[2].z -= 2;
     beard3Geom.vertices[7].z -= 2;
 
-    let beard6 = new THREE.Mesh(beard3Geom, Mat.auburnMat);
+    let beard6 = new THREE.Mesh(beard3Geom, Mat.whiteMat);
     beard6.applyMatrix(new THREE.Matrix4().makeTranslation(2, -6, 5.5));
     beard6.updateMatrix();
     beardGeomMerged.merge(beard6.geometry, beard6.matrix);
@@ -104,23 +105,23 @@ export default class Head {
     let beard4Geom = new THREE.BoxGeometry(1, 14.5, 10);
     beard4Geom.vertices[2].z -= 1;
     beard4Geom.vertices[7].z -= 1;
-    let beard9 = new THREE.Mesh(beard4Geom, Mat.auburnMat);
+    let beard9 = new THREE.Mesh(beard4Geom, Mat.whiteMat);
     beard9.applyMatrix(new THREE.Matrix4().makeTranslation(0, -6.25, 5.75));
     beard9.updateMatrix();
     beardGeomMerged.merge(beard9.geometry, beard9.matrix);
 
     let beard5Geom = new THREE.BoxGeometry(4, 8, 8);
-    let beard10 = new THREE.Mesh(beard5Geom, Mat.auburnMat);
+    let beard10 = new THREE.Mesh(beard5Geom, Mat.whiteMat);
     beard10.applyMatrix(new THREE.Matrix4().makeTranslation(-6, -1, -2));
     beard10.updateMatrix();
     beardGeomMerged.merge(beard10.geometry, beard10.matrix);
 
-    let beard11 = new THREE.Mesh(beard5Geom, Mat.auburnMat);
+    let beard11 = new THREE.Mesh(beard5Geom, Mat.whiteMat);
     beard11.applyMatrix(new THREE.Matrix4().makeTranslation(6, -1, -2));
     beard11.updateMatrix();
     beardGeomMerged.merge(beard11.geometry, beard11.matrix);
 
-    let beardMerged = new THREE.Mesh(beardGeomMerged, Mat.auburnMat);
+    let beardMerged = new THREE.Mesh(beardGeomMerged, Mat.whiteMat);
     beardMerged.castShadow = true;
     beardMerged.receiveShadow = true;
 
@@ -131,7 +132,7 @@ export default class Head {
     mouth.receiveShadow = true;
 
     let teethGeom = new THREE.BoxGeometry(10, 1, 1);
-    let teeth = new THREE.Mesh(teethGeom, Mat.whiteMat);
+    let teeth = new THREE.Mesh(teethGeom, Mat.teethMat);
     teeth.position.set(0, 0.5, 0.1);
     teeth.castShadow = false;
     teeth.receiveShadow = true;
@@ -159,7 +160,7 @@ export default class Head {
     moustacheGeom.vertices[9].x += 1;
 
     moustacheGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 4, 0));
-    this.moustache = new THREE.Mesh(moustacheGeom, Mat.auburnMat);
+    this.moustache = new THREE.Mesh(moustacheGeom, Mat.whiteMat);
     this.moustache.castShadow = true;
     this.moustache.receiveShadow = true;
 
@@ -169,70 +170,70 @@ export default class Head {
 
   Glasses() {
     //GLASSES
-    ////////////////////////////////////
+    //////////////////////////////////
 
-    // this.glasses = new THREE.Object3D();
-    // this.glasses.position.set(0,0,9);
-    // this.head.add(this.glasses);
-    //
-    //
-    // let frameGeomMerged = new THREE.Geometry();
-    //
-    // let frameOuterGeom = new THREE.BoxGeometry(6,5,1);
-    // let frameInnerGeom = new THREE.BoxGeometry(4,3,1);
-    //
-    // frameOuterGeom.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI/45));
-    // frameInnerGeom.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI/45));
-    //
-    // let frameBSP = new ThreeBSP(frameOuterGeom);
-    // let frameCutBSP = new ThreeBSP(frameInnerGeom);
-    //
-    // let frameintersectionBSP = frameBSP.subtract(frameCutBSP);
-    // let frameLeft = frameintersectionBSP.toMesh(blackMat);
-    //
-    // frameLeft.applyMatrix( new THREE.Matrix4().makeTranslation(4, 3, 0));
-    // frameLeft.updateMatrix();
-    // frameGeomMerged.merge(frameLeft.geometry, frameLeft.matrix);
-    //
-    // let frameRight = frameLeft.clone();
-    // frameRight.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI/30));
-    // frameRight.applyMatrix( new THREE.Matrix4().makeTranslation(-7.5, -0.25, 0));
-    // frameRight.updateMatrix();
-    // frameGeomMerged.merge(frameRight.geometry, frameRight.matrix);
-    //
-    // let frameMidGeom = new THREE.BoxGeometry(3,1,1);
-    // let frameMid = new THREE.Mesh(frameMidGeom, blackMat);
-    // frameMid.applyMatrix( new THREE.Matrix4().makeTranslation(0, 3, 0));
-    // frameMid.updateMatrix();
-    // frameGeomMerged.merge(frameMid.geometry, frameMid.matrix);
-    //
-    // let frameEndGeom = new THREE.BoxGeometry(1.5,1,1);
-    // let frameEndRight = new THREE.Mesh(frameEndGeom, blackMat);
-    // frameEndRight.applyMatrix( new THREE.Matrix4().makeTranslation(7.5, 3, 0));
-    // frameEndRight.updateMatrix();
-    // frameGeomMerged.merge(frameEndRight.geometry, frameEndRight.matrix);
-    //
-    // let frameEndLeft = frameEndRight.clone();
-    // frameEndLeft.position.x = -frameEndRight.position.x;
-    // frameEndLeft.updateMatrix();
-    // frameGeomMerged.merge(frameEndLeft.geometry, frameEndLeft.matrix);
-    //
-    // let frameSpokeGeom = new THREE.BoxGeometry(1,1,12);
-    // let frameSpokeRight = new THREE.Mesh(frameSpokeGeom, blackMat);
-    // frameSpokeRight.applyMatrix( new THREE.Matrix4().makeTranslation(8, 3, -5.5));
-    // frameSpokeRight.updateMatrix();
-    // frameGeomMerged.merge(frameSpokeRight.geometry, frameSpokeRight.matrix);
-    //
-    // let frameSpokeLeft = frameSpokeRight.clone();
-    // frameSpokeLeft.position.x = -frameSpokeRight.position.x;
-    // frameSpokeLeft.updateMatrix();
-    // frameGeomMerged.merge(frameSpokeLeft.geometry, frameSpokeLeft.matrix);
-    //
-    // let frameMerged = new THREE.Mesh(frameGeomMerged, blackMat);
-    // frameMerged.castShadow = true;
-    // frameMerged.receiveShadow = true;
-    //
-    // this.glasses.add(frameMerged);
+    this.glasses = new THREE.Object3D();
+    this.glasses.position.set(0,0,9);
+    this.head.add(this.glasses);
+
+
+    let frameGeomMerged = new THREE.Geometry();
+
+    let frameOuterGeom = new THREE.BoxGeometry(6,5,1);
+    let frameInnerGeom = new THREE.BoxGeometry(4,3,1);
+
+    frameOuterGeom.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI/45));
+    frameInnerGeom.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI/45));
+
+    let frameBSP = new ThreeBSP(frameOuterGeom);
+    let frameCutBSP = new ThreeBSP(frameInnerGeom);
+
+    let frameintersectionBSP = frameBSP.subtract(frameCutBSP);
+    let frameLeft = frameintersectionBSP.toMesh(Mat.blackMat);
+
+    frameLeft.applyMatrix( new THREE.Matrix4().makeTranslation(4, 3, 0));
+    frameLeft.updateMatrix();
+    frameGeomMerged.merge(frameLeft.geometry, frameLeft.matrix);
+
+    let frameRight = frameLeft.clone();
+    frameRight.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI/30));
+    frameRight.applyMatrix( new THREE.Matrix4().makeTranslation(-7.5, -0.25, 0));
+    frameRight.updateMatrix();
+    frameGeomMerged.merge(frameRight.geometry, frameRight.matrix);
+
+    let frameMidGeom = new THREE.BoxGeometry(3,1,1);
+    let frameMid = new THREE.Mesh(frameMidGeom, Mat.blackMat);
+    frameMid.applyMatrix( new THREE.Matrix4().makeTranslation(0, 3, 0));
+    frameMid.updateMatrix();
+    frameGeomMerged.merge(frameMid.geometry, frameMid.matrix);
+
+    let frameEndGeom = new THREE.BoxGeometry(1.5,1,1);
+    let frameEndRight = new THREE.Mesh(frameEndGeom, Mat.blackMat);
+    frameEndRight.applyMatrix( new THREE.Matrix4().makeTranslation(7.5, 3, 0));
+    frameEndRight.updateMatrix();
+    frameGeomMerged.merge(frameEndRight.geometry, frameEndRight.matrix);
+
+    let frameEndLeft = frameEndRight.clone();
+    frameEndLeft.position.x = -frameEndRight.position.x;
+    frameEndLeft.updateMatrix();
+    frameGeomMerged.merge(frameEndLeft.geometry, frameEndLeft.matrix);
+
+    let frameSpokeGeom = new THREE.BoxGeometry(1,1,12);
+    let frameSpokeRight = new THREE.Mesh(frameSpokeGeom, Mat.blackMat);
+    frameSpokeRight.applyMatrix( new THREE.Matrix4().makeTranslation(8, 3, -5.5));
+    frameSpokeRight.updateMatrix();
+    frameGeomMerged.merge(frameSpokeRight.geometry, frameSpokeRight.matrix);
+
+    let frameSpokeLeft = frameSpokeRight.clone();
+    frameSpokeLeft.position.x = -frameSpokeRight.position.x;
+    frameSpokeLeft.updateMatrix();
+    frameGeomMerged.merge(frameSpokeLeft.geometry, frameSpokeLeft.matrix);
+
+    let frameMerged = new THREE.Mesh(frameGeomMerged, Mat.blackMat);
+    frameMerged.castShadow = true;
+    frameMerged.receiveShadow = true;
+
+    this.glasses.add(frameMerged);
 
   }
 
@@ -248,25 +249,25 @@ export default class Head {
 
     let hairFlatGeom = new THREE.BoxGeometry(10, 2, 18);
 
-    let hair1 = new THREE.Mesh(hairFlatGeom, Mat.auburnMat);
+    let hair1 = new THREE.Mesh(hairFlatGeom, Mat.whiteMat);
     hair1.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI / 40));
     hair1.applyMatrix(new THREE.Matrix4().makeTranslation(-4, -0.5, 0));
     hair1.updateMatrix();
     hairGeomMerged.merge(hair1.geometry, hair1.matrix);
 
-    let hair2 = new THREE.Mesh(hairFlatGeom, Mat.auburnMat);
+    let hair2 = new THREE.Mesh(hairFlatGeom, Mat.whiteMat);
     hair2.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI / 10));
     hair2.applyMatrix(new THREE.Matrix4().makeTranslation(-2, 1, 0));
     hair2.updateMatrix();
     hairGeomMerged.merge(hair2.geometry, hair2.matrix);
 
-    let hair3 = new THREE.Mesh(hairFlatGeom, Mat.auburnMat);
+    let hair3 = new THREE.Mesh(hairFlatGeom, Mat.whiteMat);
     hair3.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI / 5));
     hair3.applyMatrix(new THREE.Matrix4().makeTranslation(2, 1, 0));
     hair3.updateMatrix();
     hairGeomMerged.merge(hair3.geometry, hair3.matrix);
 
-    let hair4 = new THREE.Mesh(hairFlatGeom, Mat.auburnMat);
+    let hair4 = new THREE.Mesh(hairFlatGeom, Mat.whiteMat);
     hair4.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI / 4));
     hair4.applyMatrix(new THREE.Matrix4().makeTranslation(6, 0, 0));
     hair4.updateMatrix();
@@ -278,14 +279,14 @@ export default class Head {
     hairFlatBackGeom.vertices[4].x += 1;
     hairFlatBackGeom.vertices[5].x += 1;
 
-    let hair5 = new THREE.Mesh(hairFlatBackGeom, Mat.auburnMat);
+    let hair5 = new THREE.Mesh(hairFlatBackGeom, Mat.whiteMat);
     hair5.applyMatrix(new THREE.Matrix4().makeTranslation(0, -4.5, -6));
     hair5.updateMatrix();
     hairGeomMerged.merge(hair5.geometry, hair5.matrix);
 
     let hairTuftGeom = new THREE.CylinderGeometry(1, 1.5, 10, 4);
 
-    let hairTuft1 = new THREE.Mesh(hairTuftGeom, Mat.auburnMat);
+    let hairTuft1 = new THREE.Mesh(hairTuftGeom, Mat.whiteMat);
     hairTuft1.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI / 10));
     hairTuft1.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / 10));
     hairTuft1.applyMatrix(new THREE.Matrix4().makeTranslation(-4, 2, -4));
@@ -305,7 +306,7 @@ export default class Head {
     hairTuft7.updateMatrix();
     hairGeomMerged.merge(hairTuft7.geometry, hairTuft7.matrix);
 
-    let hairTuft2 = new THREE.Mesh(hairTuftGeom, Mat.auburnMat);
+    let hairTuft2 = new THREE.Mesh(hairTuftGeom, Mat.whiteMat);
     hairTuft2.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / 6));
     hairTuft2.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / 10));
     hairTuft2.applyMatrix(new THREE.Matrix4().makeTranslation(-6.5, -1, -1));
@@ -318,7 +319,7 @@ export default class Head {
     hairTuft5.updateMatrix();
     hairGeomMerged.merge(hairTuft5.geometry, hairTuft5.matrix);
 
-    let hairTuft3 = new THREE.Mesh(hairTuftGeom, Mat.auburnMat);
+    let hairTuft3 = new THREE.Mesh(hairTuftGeom, Mat.whiteMat);
     hairTuft3.applyMatrix(new THREE.Matrix4().makeRotationZ(-Math.PI / 3));
     hairTuft3.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / 3));
     hairTuft3.applyMatrix(new THREE.Matrix4().makeTranslation(3, 3, -3));
@@ -351,7 +352,7 @@ export default class Head {
     hairTuft10.updateMatrix();
     hairGeomMerged.merge(hairTuft10.geometry, hairTuft10.matrix);
 
-    let hairMerged = new THREE.Mesh(hairGeomMerged, Mat.auburnMat);
+    let hairMerged = new THREE.Mesh(hairGeomMerged, Mat.whiteMat);
     hairMerged.castShadow = true;
     hairMerged.receiveShadow = true;
 
