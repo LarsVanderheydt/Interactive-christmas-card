@@ -1,6 +1,6 @@
 import Head from './classes/Head';
 import Colors from './objects/colors';
-
+import Audio from './classes/Audio.js';
 {
 
   let scene,
@@ -29,7 +29,7 @@ import Colors from './objects/colors';
   const init = () => {
     createScene();
     createLights();
-
+    new Audio();
     particlesJS.load('container', '../assets/particles.json', function() {
       console.log('callback - particles.js config loaded');
     });
