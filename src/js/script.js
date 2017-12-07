@@ -1,8 +1,9 @@
 import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
-{
+import SpeechRecogn from './classes/SpeechRecognition.js';
 
+{
   let scene,
     camera,
     fieldOfView,
@@ -22,15 +23,20 @@ import Audio from './classes/Audio.js';
     head,
     stars,
     windowHalfX,
-    windowHalfY;
+    windowHalfY,
+    audio;
 
   let starArray = [];
 
   const init = () => {
     createScene();
     createLights();
-    new Audio();
-    particlesJS.load('container', '../assets/particles.json', function() {
+
+    // audio = new Audio();
+    new SpeechRecogn();
+
+
+    particlesJS.load('container', '../assets/particles.json', () => {
       console.log('callback - particles.js config loaded');
     });
 
@@ -289,6 +295,7 @@ import Audio from './classes/Audio.js';
   const loop = () => {
     blinkLoop();
     //head.dizzy();
+
     head.idle();
     renderer.render(scene, camera);
     requestAnimationFrame(loop);
