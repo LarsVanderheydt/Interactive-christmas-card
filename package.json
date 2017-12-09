@@ -4,7 +4,7 @@
   "main": "./server/app.js",
   "license": "MIT",
   "scripts": {
-    "development": "npm run clean && webpack --watch",
+    "development": "npm run clean && npm run start & webpack --watch",
     "start": "NODE_ENV=development nodemon ./server/app.js",
     "production": "npm run clean && npm run copy && NODE_ENV=production webpack -p",
     "copy": "copyfiles -u 1 './src/**/*.*' ./dist",
