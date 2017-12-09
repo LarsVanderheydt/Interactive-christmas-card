@@ -8,7 +8,9 @@ const copy = new CopyWebpackPlugin([{
 }], {
   ignore: [
     `.DS_Store`,
-    './js/script.js'
+    './js/script.js',
+    './js/classes/*',
+    './js/objects/*'
   ]
 });
 
@@ -16,7 +18,7 @@ module.exports = {
   entry: './src/js/script.js',
 
   output: {
-    path: path.resolve(`./server`),
+    path: path.resolve(`./server/public`),
     filename: `js/script.js`
   },
 

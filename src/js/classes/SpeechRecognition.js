@@ -1,3 +1,4 @@
+import CartAPI from '../lib/cartAPI';
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
@@ -10,6 +11,7 @@ let transcript = "";
 const text = document.getElementById(`field`);
 const button = document.getElementById(`record`);
 const during = document.getElementById(`during`);
+const save = document.getElementById(`save`);
 
 export default class SpeechRecogn {
   constructor() {
@@ -34,6 +36,10 @@ export default class SpeechRecogn {
       console.log('Ready to receive a command.');
       button.disabled = true;
     });
+
+    save.addEventListener(`click`, () => this.handleSave());
+
+    CartAPI.read().then(a => console.log(a));
   }
 
   gotResult(event) {
@@ -50,6 +56,12 @@ export default class SpeechRecogn {
     this.recognition.stop();
     button.disabled = false;
     button.textContent = 'Click To Start';
+  }
+
+  handleSave() {
+    if (text.value) {
+      CartAPI.create({text: text.value});
+    }
   }
 }
 

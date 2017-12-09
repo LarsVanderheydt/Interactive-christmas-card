@@ -1,14 +1,14 @@
 {
   "name": "Experimental_Web",
   "version": "1.0.0",
-  "main": "server/app.js",
+  "main": "./server/app.js",
   "license": "MIT",
   "scripts": {
     "development": "npm run clean && webpack --watch",
-    "start": "NODE_ENV=development node app.js",
+    "start": "NODE_ENV=development nodemon ./server/app.js",
     "production": "npm run clean && npm run copy && NODE_ENV=production webpack -p",
     "copy": "copyfiles -u 1 './src/**/*.*' ./dist",
-    "clean": "rimraf ./server",
+    "clean": "rimraf ./server/public",
     "serve": "mamp ./dist",
     "generate-ssl-certs": "./scripts/generate-ssl-certs.sh"
   },
@@ -20,8 +20,20 @@
     "webpack-dev-server": "^2.9.1"
   },
   "dependencies": {
+    "boom": "^7.1.1",
     "copy-webpack-plugin": "^4.2.3",
+    "dotenv": "^4.0.0",
     "hapi": "^16.6.2",
-    "inert": "^4.2.1"
+    "hapi-devine-api-config": "^2.0.1",
+    "hapi-devine-autoload": "^2.0.1",
+    "hapi-devine-mongodb": "^1.7.1",
+    "hapi-devine-parse-query": "^1.0.6",
+    "hapi-devine-routes": "^1.1.1",
+    "inert": "^4.2.1",
+    "isomorphic-fetch": "^2.2.1",
+    "joi": "^13.0.2",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.13.6",
+    "nodemon": "^1.12.5"
   }
 }

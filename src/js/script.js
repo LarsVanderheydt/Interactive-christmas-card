@@ -35,7 +35,6 @@ import SpeechRecogn from './classes/SpeechRecognition.js';
     // audio = new Audio();
     new SpeechRecogn();
 
-
     particlesJS.load('container', '../assets/particles.json', () => {
       console.log('callback - particles.js config loaded');
     });
