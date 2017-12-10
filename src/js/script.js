@@ -30,10 +30,15 @@ import Colors from './objects/colors';
     createScene();
     createLights();
 
+    particlesJS.load('container', '../assets/particles.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
+
     head = new Head();
     scene.add(head.mesh);
 
     window.scene = scene;
+
     loop();
   };
 
