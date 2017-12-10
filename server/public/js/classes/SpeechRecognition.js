@@ -1,4 +1,3 @@
-import CartAPI from '../lib/cartAPI';
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
@@ -11,10 +10,10 @@ let transcript = "";
 const text = document.getElementById(`field`);
 const button = document.getElementById(`record`);
 const during = document.getElementById(`during`);
-const save = document.getElementById(`save`);
 
 export default class SpeechRecogn {
   constructor() {
+    this.txt = '';
     this.recognition = new SpeechRecognition();
     const speechRecognitionList = new SpeechGrammarList();
     // speechRecognitionList.addFromString(grammar, 1);
@@ -28,6 +27,8 @@ export default class SpeechRecogn {
 
     this.recognition.onresult = event => this.gotResult(event);
     this.recognition.onspeechend = e => this.onSpeechEnd(e);
+
+    text.addEventListener(`blur`, () => this.handleChange());
   }
 
   init() {
@@ -36,10 +37,10 @@ export default class SpeechRecogn {
       console.log('Ready to receive a command.');
       button.disabled = true;
     });
+  }
 
-    save.addEventListener(`click`, () => this.handleSave());
-
-    CartAPI.read().then(a => console.log(a));
+  handleChange() {
+    this.txt = text.value;
   }
 
   gotResult(event) {
@@ -47,7 +48,6 @@ export default class SpeechRecogn {
     transcript = event.results[last][0].transcript;
 
     text.value = transcript;
-    console.log(transcript);
     console.log(event.results);
     console.log('Confidence: ' + event.results[0][0].confidence);
   }
@@ -56,12 +56,7 @@ export default class SpeechRecogn {
     this.recognition.stop();
     button.disabled = false;
     button.textContent = 'Click To Start';
-  }
-
-  handleSave() {
-    if (text.value) {
-      CartAPI.create({text: text.value});
-    }
+    this.txt = text.value;
   }
 }
 

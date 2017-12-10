@@ -2,7 +2,8 @@ import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
 import SpeechRecogn from './classes/SpeechRecognition.js';
-
+import HandleSave from './objects/Save';
+import CartAPI from './lib/cartAPI';
 {
   let scene,
     camera,
@@ -26,6 +27,8 @@ import SpeechRecogn from './classes/SpeechRecognition.js';
     windowHalfY,
     audio;
 
+  const saveBtn = document.getElementById(`save`);
+
   let starArray = [];
 
   const init = () => {
@@ -33,7 +36,7 @@ import SpeechRecogn from './classes/SpeechRecognition.js';
     createLights();
 
     // audio = new Audio();
-    new SpeechRecogn();
+    const SpeechText = new SpeechRecogn();
 
     particlesJS.load('container', '../assets/particles.json', () => {
       console.log('callback - particles.js config loaded');
@@ -43,6 +46,13 @@ import SpeechRecogn from './classes/SpeechRecognition.js';
     scene.add(head.mesh);
 
     window.scene = scene;
+
+    saveBtn.addEventListener(`click`, () => {
+      if (!SpeechText.txt) return;
+      HandleSave({
+        text: SpeechText.txt
+      });
+    });
 
     loop();
   };

@@ -4,10 +4,12 @@ const url = `/api/cart`;
 
 export default {
 
-  create: ({text}) => {
+  create: ({text, id, name}) => {
     const method = `POST`;
     const body = new FormData();
     body.append(`text`, text);
+    body.append(`id`, id);
+    body.append(`name`, name);
 
     return fetch(url, {method, body})
       .then(r => r.json());
@@ -18,8 +20,8 @@ export default {
       .then(r => r.json());
   },
 
-  delete: _id => {
-    const method = `DELETE`;
-    return fetch(`${url}/${_id}`, {method});
+  readOne: id => {
+    const method = `GET`;
+    return fetch(`${url}/${id}`, {method}).then(r => r.json());
   }
 };

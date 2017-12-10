@@ -2,9 +2,10 @@ const path = require('path');
 const fs = require('fs');
 const Hapi = require('hapi');
 const inert = require('inert');
-const server = new Hapi.Server();
 const Mongoose = require('mongoose');
 const CartAPI = require('./routes/api/CartAPI');
+const server = new Hapi.Server();
+
 
 let tls = false;
   if (process.env.NODE_ENV === 'development') {
@@ -28,14 +29,12 @@ db.once('open', function callback() {
 });
 
 
-
 server.start(err => {
   if (err) {
     throw err;
   }
   console.log(`server running at: ${server.info.uri}`);
 });
-
 
 
 server.register(inert, err => {
@@ -46,7 +45,7 @@ server.register(inert, err => {
 
   server.route({
     method: 'GET',
-    path: `/{param*}`,
+    path: `/{params*}`,
     handler: {
       directory: {
         path: path.join(__dirname, `public`)

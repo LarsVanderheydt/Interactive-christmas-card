@@ -15,11 +15,14 @@ const copy = new CopyWebpackPlugin([{
 });
 
 module.exports = {
-  entry: './src/js/script.js',
+  entry: {
+    script: './src/js/script.js',
+    santa: './src/js/santaScript.js'
+  },
 
   output: {
     path: path.resolve(`./server/public`),
-    filename: `js/script.js`
+    filename: `js/[name].js`
   },
 
   devtool: 'inline-source-map',
