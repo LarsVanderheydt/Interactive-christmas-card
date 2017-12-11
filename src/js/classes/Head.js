@@ -44,6 +44,8 @@ export default class Head {
     // this.eyeBrowRight.rotation.z = Math.sin(Date.now() * 0.002) * Math.PI * 0.04;
     // this.eyeBrowLeft.rotation.z = Math.cos(Date.now() * 0.002) * Math.PI * 0.04;
 
+    this.mouth.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
+
     // //SNOR OMHOOG-OMLAAG
     this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
     // //SNOR OMHOOG-ROTATIE
@@ -302,7 +304,7 @@ export default class Head {
     hairGeomMerged.merge(hair5.geometry, hair5.matrix);
 
     let hairMerged = new THREE.Mesh(hairGeomMerged, Mat.whiteMat);
-    hairMerged.castShadow = true;
+    hairMerged.castShadow = false;
     hairMerged.receiveShadow = true;
 
     this.hair.add(hairMerged);
