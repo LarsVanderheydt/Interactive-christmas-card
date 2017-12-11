@@ -187,7 +187,6 @@ export default class Head {
     this.glasses.position.set(0,0,9);
     this.head.add(this.glasses);
 
-
     let frameGeomMerged = new THREE.Geometry();
 
     let frameOuterGeom = new THREE.CylinderGeometry( 3, 3, 0.5, 32 )
@@ -302,7 +301,7 @@ export default class Head {
     hairGeomMerged.merge(hair5.geometry, hair5.matrix);
 
     let hairMerged = new THREE.Mesh(hairGeomMerged, Mat.whiteMat);
-    hairMerged.castShadow = true;
+    hairMerged.castShadow = false;
     hairMerged.receiveShadow = true;
 
     this.hair.add(hairMerged);
@@ -395,6 +394,8 @@ export default class Head {
 
     this.hat = new THREE.Object3D();
     this.hat.position.set(-0.2, 11, 2.4);
+    this.hat.castShadow = true;
+    this.hat.receiveShadow = false;
     this.head.add(this.hat);
 
     let bandGeom = new THREE.TorusGeometry( 9, 2, 16, 100 );
