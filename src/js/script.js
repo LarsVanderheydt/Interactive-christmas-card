@@ -29,6 +29,9 @@ import CartAPI from './lib/cartAPI';
 
   const saveBtn = document.getElementById(`save`);
 
+let mousePos = { x: 0, y: 0};
+
+
   let starArray = [];
 
   const init = () => {
@@ -86,6 +89,8 @@ import CartAPI from './lib/cartAPI';
     window.addEventListener('resize', onWindowResize, false);
     //handleWindowResize();
 
+    document.addEventListener('mousemove', handleMouseMove, false);
+
   }
 
   const onWindowResize = () => {
@@ -96,6 +101,20 @@ import CartAPI from './lib/cartAPI';
     renderer.setSize(WIDTH, HEIGHT);
     camera.aspect = WIDTH / HEIGHT;
     camera.updateProjectionMatrix();
+  }
+
+  const handleMouseMove = e => {
+    // const tx = -1 + (event.clientX / WIDTH) *2;
+    // let ty = 1 - (event.clientY / HEIGHT)*2;
+    // mousePos = {
+    //   x: tx,
+    //   y: ty
+    // };
+    mousePos = {
+      x: event.clientX,
+      y: event.clientY
+    };
+        console.log(mousePos);
   }
 
   let loaderManager = new THREE.LoadingManager();
@@ -226,7 +245,6 @@ import CartAPI from './lib/cartAPI';
   const createHead = () => {
     head = new Head();
     head.idle();
-    //console.log(head.head.rotation);
     scene.add(head.mesh);
     //stars = new StarsGroup();
     //scene.add(stars.mesh);
