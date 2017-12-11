@@ -130,7 +130,7 @@ import Colors from './objects/colors';
     // shadowLight.shadow.camera.near = 1;
     // shadowLight.shadow.camera.far = 1000;
 
-    backLight = new THREE.DirectionalLight(0xffffff, .2);
+    backLight = new THREE.DirectionalLight(0xffffff, .1);
     backLight.position.set(-100, 200, 150);
     backLight.castShadow = true;
     //backLight.position.set(100, 100, -200);

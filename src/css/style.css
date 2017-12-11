@@ -8,9 +8,9 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: -webkit-linear-gradient(#f0323f, #cd0020);
-  background: -o-linear-gradient(#f0323f, #cd0020);
-  background: linear-gradient(#f0323f, #cd0020);
+  background: -webkit-radial-gradient(#239c2e, #239c2e, #13741f);
+  background: -o-radial-gradient(#239c2e, #239c2e, #13741f);
+  background: radial-gradient(#239c2e, #239c2e, #13741f);
 }
 
 canvas {
