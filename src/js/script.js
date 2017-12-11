@@ -1,8 +1,10 @@
 import Head from './classes/Head';
 import Colors from './objects/colors';
-
+import Audio from './classes/Audio.js';
+import SpeechRecogn from './classes/SpeechRecognition.js';
+import HandleSave from './objects/Save';
+import CartAPI from './lib/cartAPI';
 {
-
   let scene,
     camera,
     fieldOfView,
@@ -22,7 +24,10 @@ import Colors from './objects/colors';
     head,
     stars,
     windowHalfX,
-    windowHalfY;
+    windowHalfY,
+    audio;
+
+  const saveBtn = document.getElementById(`save`);
 
 let mousePos = { x: 0, y: 0};
 
@@ -33,7 +38,10 @@ let mousePos = { x: 0, y: 0};
     createScene();
     createLights();
 
-    particlesJS.load('container', '../assets/particles.json', function() {
+    // audio = new Audio();
+    const SpeechText = new SpeechRecogn();
+
+    particlesJS.load('container', '../assets/particles.json', () => {
       console.log('callback - particles.js config loaded');
     });
 
@@ -41,6 +49,13 @@ let mousePos = { x: 0, y: 0};
     scene.add(head.mesh);
 
     window.scene = scene;
+
+    saveBtn.addEventListener(`click`, () => {
+      if (!SpeechText.txt) return;
+      HandleSave({
+        text: SpeechText.txt
+      });
+    });
 
     loop();
   };
@@ -307,6 +322,7 @@ let mousePos = { x: 0, y: 0};
   const loop = () => {
     blinkLoop();
     //head.dizzy();
+
     head.idle();
     renderer.render(scene, camera);
     requestAnimationFrame(loop);
