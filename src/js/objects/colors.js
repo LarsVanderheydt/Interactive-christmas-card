@@ -9,7 +9,7 @@ const Colors = {
   black: 0x2e2e2e,
   lightBlue: 0x6295a8,
   yellow: 0xfff000,
-  red:0xcd0020
+  red: 0xcd0020
 };
 
 export default Colors;

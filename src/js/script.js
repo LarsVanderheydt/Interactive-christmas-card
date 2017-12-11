@@ -24,6 +24,9 @@ import Colors from './objects/colors';
     windowHalfX,
     windowHalfY;
 
+let mousePos = { x: 0, y: 0};
+
+
   let starArray = [];
 
   const init = () => {
@@ -71,6 +74,8 @@ import Colors from './objects/colors';
     window.addEventListener('resize', onWindowResize, false);
     //handleWindowResize();
 
+    document.addEventListener('mousemove', handleMouseMove, false);
+
   }
 
   const onWindowResize = () => {
@@ -81,6 +86,20 @@ import Colors from './objects/colors';
     renderer.setSize(WIDTH, HEIGHT);
     camera.aspect = WIDTH / HEIGHT;
     camera.updateProjectionMatrix();
+  }
+
+  const handleMouseMove = e => {
+    // const tx = -1 + (event.clientX / WIDTH) *2;
+    // let ty = 1 - (event.clientY / HEIGHT)*2;
+    // mousePos = {
+    //   x: tx,
+    //   y: ty
+    // };
+    mousePos = {
+      x: event.clientX,
+      y: event.clientY
+    };
+        console.log(mousePos);
   }
 
   let loaderManager = new THREE.LoadingManager();
@@ -130,7 +149,7 @@ import Colors from './objects/colors';
     // shadowLight.shadow.camera.near = 1;
     // shadowLight.shadow.camera.far = 1000;
 
-    backLight = new THREE.DirectionalLight(0xffffff, .1);
+    backLight = new THREE.DirectionalLight(0xffffff, .2);
     backLight.position.set(-100, 200, 150);
     backLight.castShadow = true;
     //backLight.position.set(100, 100, -200);
@@ -211,7 +230,6 @@ import Colors from './objects/colors';
   const createHead = () => {
     head = new Head();
     head.idle();
-    //console.log(head.head.rotation);
     scene.add(head.mesh);
     //stars = new StarsGroup();
     //scene.add(stars.mesh);

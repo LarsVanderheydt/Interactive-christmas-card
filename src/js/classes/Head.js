@@ -47,7 +47,9 @@ export default class Head {
     // //SNOR OMHOOG-OMLAAG
     this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
     // //SNOR OMHOOG-ROTATIE
-    // this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
+    this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
+
+    //this.mouth.scale.x = Math.cos(Date.now() * 0.004) * distance / 2;
 
     //SNELHEID HEEN EN WEER
     this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05;
@@ -59,7 +61,7 @@ export default class Head {
 
     let beardGeomMerged = new THREE.Geometry();
 
-    let beard1Geom = new THREE.BoxGeometry(2, 12, 16);
+    let beard1Geom = new THREE.BoxGeometry(2, 10, 16);
 
     let beard1 = new THREE.Mesh(beard1Geom, Mat.whiteMat);
     beard1.applyMatrix(new THREE.Matrix4().makeTranslation(9, 0, 0));
@@ -67,7 +69,7 @@ export default class Head {
     beardGeomMerged.merge(beard1.geometry, beard1.matrix);
 
     let beard2 = new THREE.Mesh(beard1Geom, Mat.whiteMat);
-    beard2.applyMatrix(new THREE.Matrix4().makeTranslation(7, -3, 2));
+    beard2.applyMatrix(new THREE.Matrix4().makeTranslation(7, -2, 2));
     beard2.scale.z = 0.8;
     beard2.updateMatrix();
     beardGeomMerged.merge(beard2.geometry, beard2.matrix);
@@ -87,16 +89,16 @@ export default class Head {
     beard2Geom.vertices[7].z -= 2;
 
     let beard5 = new THREE.Mesh(beard2Geom, Mat.whiteMat);
-    beard5.applyMatrix(new THREE.Matrix4().makeTranslation(5, -5, 5.5));
+    beard5.applyMatrix(new THREE.Matrix4().makeTranslation(5, -5, 4));
     beard5.updateMatrix();
     beardGeomMerged.merge(beard5.geometry, beard5.matrix);
 
-    let beard3Geom = new THREE.BoxGeometry(3, 14, 10);
+    let beard3Geom = new THREE.BoxGeometry(2.5, 14, 10);
     beard3Geom.vertices[2].z -= 2;
     beard3Geom.vertices[7].z -= 2;
 
     let beard6 = new THREE.Mesh(beard3Geom, Mat.whiteMat);
-    beard6.applyMatrix(new THREE.Matrix4().makeTranslation(2, -6, 5.5));
+    beard6.applyMatrix(new THREE.Matrix4().makeTranslation(2.5, -6, 6));
     beard6.updateMatrix();
     beardGeomMerged.merge(beard6.geometry, beard6.matrix);
 
@@ -110,12 +112,12 @@ export default class Head {
     beard8.updateMatrix();
     beardGeomMerged.merge(beard8.geometry, beard8.matrix);
 
-    let beard4Geom = new THREE.BoxGeometry(1, 14.5, 10);
+    let beard4Geom = new THREE.BoxGeometry(2.5, 14.5, 10);
     beard4Geom.vertices[2].z -= 1;
     beard4Geom.vertices[7].z -= 1;
 
     let beard9 = new THREE.Mesh(beard4Geom, Mat.whiteMat);
-    beard9.applyMatrix(new THREE.Matrix4().makeTranslation(0, -6.25, 5.75));
+    beard9.applyMatrix(new THREE.Matrix4().makeTranslation(0, -7, 5.75));
     beard9.updateMatrix();
     beardGeomMerged.merge(beard9.geometry, beard9.matrix);
 
@@ -126,7 +128,7 @@ export default class Head {
     beardGeomMerged.merge(beard10.geometry, beard10.matrix);
 
     let beard11 = new THREE.Mesh(beard5Geom, Mat.whiteMat);
-    beard11.applyMatrix(new THREE.Matrix4().makeTranslation(6, -1, -2));
+    beard11.applyMatrix(new THREE.Matrix4().makeTranslation(0, -5, -2));
     beard11.updateMatrix();
     beardGeomMerged.merge(beard11.geometry, beard11.matrix);
 
@@ -392,13 +394,13 @@ export default class Head {
     ////////////////////////////////////
 
     this.hat = new THREE.Object3D();
-    this.hat.position.set(0, 11, 0);
+    this.hat.position.set(-0.2, 11, 2.4);
     this.head.add(this.hat);
 
     let bandGeom = new THREE.TorusGeometry( 9, 2, 16, 100 );
     let bigConeGeom = new THREE.CylinderGeometry( 1, 11, 12, 15 );
     let smallConeGeom =  new THREE.CylinderGeometry( 0.8, 3, 9, 32 );
-    let hatDingleGeom = new THREE.SphereGeometry( 1.5, 4, 4);
+    let hatDingleGeom = new THREE.SphereGeometry( 1.5, 8, 8);
 
     this.band = new THREE.Mesh(bandGeom, Mat.teethMat);
     this.band.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / 2));
