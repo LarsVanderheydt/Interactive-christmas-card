@@ -27,34 +27,67 @@ export default class Head {
     this.Freckles();
     this.Features();
     this.idle();
+    this.normalize();
   }
 
-  idle() {
+  normalize(v, vmin, vmax, tmin, tmax) {
+    const nv = Math.max(Math.min(v, vmax), vmin);
+    const dv = vmax - vmin;
+    const pc = (nv - vmin) / dv;
+    const dt = tmax - tmin;
+    const tv = tmin + (pc * dt);
+    return tv;
+  }
+
+  updateBody(speed) {
+    //this.eyeBlueRight.rotation.y += (lion.tHeagRotY - this.eyeBlueRight.rotation.y) / speed;
+    //this.eyeBlueRight.rotation.x += (this.eyeBlueRightRotX - this.eyeBlueRight.rotation.x) / speed;
+
+    //this.eyeBlueRight.position.x += (this.eyeBlueRightPosX - this.eyeBlueRight.position.x) / speed;
+
+    //this.eyeBlueRight.position.y += Math.sin(this.eyeBlueRightPosY - this.eyeBlueRight.position.y) / speed;
+    // this.eyeBlueRight.position.z += (this.eyeBlueRightPosZ - this.eyeBlueRight.position.z) / speed;
+  }
+
+  idle(xTarget, yTarget) {
+    //console.log(xTarget, yTarget);
+    //console.log(this.eyeBlueRight.position.x);
+    //console.log(this.eyeBlueRight.position.y);
     let distance = 1;
 
     this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.005;
     this.head.rotation.x = Math.sin(Date.now() * 0.004) * Math.PI * 0.03;
-    //this.head.rotation.y = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
 
-    this.eyeBlueRight.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
     this.eyeBlueLeft.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
+    this.eyeBlueRight.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
+    //this.eyeBlueRightPosX = (xTarget);
+
+    //this.eyeBlueRightPosX = normalize(xTarget, -20, 20, 70, -70);
+
+    // this.eyeBlueRightRotY = xTarget, -20, 20, -Math.PI / 4, Math.PI / 4;
+    // this.eyeBlueRightRotX = yTarget, -20, 20, -Math.PI / 4, Math.PI / 4;
+    // this.eyeBlueRightPosX = xTarget, -20, 20, 70, -70;
+    // this.eyeBlueRightPosY = yTarget, -140, 260, 20, 100;
+    // this.eyeBlueRightPosZ = 7;
 
     this.eyeBrowRight.position.y = Math.sin(Date.now() * 0.004) * distance / 2;
     this.eyeBrowLeft.position.y = Math.cos(Date.now() * 0.004) * distance / 2;
+
     // this.eyeBrowRight.rotation.z = Math.sin(Date.now() * 0.002) * Math.PI * 0.04;
     // this.eyeBrowLeft.rotation.z = Math.cos(Date.now() * 0.002) * Math.PI * 0.04;
 
-    // this.mouth.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
+    //this.beard.mouth.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
 
-    // //SNOR OMHOOG-OMLAAG
+    // SNOR OMHOOG-OMLAAG
     this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
-    // //SNOR OMHOOG-ROTATIE
+    // SNOR OMHOOG-ROTATIE
     this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
 
     //this.mouth.scale.x = Math.cos(Date.now() * 0.004) * distance / 2;
 
     //SNELHEID HEEN EN WEER
     this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05;
+    this.updateBody(10);
   }
 
   Beard() {
@@ -186,16 +219,16 @@ export default class Head {
     //////////////////////////////////
 
     this.glasses = new THREE.Object3D();
-    this.glasses.position.set(0,0,9);
+    this.glasses.position.set(0, 0, 9);
     this.head.add(this.glasses);
 
     let frameGeomMerged = new THREE.Geometry();
 
-    let frameOuterGeom = new THREE.CylinderGeometry( 3, 3, 0.5, 32 )
-    let frameInnerGeom = new THREE.CylinderGeometry( 2.7, 2.7,  0.5, 32 )
+    let frameOuterGeom = new THREE.CylinderGeometry(3, 3, 0.5, 32)
+    let frameInnerGeom = new THREE.CylinderGeometry(2.7, 2.7, 0.5, 32)
 
-    frameOuterGeom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI/2));
-    frameInnerGeom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI/2));
+    frameOuterGeom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+    frameInnerGeom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
 
     let frameBSP = new ThreeBSP(frameOuterGeom);
     let frameCutBSP = new ThreeBSP(frameInnerGeom);
@@ -203,25 +236,25 @@ export default class Head {
     let frameintersectionBSP = frameBSP.subtract(frameCutBSP);
     let frameLeft = frameintersectionBSP.toMesh(Mat.goldMat);
 
-    frameLeft.applyMatrix( new THREE.Matrix4().makeTranslation(4, 3, 0));
+    frameLeft.applyMatrix(new THREE.Matrix4().makeTranslation(4, 3, 0));
     frameLeft.updateMatrix();
     frameGeomMerged.merge(frameLeft.geometry, frameLeft.matrix);
 
     let frameRight = frameLeft.clone();
-    frameRight.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI/30));
-    frameRight.applyMatrix( new THREE.Matrix4().makeTranslation(-7.5, -0.25, 0));
+    frameRight.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / 30));
+    frameRight.applyMatrix(new THREE.Matrix4().makeTranslation(-7.5, -0.25, 0));
     frameRight.updateMatrix();
     frameGeomMerged.merge(frameRight.geometry, frameRight.matrix);
 
-    let frameMidGeom = new THREE.BoxGeometry(2,.3,.5);
+    let frameMidGeom = new THREE.BoxGeometry(2, .3, .5);
     let frameMid = new THREE.Mesh(frameMidGeom, Mat.goldMat);
-    frameMid.applyMatrix( new THREE.Matrix4().makeTranslation(0, 3.3, -0.3));
+    frameMid.applyMatrix(new THREE.Matrix4().makeTranslation(0, 3.3, -0.3));
     frameMid.updateMatrix();
     frameGeomMerged.merge(frameMid.geometry, frameMid.matrix);
 
-    let frameEndGeom = new THREE.BoxGeometry(1.5,.5,1);
+    let frameEndGeom = new THREE.BoxGeometry(1.5, .5, 1);
     let frameEndRight = new THREE.Mesh(frameEndGeom, Mat.goldMat);
-    frameEndRight.applyMatrix( new THREE.Matrix4().makeTranslation(7.5, 3, 0));
+    frameEndRight.applyMatrix(new THREE.Matrix4().makeTranslation(7.5, 3, 0));
     frameEndRight.updateMatrix();
     frameGeomMerged.merge(frameEndRight.geometry, frameEndRight.matrix);
 
@@ -230,9 +263,9 @@ export default class Head {
     frameEndLeft.updateMatrix();
     frameGeomMerged.merge(frameEndLeft.geometry, frameEndLeft.matrix);
 
-    let frameSpokeGeom = new THREE.BoxGeometry(1,0.5,12);
+    let frameSpokeGeom = new THREE.BoxGeometry(1, 0.5, 12);
     let frameSpokeRight = new THREE.Mesh(frameSpokeGeom, Mat.goldMat);
-    frameSpokeRight.applyMatrix( new THREE.Matrix4().makeTranslation(8, 3, -5.5));
+    frameSpokeRight.applyMatrix(new THREE.Matrix4().makeTranslation(8, 3, -5.5));
     frameSpokeRight.updateMatrix();
     frameGeomMerged.merge(frameSpokeRight.geometry, frameSpokeRight.matrix);
 
@@ -242,7 +275,7 @@ export default class Head {
     frameGeomMerged.merge(frameSpokeLeft.geometry, frameSpokeLeft.matrix);
 
     let frameMerged = new THREE.Mesh(frameGeomMerged, Mat.goldMat);
-    frameMerged.castShadow = true;
+    frameMerged.castShadow = false;
     frameMerged.receiveShadow = true;
 
     this.glasses.add(frameMerged);
@@ -396,14 +429,12 @@ export default class Head {
 
     this.hat = new THREE.Object3D();
     this.hat.position.set(-0.2, 11, 2.4);
-    this.hat.castShadow = true;
-    this.hat.receiveShadow = false;
     this.head.add(this.hat);
 
-    let bandGeom = new THREE.TorusGeometry( 9, 2, 16, 100 );
-    let bigConeGeom = new THREE.CylinderGeometry( 1, 11, 12, 15 );
-    let smallConeGeom =  new THREE.CylinderGeometry( 0.8, 3, 9, 32 );
-    let hatDingleGeom = new THREE.SphereGeometry( 1.5, 8, 8);
+    let bandGeom = new THREE.TorusGeometry(9, 2, 16, 100);
+    let bigConeGeom = new THREE.CylinderGeometry(1, 11, 12, 15);
+    let smallConeGeom = new THREE.CylinderGeometry(0.8, 3, 9, 32);
+    let hatDingleGeom = new THREE.SphereGeometry(1.5, 8, 8);
 
     this.band = new THREE.Mesh(bandGeom, Mat.teethMat);
     this.band.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / 2));
