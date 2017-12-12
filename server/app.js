@@ -5,6 +5,7 @@ const inert = require('inert');
 const Mongoose = require('mongoose');
 const CartAPI = require('./routes/api/CartAPI');
 const server = new Hapi.Server();
+require(`dotenv`).load({silent: true});
 
 const {PORT = 8080, URL, MONGO_URL} = process.env;
 
@@ -18,7 +19,8 @@ let tls = false;
 
 server.connection({
   port: process.env.PORT || 8080,
-  tls
+  tls,
+  host: '0.0.0.0'
 });
 
 Mongoose.connect(MONGO_URL, {'useMongoClient': true});
