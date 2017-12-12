@@ -8,9 +8,7 @@ const copy = new CopyWebpackPlugin([{
 }], {
   ignore: [
     `.DS_Store`,
-    './js/script.js',
-    './js/classes/*',
-    './js/objects/*'
+    './js/script.js'
   ]
 });
 

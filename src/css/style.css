@@ -39,3 +39,9 @@ canvas {
   bottom: 0;
   right: 0;
 }
+
+.from, .to {
+  z-index: 99;
+  color: white;
+  position: absolute;
+}

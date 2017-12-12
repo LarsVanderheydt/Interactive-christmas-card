@@ -38,7 +38,18 @@ let mousePos = { x: 0, y: 0};
     createScene();
     createLights();
 
-    // audio = new Audio();
+    audio = new Audio();
+
+    const saveAudio = document.getElementById(`save_audio`);
+    saveAudio.addEventListener(`click`, () => {
+    // console.log(audio.arr);
+      HandleSave({
+        text: SpeechText.txt,
+        sound: audio.audioBlob
+      });
+
+    });
+
     const SpeechText = new SpeechRecogn();
 
     particlesJS.load('container', '../assets/particles.json', () => {
@@ -114,7 +125,7 @@ let mousePos = { x: 0, y: 0};
       x: event.clientX,
       y: event.clientY
     };
-        console.log(mousePos);
+        // console.log(mousePos);
   }
 
   let loaderManager = new THREE.LoadingManager();
@@ -322,7 +333,6 @@ let mousePos = { x: 0, y: 0};
   const loop = () => {
     blinkLoop();
     //head.dizzy();
-
     head.idle();
     renderer.render(scene, camera);
     requestAnimationFrame(loop);
