@@ -21,6 +21,7 @@
     "boom": "^7.1.1",
     "copy-webpack-plugin": "^4.2.3",
     "dotenv": "^4.0.0",
+    "forever": "^0.15.3",
     "hapi": "^16.6.2",
     "hapi-devine-api-config": "^2.0.1",
     "hapi-devine-autoload": "^2.0.1",
