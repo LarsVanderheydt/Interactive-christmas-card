@@ -28,10 +28,7 @@ import CartAPI from './lib/cartAPI';
     audio;
 
   const saveBtn = document.getElementById(`save`);
-
-let mousePos = { x: 0, y: 0};
-
-
+  let mousePos = { x: 0, y: 0};
   let starArray = [];
 
   const init = () => {
