@@ -44,7 +44,7 @@ export default class Head {
     // this.eyeBrowRight.rotation.z = Math.sin(Date.now() * 0.002) * Math.PI * 0.04;
     // this.eyeBrowLeft.rotation.z = Math.cos(Date.now() * 0.002) * Math.PI * 0.04;
 
-    this.mouth.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
+    //this.beard.mouth.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
 
     // //SNOR OMHOOG-OMLAAG
     this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
@@ -243,7 +243,7 @@ export default class Head {
     frameGeomMerged.merge(frameSpokeLeft.geometry, frameSpokeLeft.matrix);
 
     let frameMerged = new THREE.Mesh(frameGeomMerged, Mat.goldMat);
-    frameMerged.castShadow = true;
+    frameMerged.castShadow = false;
     frameMerged.receiveShadow = true;
 
     this.glasses.add(frameMerged);

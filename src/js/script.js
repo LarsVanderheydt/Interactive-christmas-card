@@ -25,12 +25,12 @@ import CartAPI from './lib/cartAPI';
     stars,
     windowHalfX,
     windowHalfY,
+    color,
     audio;
 
   const saveBtn = document.getElementById(`save`);
 
-let mousePos = { x: 0, y: 0};
-
+  let mousePos = { x: 0, y: 0};
 
   let starArray = [];
 
@@ -56,6 +56,15 @@ let mousePos = { x: 0, y: 0};
         text: SpeechText.txt
       });
     });
+
+    console.log(controllerText);
+    const controller = new controllerText(this.skinColor);
+    console.log("onder Controller");
+
+    const gui = new dat.GUI();
+
+    let control1 = gui.addColor(controller, 'skinColor');
+    // gui.add(options, 'reset');
 
     loop();
   };
@@ -114,7 +123,7 @@ let mousePos = { x: 0, y: 0};
       x: event.clientX,
       y: event.clientY
     };
-        console.log(mousePos);
+        //console.log(mousePos);
   }
 
   let loaderManager = new THREE.LoadingManager();
@@ -318,6 +327,12 @@ let mousePos = { x: 0, y: 0};
   //
   //     }
   //   }
+
+  const controllerText = (skinColor) => {
+    console.log("Inside FIZZY");
+
+    this.skinColor = "#e44231";
+  }
 
   const loop = () => {
     blinkLoop();
