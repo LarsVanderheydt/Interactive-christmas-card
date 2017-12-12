@@ -57,21 +57,22 @@ import CartAPI from './lib/cartAPI';
       });
     });
 
-    console.log(controllerText);
-    const controller = new controllerText(this.skinColor);
+    // console.log(controllerText);
+    // const controller = new controllerText(this.skinColor);
     console.log("onder Controller");
-
     const gui = new dat.GUI();
 
-    let control1 = gui.addColor(controller, 'skinColor');
+    // let control1 = gui.addColor(controller, 'skinColor');
     // gui.add(options, 'reset');
-
+    normalize();
     loop();
   };
 
   const createScene = () => {;
     HEIGHT = window.innerHeight;
     WIDTH = window.innerWidth;
+    windowHalfX = WIDTH / 2;
+    windowHalfY = HEIGHT / 2;
 
     scene = new THREE.Scene();
     //scene.fog = new THREE.Fog(0xffffff, 150,300);
@@ -123,7 +124,15 @@ import CartAPI from './lib/cartAPI';
       x: event.clientX,
       y: event.clientY
     };
-        //console.log(mousePos);
+  }
+
+  const normalize = (v, vmin, vmax, tmin, tmax) => {
+    const nv = Math.max(Math.min(v, vmax), vmin);
+    const dv = vmax - vmin;
+    const pc = (nv - vmin) / dv;
+    const dt = tmax - tmin;
+    const tv = tmin + (pc * dt);
+    return tv;
   }
 
   let loaderManager = new THREE.LoadingManager();
@@ -328,17 +337,21 @@ import CartAPI from './lib/cartAPI';
   //     }
   //   }
 
-  const controllerText = (skinColor) => {
-    console.log("Inside FIZZY");
-
-    this.skinColor = "#e44231";
-  }
+  // const controllerText = (skinColor) => {
+  //   console.log("Inside FIZZY");
+  //
+  //   this.skinColor = "#e44231";
+  // }
 
   const loop = () => {
     blinkLoop();
     //head.dizzy();
+    let xTarget = (mousePos.x - windowHalfX);
+    let yTarget = (mousePos.y - windowHalfY);
 
-    head.idle();
+    //console.log(xTarget);
+
+    head.idle(xTarget, yTarget);
     renderer.render(scene, camera);
     requestAnimationFrame(loop);
   }
