@@ -1,24 +1,31 @@
 const path = require(`path`);
 const webpack = require(`webpack`);
+const CopyWebpackPlugin = require(`copy-webpack-plugin`);
+
+const copy = new CopyWebpackPlugin([{
+  from: `./src`,
+  to: `./`
+}], {
+  ignore: [
+    `.DS_Store`,
+    './js/script.js'
+  ]
+});
 
 module.exports = {
-  entry: './src/js/script.js',
+  entry: {
+    script: './src/js/script.js',
+    santa: './src/js/santaScript.js'
+  },
 
   output: {
-    path: path.resolve(`./dist`),
-    filename: `js/script.js`,
+    path: path.resolve(`./server/public`),
+    filename: `js/[name].js`
   },
 
   devtool: 'inline-source-map',
 
-  devServer: {
-    contentBase: `./src`,
-    historyApiFallback: true,
-    hot: true,
-    port: 3000
-  },
-
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    copy
   ]
 };

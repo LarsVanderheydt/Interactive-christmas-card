@@ -1,14 +1,14 @@
 {
-  "name": "aviator",
+  "name": "Experimental_Web",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./server/app.js",
   "license": "MIT",
   "scripts": {
-    "development": "webpack-dev-server --open",
-    "production": "npm run clean && npm run copy && NODE_ENV=production webpack -p",
-    "copy": "copyfiles -u 1 './src/**/*.*' ./dist",
-    "clean": "rimraf dist",
-    "serve": "mamp ./dist"
+    "development": "npm run clean && npm run server & webpack --watch",
+    "server": "NODE_ENV=development nodemon ./server/app.js",
+    "start": "forever .",
+    "clean": "rimraf ./server/public",
+    "generate-ssl-certs": "./scripts/generate-ssl-certs.sh"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.17",
@@ -17,5 +17,24 @@
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "boom": "^7.1.1",
+    "copy-webpack-plugin": "^4.2.3",
+    "dotenv": "^4.0.0",
+    "forever": "^0.15.3",
+    "hapi": "^16.6.2",
+    "hapi-devine-api-config": "^2.0.1",
+    "hapi-devine-autoload": "^2.0.1",
+    "hapi-devine-mongodb": "^1.7.1",
+    "hapi-devine-parse-query": "^1.0.6",
+    "hapi-devine-routes": "^1.1.1",
+    "inert": "^4.2.1",
+    "isomorphic-fetch": "^2.2.1",
+    "joi": "^13.0.2",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.13.6",
+    "nodemon": "^1.12.5",
+    "recorderjs": "^1.0.1",
+    "shortid": "^2.2.8"
+  }
 }
