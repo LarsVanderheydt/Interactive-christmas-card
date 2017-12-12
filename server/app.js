@@ -6,6 +6,7 @@ const Mongoose = require('mongoose');
 const CartAPI = require('./routes/api/CartAPI');
 const server = new Hapi.Server();
 
+const {PORT = 8080, URL, MONGO_URL} = process.env;
 
 let tls = false;
   if (process.env.NODE_ENV === 'development') {
@@ -17,11 +18,10 @@ let tls = false;
 
 server.connection({
   port: process.env.PORT || 8080,
-  tls,
-  host: '0.0.0.0'
+  tls
 });
 
-Mongoose.connect('mongodb://localhost/carts', {'useMongoClient': true});
+Mongoose.connect(MONGO_URL, {'useMongoClient': true});
 const db = Mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function callback() {

@@ -6,10 +6,6 @@
   "scripts": {
     "development": "npm run clean && npm run start & webpack --watch",
     "start": "NODE_ENV=development nodemon ./server/app.js",
-    "production": "npm run clean && npm run copy && NODE_ENV=production webpack -p",
-    "copy": "copyfiles -u 1 './src/**/*.*' ./dist",
-    "clean": "rimraf ./server/public",
-    "serve": "mamp ./dist",
     "generate-ssl-certs": "./scripts/generate-ssl-certs.sh"
   },
   "devDependencies": {
