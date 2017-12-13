@@ -38,18 +38,7 @@ import CartAPI from './lib/cartAPI';
     createScene();
     createLights();
 
-    audio = new Audio();
-
-    const saveAudio = document.getElementById(`save_audio`);
-    saveAudio.addEventListener(`click`, () => {
-    // console.log(audio.arr);
-      HandleSave({
-        text: SpeechText.txt,
-        sound: audio.audioBlob
-      });
-
-    });
-
+    // audio = new Audio();
     const SpeechText = new SpeechRecogn();
 
     particlesJS.load('container', '../assets/particles.json', () => {

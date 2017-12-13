@@ -50,8 +50,8 @@ export default class Head {
   }
 
   idle(xTarget, yTarget) {
-    console.log(xTarget, yTarget);
-    console.log(this.eyeBlueRight.position.x);
+    //console.log(xTarget, yTarget);
+    //console.log(this.eyeBlueRight.position.x);
     //console.log(this.eyeBlueRight.position.y);
     let distance = 1;
 
