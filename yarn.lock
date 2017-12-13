@@ -144,6 +144,10 @@ array-includes@^3.0.3:
     define-properties "^1.1.2"
     es-abstract "^1.7.0"
 
+array-to-audiobuffer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/array-to-audiobuffer/-/array-to-audiobuffer-1.0.0.tgz#7fbc8dc6333f8f9507587ab84a1afcbfda6a0a15"
+
 array-union@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"

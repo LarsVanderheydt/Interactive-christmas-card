@@ -1,5 +1,5 @@
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-import bufferToArrayBuffer from 'buffer-to-arraybuffer';
+import arrayToAudioBuffer from 'array-to-audiobuffer';
 import CartAPI from './lib/cartAPI';
 
 let targetId, audioCtx;
@@ -20,17 +20,17 @@ const init = () => {
       console.log('something went terribly right ehzeg!');
       console.log(d);
       document.getElementById(`title`).innerHTML = d.from;
-
-      const audio = new bufferToArrayBuffer(d.sound);
-      console.log(audio);
-      loadArrayBuffer(audio);
+      console.log(d.sound);
+      document.getElementById(`santa_audio`).src = `./uploads/${d.sound}.ogg`;
     }
   });
 }
 
 const loadArrayBuffer = arrayBuffer => {
   const source = audioCtx.createBufferSource();
+
   audioCtx.decodeAudioData(arrayBuffer, buffer => {
+    console.log(buffer);
     source.buffer = buffer;
     source.connect(audioCtx.destination);
 

@@ -7,7 +7,6 @@ const record = document.getElementById(`audio`);
 
 export default class Audio {
   constructor() {
-    this.externalScopeVariable = '';
     this.stoptRecording = false;
 
     audioCtx = new AudioContext();
@@ -16,13 +15,23 @@ export default class Audio {
       const mediaRecorder = new MediaRecorder(stream);
 
       /*--------------------Start Recording-----------------------*/
-      record.addEventListener(`click`, () => mediaRecorder.start());
+      record.addEventListener(`click`, () => {
+         mediaRecorder.start();
+         console.log('record');
+      });
       /*----------------------------------------------------------*/
 
+      // add audiochunk to array
       mediaRecorder.addEventListener(`dataavailable`,  e => audioChunks.push(e.data));
       mediaRecorder.addEventListener(`stop`, () => {
-        this.audioBlob = new Blob(audioChunks);
-        this.blobToArrayBuffer(this.audioBlob);
+        // create blob from audiochunks
+        this.blob = new Blob(audioChunks, {type : 'audio/ogg'});
+
+        const blobUrl = URL.createObjectURL(this.blob);
+
+        document.getElementById(`audio_controls`).src = blobUrl;
+
+        //this.blobToArrayBuffer(this.blob);
         audioChunks = [];
       });
 
@@ -40,8 +49,6 @@ export default class Audio {
     const fileReader = new FileReader();
 
     fileReader.onload = e => {
-      // this.arr = e.currentTarget.result;
-      // console.log(e.currentTarget.result);
       const arrayBuffer = e.currentTarget.result;
       this.loadArrayBuffer(arrayBuffer);
     };

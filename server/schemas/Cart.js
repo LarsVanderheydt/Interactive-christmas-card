@@ -7,6 +7,7 @@ var CartSchema = new Schema({
     isActive: Boolean,
     id: String,
     from: String,
-    sound: Buffer
+    sound: String,
+    date: String
 });
 module.exports = mongoose.model('Cart', CartSchema);

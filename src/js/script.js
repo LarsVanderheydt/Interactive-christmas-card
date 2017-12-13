@@ -2,7 +2,7 @@ import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
 import SpeechRecogn from './classes/SpeechRecognition.js';
-import HandleSave from './objects/Save';
+import handleSave from './objects/Save';
 import CartAPI from './lib/cartAPI';
 {
   let scene,
@@ -26,9 +26,10 @@ import CartAPI from './lib/cartAPI';
     windowHalfX,
     windowHalfY,
     color,
-    audio;
+    audio,
+    SpeechText;
 
-  const saveBtn = document.getElementById(`save`);
+  const saveBtn = document.getElementById(`save_audio`);
 
   let mousePos = { x: 0, y: 0};
 
@@ -38,22 +39,27 @@ import CartAPI from './lib/cartAPI';
     createScene();
     createLights();
 
-    // audio = new Audio();
-    const SpeechText = new SpeechRecogn();
-
+    // create snow
     particlesJS.load('container', '../assets/particles.json', () => {
       console.log('callback - particles.js config loaded');
     });
 
+    // handle audio
+    audio = new Audio();
+
+    // show and handle head
     head = new Head();
     scene.add(head.mesh);
 
-    window.scene = scene;
+    // handle SpeechRecognition
+    SpeechText = new SpeechRecogn();
 
+    // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
-      if (!SpeechText.txt) return;
-      HandleSave({
-        text: SpeechText.txt
+      handleSave({
+        text: SpeechText.txt,
+        // send audioblob to save
+        blob: audio.blob
       });
     });
 
@@ -64,6 +70,10 @@ import CartAPI from './lib/cartAPI';
 
     // let control1 = gui.addColor(controller, 'skinColor');
     // gui.add(options, 'reset');
+
+    // set scene for extension
+    window.scene = scene;
+
     loop();
   };
 
@@ -271,7 +281,6 @@ import CartAPI from './lib/cartAPI';
     isBlinking = false;
 
     if ((!isBlinking) && (Math.random() > 0.99)) {
-      console.log('blink');
       isBlinking = true;
       blink();
     }
