@@ -39,30 +39,40 @@ export default class Head {
     return tv;
   }
 
-  updateBody(speed) {
+  updateBody(speed, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY) {
     //this.eyeBlueRight.rotation.y += (lion.tHeagRotY - this.eyeBlueRight.rotation.y) / speed;
     //this.eyeBlueRight.rotation.x += (this.eyeBlueRightRotX - this.eyeBlueRight.rotation.x) / speed;
 
-    //this.eyeBlueRight.position.x += (this.eyeBlueRightPosX - this.eyeBlueRight.position.x) / speed;
+    this.eyeBlueRight.position.x += (eyeBlueRightPosX - this.eyeBlueRight.position.x) / speed;
+    this.eyeBlueLeft.position.x += (eyeBlueLeftPosX - this.eyeBlueLeft.position.x) / speed;
+
+    this.eyeBlueRight.position.y += (eyeBlueRightPosY - this.eyeBlueRight.position.y) / speed;
+    this.eyeBlueLeft.position.y += (eyeBlueLeftPosY - this.eyeBlueLeft.position.y) / speed;
 
     //this.eyeBlueRight.position.y += Math.sin(this.eyeBlueRightPosY - this.eyeBlueRight.position.y) / speed;
     // this.eyeBlueRight.position.z += (this.eyeBlueRightPosZ - this.eyeBlueRight.position.z) / speed;
   }
 
-  idle(xTarget, yTarget) {
+  idle(xTarget = 0, yTarget = 0) {
+
     //console.log(xTarget, yTarget);
     //console.log(this.eyeBlueRight.position.x);
-    //console.log(this.eyeBlueRight.position.y);
+    console.log(this.eyeBlueRight.position.y);
     let distance = 1;
 
     this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.005;
     this.head.rotation.x = Math.sin(Date.now() * 0.004) * Math.PI * 0.03;
 
-    this.eyeBlueLeft.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
-    this.eyeBlueRight.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
-    //this.eyeBlueRightPosX = (xTarget);
+    // this.eyeBlueLeft.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
+    // this.eyeBlueRight.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
 
-    //this.eyeBlueRightPosX = normalize(xTarget, -20, 20, 70, -70);
+    const eyeBlueRightPosX = this.normalize(xTarget, -200, 200, -0.6, 0.6);
+
+    const eyeBlueLeftPosX = this.normalize(xTarget, -200, 200, -0.6, 0.6);
+
+    const eyeBlueRightPosY = this.normalize(yTarget, -200, 200, 0.6, -0.6);
+
+    const eyeBlueLeftPosY = this.normalize(yTarget, -200, 200, 0.6, -0.6);
 
     // this.eyeBlueRightRotY = xTarget, -20, 20, -Math.PI / 4, Math.PI / 4;
     // this.eyeBlueRightRotX = yTarget, -20, 20, -Math.PI / 4, Math.PI / 4;
@@ -87,7 +97,7 @@ export default class Head {
 
     //SNELHEID HEEN EN WEER
     this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05;
-    this.updateBody(10);
+    this.updateBody(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY);
   }
 
   Beard() {
