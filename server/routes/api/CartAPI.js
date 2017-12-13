@@ -23,7 +23,8 @@ module.exports = [
           text: data.text,
           id: data.id,
           from: data.name,
-          isActive: true
+          isActive: true,
+          sound: data.sound
       });
 
       cart.save(function(error, cart) {

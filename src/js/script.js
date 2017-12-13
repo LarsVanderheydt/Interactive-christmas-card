@@ -64,7 +64,6 @@ import CartAPI from './lib/cartAPI';
 
     // let control1 = gui.addColor(controller, 'skinColor');
     // gui.add(options, 'reset');
-    normalize();
     loop();
   };
 
@@ -124,15 +123,6 @@ import CartAPI from './lib/cartAPI';
       x: event.clientX,
       y: event.clientY
     };
-  }
-
-  const normalize = (v, vmin, vmax, tmin, tmax) => {
-    const nv = Math.max(Math.min(v, vmax), vmin);
-    const dv = vmax - vmin;
-    const pc = (nv - vmin) / dv;
-    const dt = tmax - tmin;
-    const tv = tmin + (pc * dt);
-    return tv;
   }
 
   let loaderManager = new THREE.LoadingManager();
