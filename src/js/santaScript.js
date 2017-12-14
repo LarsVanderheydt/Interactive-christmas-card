@@ -1,22 +1,37 @@
+const AudioContext = window.AudioContext || window.webkitAudioContext;
 import CartAPI from './lib/cartAPI';
-let targetId;
+
+let targetId, audioCtx;
+const play = document.getElementById(`play_santa`);
 
 const init = () => {
+  audioCtx = new AudioContext();
   targetId = getUrlParameter("id");
-  if (!targetId) {
-    alert('missing id');
-    return;
-  }
+  if (!targetId) window.location = "https://localhost:8080";
 
   CartAPI.readOne(targetId).then(d => {
     if (d.statusCode) {
-      console.log('something went terribly wrong ehzeg!');
+      window.location = "https://localhost:8080";
     } else {
-      console.log('something went terribly right ehzeg!');
-      console.log(d);
       document.getElementById(`title`).innerHTML = d.from;
+      document.getElementById(`santa_audio`).src = `./uploads/${d.sound}.ogg`;
     }
   });
+}
+
+const loadArrayBuffer = arrayBuffer => {
+  const source = audioCtx.createBufferSource();
+
+  audioCtx.decodeAudioData(arrayBuffer, buffer => {
+    source.buffer = buffer;
+    source.connect(audioCtx.destination);
+
+    /*---------------Play arrayBuffer-----------------*/
+    play.addEventListener(`click`, () => source.start());
+    /*------------------------------------------------*/
+
+  },
+  e => { console.log("Error with decoding audio data" + e.err); });
 }
 
 const getUrlParameter = name => {

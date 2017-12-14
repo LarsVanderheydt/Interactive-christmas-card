@@ -1,0 +1,5 @@
+.babelrc
+/src
+nodemon.json
+*.config.js
+README.md

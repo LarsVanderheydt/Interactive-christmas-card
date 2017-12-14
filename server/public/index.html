@@ -8,7 +8,7 @@
 		<meta name="description" content="Experimental Web Opdracht" />
 		<meta name="keywords" content="three.js, webgl, christmascard, 3d, animation, web development, javascript" />
 		<meta name="author" content="Lars & Louise" />
-		<!-- <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,700italic' rel='stylesheet' type='text/css'> -->
+<link href="https://fonts.googleapis.com/css?family=Barlow:300i,400" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -16,23 +16,36 @@
 
 	</head>
 	<body>
-		<h1>Stuur jou unieke santa naar jou vrienden met deze link <a href="" class="unique_link"></a></h1>
+		<audio src="" id="audio_controls" controls>
+
+		</audio>
+		<section class="topbuttons">
+			<button type="button" id="play">Play</button>
+			<button type="button" id="stop">Stop</button>
+			<button type="button" id="audio">Record</button>
+			<button type="button" id="save_audio">Save</button>
+		</section>
+
+		<section class="link">
+			<h1 class="to">Stuur jouw unieke santa naar je vrienden met deze link <a href="" class="unique_link"></a></h1>
+		</section>
+
 		<div class="SpRecognition">
-			<input type="text" name="name" value="" id="name_input">
-			<textarea name="name" id="field" rows="8" cols="80"></textarea>
-			<button type="button" id="record">Record</button>
-			<button type="button" id="save">Save</button>
+			<input type="text" name="name" value="" id="name_input" placeholder="Jouw naam" class="border">
+			<textarea name="name" id="field" rows="10" cols="80" name="text" placeholder="Jouw boodschap" class="border"></textarea>
+			<div class="buttonsGroup">
+				<button class="button" type="button" id="record">Record</button>
+				<button class="button" type="button" id="save">Save</button>
+			</div>
 		</div>
 
-
 		<div id="container"></div>
-		<!-- <div class="world" id="world"></div> -->
-		<script type="text/javascript" src="./js/vendors/three.min.js"></script>
-		<script type="text/javascript" src="./js/vendors/TweenMax.min.js"></script>
-		<script type="text/javascript" src="./js/vendors/threeCSG.js"></script>
-		<script type="text/javascript" src="./js/vendors/dat.gui.min.js"></script>
-		<!-- <script src="./js/vendors/recorderjs/recorder.js"></script> -->
-		<script type="text/javascript" src="./js/vendors/particles.min.js"></script>
+
+		<script src="./js/vendors/three.min.js"></script>
+		<script src="./js/vendors/TweenMax.min.js"></script>
+		<script src="./js/vendors/threeCSG.js"></script>
+		<script src="./js/vendors/dat.gui.min.js"></script>
+		<script src="./js/vendors/particles.min.js"></script>
 
 		<script src="./js/script.js"/></script>
 	</body>

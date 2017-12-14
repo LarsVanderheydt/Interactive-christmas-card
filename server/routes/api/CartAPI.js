@@ -1,5 +1,8 @@
 const Cart = require('../../schemas/Cart');
 const Boom = require('boom');
+const path = require('path');
+const fs = require('fs');
+const {omit, pick} = require(`lodash`);
 
 module.exports = [
   {
@@ -17,21 +20,48 @@ module.exports = [
   {
     method: ['PUT', 'POST'],
     path: '/api/cart',
+    config: {
+      payload: {
+        output: `stream`,
+        parse: true,
+        allow: `multipart/form-data`
+      },
+    },
+
     handler: function (request, reply) {
       const data = request.payload;
-      const cart = new Cart({
-          text: data.text,
-          id: data.id,
-          from: data.name,
-          isActive: true
-      });
+      console.log(data.id);
+      if (data.sound) {
+        const {filename} = data.sound.hapi;
+        const folder = path.join(__dirname, `../../uploads`);
+        const p = `${folder}/${filename}.ogg`;
+        const f = fs.createWriteStream(p);
+        f.on(`error`, err => {
+          console.error(err);
+        });
+        data.sound.pipe(f);
+        data.sound.on(`end`, () => {
+          const d = pick(request.payload);
+          d.sound = filename;
+          console.log(d.id);
+          // create new instance of model (with payload as data)
+          const cart = new Cart({
+              text: d.text,
+              id: data.id,
+              from: d.name,
+              isActive: true,
+              sound: d.sound,
+              date: Date.now()
+          });
 
-      cart.save(function(error, cart) {
-        if (error) {
-            console.error(error);
-        }
-        reply(cart);
-      });
+          cart.save(function(error, cart) {
+            if (error) {
+                console.error(error);
+            }
+            reply(cart);
+          });
+        })
+      }
     }
   },
   {
