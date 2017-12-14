@@ -57,7 +57,7 @@ export default class Head {
 
     //console.log(xTarget, yTarget);
     //console.log(this.eyeBlueRight.position.x);
-    console.log(this.eyeBlueRight.position.y);
+    // console.log(this.eyeBlueRight.position.y);
     let distance = 1;
 
     this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.005;

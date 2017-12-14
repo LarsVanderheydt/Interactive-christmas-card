@@ -36,13 +36,13 @@ import CartAPI from './lib/cartAPI';
   let starArray = [];
 
   const init = () => {
-    createScene();
-    createLights();
-
     // create snow
-    particlesJS.load('container', '../assets/particles.json', () => {
+    particlesJS.load('particles-js', '../assets/particles.json', () => {
       console.log('callback - particles.js config loaded');
     });
+
+    createScene();
+    createLights();
 
     // handle audio
     audio = new Audio();
