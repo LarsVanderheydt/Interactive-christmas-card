@@ -1,7 +1,6 @@
 import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
-import SpeechRecogn from './classes/SpeechRecognition.js';
 import handleSave from './objects/Save';
 import CartAPI from './lib/cartAPI';
 {
@@ -29,7 +28,7 @@ import CartAPI from './lib/cartAPI';
     audio,
     SpeechText;
 
-  const saveBtn = document.getElementById(`save_audio`);
+  const saveBtn = document.getElementById(`save`);
 
   let mousePos = { x: 0, y: 0};
 
@@ -46,18 +45,16 @@ import CartAPI from './lib/cartAPI';
 
     // handle audio
     audio = new Audio();
-
     // show and handle head
     head = new Head();
     scene.add(head.mesh);
 
-    // handle SpeechRecognition
-    SpeechText = new SpeechRecogn();
-
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
+      console.log(audio.blob);
+
       handleSave({
-        text: SpeechText.txt,
+        text: audio.txt,
         // send audioblob to save
         blob: audio.blob
       });

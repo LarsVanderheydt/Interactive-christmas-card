@@ -30,7 +30,7 @@ module.exports = [
 
     handler: function (request, reply) {
       const data = request.payload;
-      console.log(data.id);
+
       if (data.sound) {
         const {filename} = data.sound.hapi;
         const folder = path.join(__dirname, `../../uploads`);
@@ -43,12 +43,11 @@ module.exports = [
         data.sound.on(`end`, () => {
           const d = pick(request.payload);
           d.sound = filename;
-          console.log(d.id);
-          // create new instance of model (with payload as data)
+          console.log(d);
           const cart = new Cart({
-              text: d.text,
+              text: data.text,
               id: data.id,
-              from: d.name,
+              name: data.name,
               isActive: true,
               sound: d.sound,
               date: Date.now()

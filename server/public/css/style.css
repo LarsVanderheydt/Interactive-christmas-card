@@ -34,6 +34,13 @@ h1 {
           flex-direction: column;
 }
 
+#name {
+  margin-top: -32px;
+  margin-top: -2rem;
+  text-transform: uppercase;
+  color: white;
+}
+
 .to,
 .from {
   color: rgba(242, 242, 242, 1);

@@ -1,72 +1,76 @@
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-let audioCtx, tag;
+
+let audioCtx, recognition;
+let transcript = "";
 let audioChunks = [];
-const play = document.getElementById(`play`);
-const stop = document.getElementById(`stop`);
-const record = document.getElementById(`audio`);
+
+const text = document.getElementById(`field`);
+const record = document.getElementById(`record`);
 
 export default class Audio {
   constructor() {
-    this.stoptRecording = false;
+    // handle SpeechRecognition
+    recognition = new SpeechRecognition();
+    this.speechSettings();
 
+    recognition.onresult = event => this.gotResult(event);
+    recognition.onspeechend = e => this.onSpeechEnd(e);
+    text.addEventListener(`blur`, () => this.txt = text.value);
+
+    this.text = "";
+    // handle AudioContext
     audioCtx = new AudioContext();
     navigator.mediaDevices.getUserMedia({ audio: true })
     .then(stream => {
-      const mediaRecorder = new MediaRecorder(stream);
+      this.mediaRecorder = new MediaRecorder(stream);
 
       /*--------------------Start Recording-----------------------*/
       record.addEventListener(`click`, () => {
-         mediaRecorder.start();
-         console.log('record');
+         this.mediaRecorder.start();
+         recognition.start();
+         record.disabled = true;
       });
       /*----------------------------------------------------------*/
 
       // add audiochunk to array
-      mediaRecorder.addEventListener(`dataavailable`,  e => audioChunks.push(e.data));
-      mediaRecorder.addEventListener(`stop`, () => {
+      this.mediaRecorder.addEventListener(`dataavailable`,  e => audioChunks.push(e.data));
+
+      // when mediaRecorder stops, make and handle audio blob
+      this.mediaRecorder.addEventListener(`stop`, () => {
         // create blob from audiochunks
         this.blob = new Blob(audioChunks, {type : 'audio/ogg'});
 
+        // make url from blob stream
         const blobUrl = URL.createObjectURL(this.blob);
-
         document.getElementById(`audio_controls`).src = blobUrl;
 
-        //this.blobToArrayBuffer(this.blob);
         audioChunks = [];
       });
-
-      /*------------------Stop Recording----------------------*/
-      stop.addEventListener(`click`, () => {
-        mediaRecorder.stop();
-        this.stoptRecording = true;
-      });
-      /*------------------------------------------------------*/
-
     });
   }
 
-  blobToArrayBuffer(audioBlob) {
-    const fileReader = new FileReader();
+  onSpeechEnd(e) {
+    this.mediaRecorder.stop();
 
-    fileReader.onload = e => {
-      const arrayBuffer = e.currentTarget.result;
-      this.loadArrayBuffer(arrayBuffer);
-    };
-
-    fileReader.readAsArrayBuffer(audioBlob);
+    recognition.stop();
+    record.disabled = false;
+    record.textContent = 'Opnieuw proberen?';
+    this.txt = text.value;
   }
 
-  loadArrayBuffer(arrayBuffer) {
-    const source = audioCtx.createBufferSource();
-    audioCtx.decodeAudioData(arrayBuffer, buffer => {
-      source.buffer = buffer;
-      source.connect(audioCtx.destination);
+  gotResult(event) {
+    const last = event.results.length - 1;
+    transcript = event.results[last][0].transcript;
+    text.value = transcript;
+  }
 
-      /*---------------Play arrayBuffer-----------------*/
-      play.addEventListener(`click`, () => source.start());
-      /*------------------------------------------------*/
-
-    },
-    e => { console.log("Error with decoding audio data" + e.err); });
+  speechSettings() {
+    recognition.continuous = false;
+    recognition.lang = 'nl-BE';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
   }
 };
