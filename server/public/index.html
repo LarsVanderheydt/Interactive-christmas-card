@@ -16,6 +16,18 @@
 
 	</head>
 	<body>
+		<select name="biquadType" id="biquadType">
+		  <option value="lowpass">lowpass</option>
+		  <option value="highpass">highpass</option>
+		  <option value="bandpass">bandpass</option>
+		  <option value="lowshelf">lowshelf</option>
+		  <option value="highshelf">highshelf</option>
+		  <option value="peaking">peaking</option>
+		  <option value="notch">notch</option>
+		  <option value="allpass">allpass</option>
+		</select>
+		<input type="range" name="" value="350" min="350" max="30000" id="biquadValue">
+
 		<audio src="" id="audio_controls" controls></audio>
 
 		<section class="link">

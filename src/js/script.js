@@ -3,9 +3,14 @@ import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
 import handleSave from './objects/Save';
 import CartAPI from './lib/cartAPI';
-{
-  let scene,camera,fieldOfView,aspectRatio,nearPlane,farPlane,HEIGHT,WIDTH,globalLight,shadowLight,backLight,light,renderer,container,controls,loaded,head,stars,windowHalfX,windowHalfY,color,audio,SpeechText;
 
+{
+  let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, HEIGHT, WIDTH;
+  let globalLight, shadowLight, backLight, light, renderer, container, loaded;
+  let head, stars, windowHalfX, windowHalfY, color, audio, SpeechText;
+
+  // vars for dat.gui
+  let controller, gui;
   const saveBtn = document.getElementById(`save`);
 
   let mousePos = { x: 0, y: 0};
@@ -21,62 +26,46 @@ import CartAPI from './lib/cartAPI';
     createScene();
     createLights();
 
-    // handle audio
-    audio = new Audio();
-    // show and handle head
-    head = new Head();
+    audio = new Audio(); // handle audio
+    head = new Head(); // show and handle head
     scene.add(head.mesh);
 
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
-      console.log(audio.blob);
-
       handleSave({
         text: audio.txt,
-        // send audioblob to save
-        blob: audio.blob
+        blob: audio.blob // send audioblob to save
       });
     });
 
-    // console.log(controllerText);
-    const controller = new controllerText(this.skin, this.freckles,  this.eye, this.glasses, this.hat);
-    const gui = new dat.GUI();
+    gui = new dat.GUI();
+    controller = new controllerText();
+    guiController(['skin', 'freckles', 'eye', 'glasses', 'hat']); // add gui for array object and set colors on color change
 
-    gui.addColor(controller, 'skin').onChange(function() {
-      Colors.skin = controller.skin;
-      scene.remove(head.mesh);
-      createHead();
-    });
-
-    gui.addColor(controller, 'freckles').onChange(function() {
-      Colors.freckles = controller.freckles;
-      scene.remove(head.mesh);
-      createHead();
-    });
-
-    gui.addColor(controller, 'eye').onChange(function() {
-      Colors.eye = controller.eye;
-      scene.remove(head.mesh);
-      createHead();
-    });
-
-    gui.addColor(controller, 'glasses').onChange(function() {
-      Colors.glasses = controller.glasses;
-      scene.remove(head.mesh);
-      createHead();
-    });
-
-    gui.addColor(controller, 'hat').onChange(function() {
-      Colors.hat = controller.hat;
-      scene.remove(head.mesh);
-      createHead();
-    });
-
-    // set scene for extension
-    window.scene = scene;
+    window.scene = scene; // set scene for extension
 
     loop();
   };
+
+  const guiController = keys => {
+    keys.forEach(key => {
+      gui.addColor(controller, key).onChange(() => {
+
+        // set right color for material
+        switch (key) {
+          case 'skin': Colors.skin = controller.skin;
+          case 'freckles': Colors.freckles = controller.freckles;
+          case 'eye': Colors.eye = controller.eye;
+          case 'glasses': Colors.glasses = controller.glasses;
+          case 'hat': Colors.hat = controller.hat;
+        }
+
+        //remove current head and make a new one to set current color
+        scene.remove(head.mesh);
+        createHead();
+      });
+    });
+  }
 
   const dec2hex = (i) => {
     var result = "0x000000";
