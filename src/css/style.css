@@ -11,9 +11,13 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: -webkit-radial-gradient(#239c2e, #239c2e, #13741f);
-  background: -o-radial-gradient(#239c2e, #239c2e, #13741f);
-  background: radial-gradient(#239c2e, #239c2e, #13741f);
+  background: -webkit-radial-gradient(#113b51, #113b51, #2d2c2c);
+  background: -o-radial-gradient(#113b51, #113b51, #2d2c2c);
+  background: radial-gradient(#113b51, #113b51, #2d2c2c);
+
+  /*
+  background: white;
+  */
 }
 
 h1 {
