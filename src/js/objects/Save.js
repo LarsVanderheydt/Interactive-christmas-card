@@ -5,7 +5,7 @@ const link = document.querySelector(`.unique_link`);
 
 const handleSave = ({text, blob}) => {
   const id = shortid.generate();
-
+  console.log(name.value);
   CartAPI.create({
     text,
     id,

@@ -6,7 +6,7 @@ var CartSchema = new Schema({
     text: String,
     isActive: Boolean,
     id: String,
-    from: String,
+    name: String,
     sound: String,
     date: String
 });

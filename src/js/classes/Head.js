@@ -8,7 +8,10 @@ export default class Head {
     this.mesh = new THREE.Object3D();
 
     let headGeom = new THREE.BoxBufferGeometry(16, 16, 16);
-    this.head = new THREE.Mesh(headGeom, Mat.skinMat);
+    let skinMat = new THREE.MeshLambertMaterial({color: Colors.skin, flatShading: true});
+    let eyeMat = new THREE.MeshPhongMaterial({color: Colors.eye, flatShading: true});
+
+    this.head = new THREE.Mesh(headGeom,skinMat);
     this.head.castShadow = true;
     this.head.receiveShadow = false;
     this.mesh.add(this.head);
@@ -101,8 +104,6 @@ export default class Head {
   }
 
   Beard() {
-    //BEARD
-    ////////////////////////////////////
 
     let beardGeomMerged = new THREE.Geometry();
 
@@ -231,6 +232,8 @@ export default class Head {
     this.glasses = new THREE.Object3D();
     this.glasses.position.set(0, 0, 9);
     this.head.add(this.glasses);
+    let glassesMat = new THREE.MeshPhongMaterial({color: Colors.glasses, flatShading: true});
+
 
     let frameGeomMerged = new THREE.Geometry();
 
@@ -244,7 +247,7 @@ export default class Head {
     let frameCutBSP = new ThreeBSP(frameInnerGeom);
 
     let frameintersectionBSP = frameBSP.subtract(frameCutBSP);
-    let frameLeft = frameintersectionBSP.toMesh(Mat.goldMat);
+    let frameLeft = frameintersectionBSP.toMesh(glassesMat);
 
     frameLeft.applyMatrix(new THREE.Matrix4().makeTranslation(4, 3, 0));
     frameLeft.updateMatrix();
@@ -257,13 +260,13 @@ export default class Head {
     frameGeomMerged.merge(frameRight.geometry, frameRight.matrix);
 
     let frameMidGeom = new THREE.BoxGeometry(2, .3, .5);
-    let frameMid = new THREE.Mesh(frameMidGeom, Mat.goldMat);
+    let frameMid = new THREE.Mesh(frameMidGeom, glassesMat);
     frameMid.applyMatrix(new THREE.Matrix4().makeTranslation(0, 3.3, -0.3));
     frameMid.updateMatrix();
     frameGeomMerged.merge(frameMid.geometry, frameMid.matrix);
 
     let frameEndGeom = new THREE.BoxGeometry(1.5, .5, 1);
-    let frameEndRight = new THREE.Mesh(frameEndGeom, Mat.goldMat);
+    let frameEndRight = new THREE.Mesh(frameEndGeom, glassesMat);
     frameEndRight.applyMatrix(new THREE.Matrix4().makeTranslation(7.5, 3, 0));
     frameEndRight.updateMatrix();
     frameGeomMerged.merge(frameEndRight.geometry, frameEndRight.matrix);
@@ -274,7 +277,7 @@ export default class Head {
     frameGeomMerged.merge(frameEndLeft.geometry, frameEndLeft.matrix);
 
     let frameSpokeGeom = new THREE.BoxGeometry(1, 0.5, 12);
-    let frameSpokeRight = new THREE.Mesh(frameSpokeGeom, Mat.goldMat);
+    let frameSpokeRight = new THREE.Mesh(frameSpokeGeom, glassesMat);
     frameSpokeRight.applyMatrix(new THREE.Matrix4().makeTranslation(8, 3, -5.5));
     frameSpokeRight.updateMatrix();
     frameGeomMerged.merge(frameSpokeRight.geometry, frameSpokeRight.matrix);
@@ -284,7 +287,7 @@ export default class Head {
     frameSpokeLeft.updateMatrix();
     frameGeomMerged.merge(frameSpokeLeft.geometry, frameSpokeLeft.matrix);
 
-    let frameMerged = new THREE.Mesh(frameGeomMerged, Mat.goldMat);
+    let frameMerged = new THREE.Mesh(frameGeomMerged, glassesMat);
     frameMerged.castShadow = false;
     frameMerged.receiveShadow = true;
 
@@ -354,8 +357,6 @@ export default class Head {
   }
 
   Eyes() {
-    //EYES
-    ////////////////////////////////////
 
     this.eyes = new THREE.Object3D();
     this.eyes.position.set(0, 3, 9);
@@ -370,7 +371,9 @@ export default class Head {
 
     let eyeBlueGeom = new THREE.PlaneGeometry(1.5, 1.5);
 
-    this.eyeBlueRight = new THREE.Mesh(eyeBlueGeom, Mat.blueMat);
+    let eyeMat = new THREE.MeshPhongMaterial({color: Colors.eye, flatShading: true});
+
+    this.eyeBlueRight = new THREE.Mesh(eyeBlueGeom, eyeMat);
     this.eyeBlueRight.position.set(0, 0, .01);
     this.eyeBlueRight.castShadow = false;
     this.eyeBlueRight.receiveShadow = false;
@@ -391,7 +394,7 @@ export default class Head {
     eyeWhiteLeft.castShadow = false;
     eyeWhiteLeft.receiveShadow = false;
 
-    this.eyeBlueLeft = new THREE.Mesh(eyeBlueGeom, Mat.blueMat);
+    this.eyeBlueLeft = new THREE.Mesh(eyeBlueGeom, eyeMat);
     this.eyeBlueLeft.position.set(0, 0, .01);
     this.eyeBlueLeft.castShadow = false;
     this.eyeBlueLeft.receiveShadow = false;
@@ -409,9 +412,6 @@ export default class Head {
   }
 
   EyeBrows() {
-    //EYE BROWS
-    ////////////////////////////////////
-
     this.eyeBrows = new THREE.Object3D();
     this.eyeBrows.position.set(0, 6, 8);
     this.head.add(this.eyeBrows);
@@ -434,12 +434,11 @@ export default class Head {
   }
 
   Hat() {
-    //HAT
-    ////////////////////////////////////
-
     this.hat = new THREE.Object3D();
     this.hat.position.set(-0.2, 11, 2.4);
     this.head.add(this.hat);
+    let hatMat = new THREE.MeshPhongMaterial({color: Colors.hat, flatShading: true});
+
 
     let bandGeom = new THREE.TorusGeometry(9, 2, 16, 100);
     let bigConeGeom = new THREE.CylinderGeometry(1, 11, 12, 15);
@@ -452,12 +451,12 @@ export default class Head {
     this.band.castShadow = false;
     this.band.receiveShadow = false;
 
-    this.bigCone = new THREE.Mesh(bigConeGeom, Mat.redMat);
+    this.bigCone = new THREE.Mesh(bigConeGeom, hatMat);
     this.bigCone.position.set(0, 6, 0);
     this.bigCone.castShadow = false;
     this.bigCone.receiveShadow = false;
 
-    this.smallCone = new THREE.Mesh(smallConeGeom, Mat.redMat);
+    this.smallCone = new THREE.Mesh(smallConeGeom, hatMat);
     this.smallCone.applyMatrix(new THREE.Matrix4().makeRotationX(Math.PI / 2));
     this.smallCone.applyMatrix(new THREE.Matrix4().makeRotationY(Math.PI / 2));
     this.smallCone.applyMatrix(new THREE.Matrix4().makeRotationZ(Math.PI / -8));
@@ -474,8 +473,6 @@ export default class Head {
   }
 
   Freckles() {
-    //Freckles
-    ////////////////////////////////////
     this.freckles = new THREE.Object3D();
     this.freckles.position.set(0, 0, 8);
     this.head.add(this.freckles);
@@ -483,8 +480,9 @@ export default class Head {
     let frecklesGeomMerged = new THREE.Geometry();
 
     let frecklesGeom = new THREE.PlaneGeometry(0.5, 0.5);
+    let frecklesMat = new THREE.MeshLambertMaterial({color: Colors.freckles, flatShading: true});
 
-    let freckle1 = new THREE.Mesh(frecklesGeom, Mat.brownMat);
+    let freckle1 = new THREE.Mesh(frecklesGeom, frecklesMat);
     freckle1.applyMatrix(new THREE.Matrix4().makeTranslation(-5, 0, 0.01));
     freckle1.updateMatrix();
     frecklesGeomMerged.merge(freckle1.geometry, freckle1.matrix);
@@ -512,7 +510,7 @@ export default class Head {
     freckle6.updateMatrix();
     frecklesGeomMerged.merge(freckle6.geometry, freckle6.matrix);
 
-    let freckledMerged = new THREE.Mesh(frecklesGeomMerged, Mat.skin2Mat);
+    let freckledMerged = new THREE.Mesh(frecklesGeomMerged, frecklesMat);
     freckledMerged.castShadow = false;
     freckledMerged.receiveShadow = false;
 
@@ -520,22 +518,20 @@ export default class Head {
   }
 
   Features() {
-    //Features - Nose and Ears
-    ////////////////////////////////////
-
     let earGeom = new THREE.BoxBufferGeometry(1.5, 3, 1.5);
-    let earRight = new THREE.Mesh(earGeom, Mat.skinMat);
+    let skinMat = new THREE.MeshLambertMaterial({color: Colors.skin, flatShading: true});
+    let earRight = new THREE.Mesh(earGeom, skinMat);
     earRight.position.set(-8.5, 1, 3);
     earRight.castShadow = false;
     earRight.receiveShadow = false;
 
-    let earLeft = new THREE.Mesh(earGeom, Mat.skinMat);
+    let earLeft = new THREE.Mesh(earGeom, skinMat);
     earLeft.position.set(8.5, 1, 3);
     earLeft.castShadow = false;
     earLeft.receiveShadow = false;
 
     let noseGeom = new THREE.CylinderGeometry(1, 2, 4, 4);
-    let nose = new THREE.Mesh(noseGeom, Mat.skinMat);
+    let nose = new THREE.Mesh(noseGeom, skinMat);
     nose.scale.set(.75, 1, 1.3);
     nose.position.set(0, 1, 8);
     nose.castShadow = false;

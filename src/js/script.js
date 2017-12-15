@@ -1,35 +1,17 @@
 import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
-import SpeechRecogn from './classes/SpeechRecognition.js';
 import handleSave from './objects/Save';
 import CartAPI from './lib/cartAPI';
-{
-  let scene,
-    camera,
-    fieldOfView,
-    aspectRatio,
-    nearPlane,
-    farPlane,
-    HEIGHT,
-    WIDTH,
-    globalLight,
-    shadowLight,
-    backLight,
-    light,
-    renderer,
-    container,
-    controls,
-    loaded,
-    head,
-    stars,
-    windowHalfX,
-    windowHalfY,
-    color,
-    audio,
-    SpeechText;
 
-  const saveBtn = document.getElementById(`save_audio`);
+{
+  let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, HEIGHT, WIDTH;
+  let globalLight, shadowLight, backLight, light, renderer, container, loaded;
+  let head, stars, windowHalfX, windowHalfY, color, audio, SpeechText;
+
+  // vars for dat.gui
+  let controller, gui;
+  const saveBtn = document.getElementById(`save`);
 
   let mousePos = { x: 0, y: 0};
 
@@ -44,38 +26,66 @@ import CartAPI from './lib/cartAPI';
     createScene();
     createLights();
 
-    // handle audio
-    audio = new Audio();
-
-    // show and handle head
-    head = new Head();
+    audio = new Audio(); // handle audio
+    head = new Head(); // show and handle head
     scene.add(head.mesh);
-
-    // handle SpeechRecognition
-    SpeechText = new SpeechRecogn();
 
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
       handleSave({
-        text: SpeechText.txt,
-        // send audioblob to save
-        blob: audio.blob
+        text: audio.txt,
+        blob: audio.blob // send audioblob to save
       });
     });
 
-    // console.log(controllerText);
-    // const controller = new controllerText(this.skinColor);
-    console.log("onder Controller");
-    const gui = new dat.GUI();
+    gui = new dat.GUI();
+    controller = new controllerText();
+    guiController(['skin', 'freckles', 'eye', 'glasses', 'hat']); // add gui for array object and set colors on color change
 
-    // let control1 = gui.addColor(controller, 'skinColor');
-    // gui.add(options, 'reset');
-
-    // set scene for extension
-    window.scene = scene;
+    window.scene = scene; // set scene for extension
 
     loop();
   };
+
+  const guiController = keys => {
+    keys.forEach(key => {
+      gui.addColor(controller, key).onChange(() => {
+
+        // set right color for material
+        switch (key) {
+          case 'skin': Colors.skin = controller.skin;
+          case 'freckles': Colors.freckles = controller.freckles;
+          case 'eye': Colors.eye = controller.eye;
+          case 'glasses': Colors.glasses = controller.glasses;
+          case 'hat': Colors.hat = controller.hat;
+        }
+
+        //remove current head and make a new one to set current color
+        scene.remove(head.mesh);
+        createHead();
+      });
+    });
+  }
+
+  const dec2hex = (i) => {
+    var result = "0x000000";
+    if (i >= 0 && i <= 15) {
+      result = "0x00000" + i.toString(16);
+    } else if (i >= 16 && i <= 255) {
+      result = "0x0000" + i.toString(16);
+    } else if (i >= 256 && i <= 4095) {
+      result = "0x000" + i.toString(16);
+    } else if (i >= 4096 && i <= 65535) {
+      result = "0x00" + i.toString(16);
+    } else if (i >= 65535 && i <= 1048575) {
+      result = "0x0" + i.toString(16);
+    } else if (i >= 1048575) {
+      result = '0x' + i.toString(16);
+    }
+    if (result.length == 8) {
+      return result;
+    }
+  }
 
   const createScene = () => {;
     HEIGHT = window.innerHeight;
@@ -84,7 +94,6 @@ import CartAPI from './lib/cartAPI';
     windowHalfY = HEIGHT / 2;
 
     scene = new THREE.Scene();
-    //scene.fog = new THREE.Fog(0xffffff, 150,300);
     aspectRatio = WIDTH / HEIGHT;
     fieldOfView = 50;
     nearPlane = 1;
@@ -106,8 +115,6 @@ import CartAPI from './lib/cartAPI';
     container = document.getElementById('container')
     container.appendChild(renderer.domElement);
     window.addEventListener('resize', onWindowResize, false);
-    //handleWindowResize();
-
     document.addEventListener('mousemove', handleMouseMove, false);
 
   }
@@ -123,12 +130,6 @@ import CartAPI from './lib/cartAPI';
   }
 
   const handleMouseMove = e => {
-    // const tx = -1 + (event.clientX / WIDTH) *2;
-    // let ty = 1 - (event.clientY / HEIGHT)*2;
-    // mousePos = {
-    //   x: tx,
-    //   y: ty
-    // };
     mousePos = {
       x: event.clientX,
       y: event.clientY
@@ -261,6 +262,7 @@ import CartAPI from './lib/cartAPI';
   // }
 
   const createHead = () => {
+    head.name = "Head";
     head = new Head();
     head.idle();
     scene.add(head.mesh);
@@ -336,11 +338,15 @@ import CartAPI from './lib/cartAPI';
   //     }
   //   }
 
-  // const controllerText = (skinColor) => {
-  //   console.log("Inside FIZZY");
-  //
-  //   this.skinColor = "#e44231";
-  // }
+  class controllerText {
+    constructor (){
+      this.skin = Colors.skin;
+      this.freckles = Colors.freckles;
+      this.eye = Colors.eye;
+      this.glasses = Colors.glasses;
+      this.hat = Colors.hat;
+    }
+  }
 
   const loop = () => {
     blinkLoop();
