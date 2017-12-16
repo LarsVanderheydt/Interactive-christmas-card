@@ -11,23 +11,47 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: -webkit-radial-gradient(#113b51, #113b51, #2d2c2c);
-  background: -o-radial-gradient(#113b51, #113b51, #2d2c2c);
-  background: radial-gradient(#113b51, #113b51, #2d2c2c);
-
-  /*
-  background: white;
-  */
+  background: -webkit-radial-gradient(#710018, #970022, #970022, #710018);
+  background: -o-radial-gradient(#710018, #970022, #970022, #710018);
+  background: linear-gradient(#710018, #970022, #970022, #710018);
 }
 
-h1 {
-  text-align: center;
-  padding-top: 2rem;
+.information {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  margin-left: 60%;
+}
+
+.information-uitleg {
+  width: 90%;
+  align-items: flex-end;
+  margin: 2rem auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  flex-direction: column;
+
+  & img {
+    margin-bottom: 2rem;
+  }
+}
+
+.information-uitleg-text {
+  width: 80%;
+  text-align: center;
+  color: white;
+
+  & h1 {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+#gui {
+  position: absolute;
+  right: 1%;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 #name {
@@ -69,28 +93,31 @@ input[type="text"] {
   width: 90%;
   text-transform: uppercase;
   margin-bottom: 0.1rem;
+  background-color: rgba(241, 168, 172, 0.7);
 }
 
 input[type=text]:focus {
-  background-color: #13741f;
+  background-color: #970022;
   color: #fff;
   border-radius: 0.5em;
-  border: 1px solid #13741f;
-  box-shadow: 0 2px 0 0 #13741f;
+  border: 1px solid #970022;
+  box-shadow: 0 2px 0 0 #970022;
 }
 
 textarea {
   border-radius: 0.5em;
   padding: 0 1em;
   width: 90%;
+  background-color: rgba(241, 168, 172, 0.7);
 }
 
 textarea:focus {
-  background-color: #13741f;
+  background-color: #970022;
   color: #fff;
   border-radius: 0.5em;
-  border: 1px solid #13741f;
-  box-shadow: 0 2px 0 0 #13741f;
+  border: 1px solid #970022;
+  box-shadow: 0 2px 0 0 #970022;
+  outline: none;
 }
 
 input:focus::placeholder {
@@ -99,9 +126,8 @@ input:focus::placeholder {
 
 .border {
   font-size: 16px;
-  border: 2px solid #13741f;
-  background-color: #fff;
-  box-shadow: 0 3px 0 0 #13741f;
+  border: 2px solid #970022;
+  box-shadow: 0 3px 0 0 #970022;
 }
 
 input:focus {
@@ -113,32 +139,17 @@ input:focus {
 }
 
 .border::placeholder {
-  color: #13741f;
-}
-
-.wrap {
-  text-align: center;
-}
-
-.input-contain {
-  float: left;
-  text-align: center;
-}
-
-.buttonsGroup {
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
+  color: #970022;
 }
 
 button {
   margin-top: 0.5em;
   font-size: 1rem;
-  background-color: #13741f;
+  background-color: #970022;
   color: #fff;
   border-radius: 0.5em;
-  border: 1px solid #13741f;
-  box-shadow: 0 2px 0 0 #13741f;
+  border: 1px solid #970022;
+  box-shadow: 0 2px 0 0 #970022;
   text-transform: uppercase;
   font-weight: bold;
   padding: 0.5em;
@@ -160,6 +171,12 @@ button {
   border: 0.2rem black solid;
 }
 
+.sound-adjustments {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
 #particles-js {
   position: absolute;
   z-index: -89;
@@ -170,13 +187,15 @@ button {
 }
 
 .SpRecognition {
-  width: 30%;
+  width: 90%;
   margin: 1rem;
-  position: absolute;
   z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: center;
-  bottom: 0;
-  right: 0;
+
+  & label {
+    color: white;
+    align-self: flex-start;
+  }
 }

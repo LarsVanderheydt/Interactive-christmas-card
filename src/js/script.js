@@ -39,6 +39,8 @@ import CartAPI from './lib/cartAPI';
     });
 
     gui = new dat.GUI();
+    gui.domElement.id = 'gui';
+    gui.closed = true;
     controller = new controllerText();
     guiController(['skin', 'freckles', 'eye', 'glasses', 'hat']); // add gui for array object and set colors on color change
 
@@ -89,7 +91,7 @@ import CartAPI from './lib/cartAPI';
 
   const createScene = () => {;
     HEIGHT = window.innerHeight;
-    WIDTH = window.innerWidth;
+    WIDTH = window.innerWidth /1.67;
     windowHalfX = WIDTH / 2;
     windowHalfY = HEIGHT / 2;
 
@@ -98,16 +100,14 @@ import CartAPI from './lib/cartAPI';
     fieldOfView = 50;
     nearPlane = 1;
     farPlane = 2000;
+
     camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
     camera.position.x = 0;
     camera.position.z = 70;
     camera.position.y = 0;
 
     renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
-    renderer.setPixelRatio(
-      window.devicePixelRatio
-      ? window.devicePixelRatio
-      : 1)
+    renderer.setPixelRatio(window.devicePixelRatio? window.devicePixelRatio: 1)
     renderer.setSize(WIDTH, HEIGHT);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -116,12 +116,11 @@ import CartAPI from './lib/cartAPI';
     container.appendChild(renderer.domElement);
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', handleMouseMove, false);
-
   }
 
   const onWindowResize = () => {
     HEIGHT = window.innerHeight;
-    WIDTH = window.innerWidth;
+    WIDTH = window.innerWidth  / 1.67;
     windowHalfX = WIDTH / 2;
     windowHalfY = HEIGHT / 2;
     renderer.setSize(WIDTH, HEIGHT);
@@ -137,27 +136,6 @@ import CartAPI from './lib/cartAPI';
   }
 
   let loaderManager = new THREE.LoadingManager();
-
-  const onStart = (url, itemsLoaded, itemsTotal) => {
-    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-  }
-
-  const onLoad = () => {
-    console.log('Loading complete!');
-    finishedLoading();
-  }
-
-  const onProgress = (url, itemsLoaded, itemsTotal) => {
-    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-  }
-
-  const onError = (url) => {
-    console.log('There was an error loading ' + url);
-  }
-
-  const finishedLoading = () => {
-    loaded = true;
-  }
 
   const handleWindowResize = e => {
     HEIGHT = window.innerHeight;
@@ -176,22 +154,13 @@ import CartAPI from './lib/cartAPI';
     shadowLight = new THREE.DirectionalLight(0xffffff, .3);
     shadowLight.position.set(100, 250, 175);
     shadowLight.castShadow = true;
-    // shadowLight.shadow.camera.left = -150;
-    // shadowLight.shadow.camera.right = 150;
-    // shadowLight.shadow.camera.top = 150;
-    // shadowLight.shadow.camera.bottom = -150;
-    // shadowLight.shadow.camera.near = 1;
-    // shadowLight.shadow.camera.far = 1000;
 
     backLight = new THREE.DirectionalLight(0xffffff, .2);
     backLight.position.set(-100, 200, 150);
     backLight.castShadow = true;
-    //backLight.position.set(100, 100, -200);
 
-    if (isMobile)
-      shadowLight.shadow.mapSize.width = shadowLight.shadow.mapSize.height = 1024;
-    if (!isMobile)
-      shadowLight.shadow.mapSize.width = shadowLight.shadow.mapSize.height = 2048;
+    if (isMobile) shadowLight.shadow.mapSize.width = shadowLight.shadow.mapSize.height = 1024;
+    if (!isMobile) shadowLight.shadow.mapSize.width = shadowLight.shadow.mapSize.height = 2048;
 
     scene.add(globalLight);
     scene.add(shadowLight);
@@ -276,8 +245,7 @@ import CartAPI from './lib/cartAPI';
     //stars.mesh.position.set(0, 10, 0);
   }
 
-  //BLINK
-  ////////////////////
+
   let isBlinking = false;
   const blinkLoop = () => {
     isBlinking = false;
@@ -353,8 +321,6 @@ import CartAPI from './lib/cartAPI';
     //head.dizzy();
     let xTarget = (mousePos.x - windowHalfX);
     let yTarget = (mousePos.y - windowHalfY);
-
-    //console.log(xTarget);
 
     head.idle(xTarget, yTarget);
     renderer.render(scene, camera);

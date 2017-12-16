@@ -1,57 +1,80 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Experimental Web Opdracht</title>
-		<meta name="description" content="Experimental Web Opdracht" />
-		<meta name="keywords" content="three.js, webgl, christmascard, 3d, animation, web development, javascript" />
-		<meta name="author" content="Lars & Louise" />
-		<link href="https://fonts.googleapis.com/css?family=Barlow:300i,400" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<!--[if IE]>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Experimental Web Opdracht</title>
+	<meta name="description" content="Experimental Web Opdracht" />
+	<meta name="keywords" content="three.js, webgl, christmascard, 3d, animation, web development, javascript" />
+	<meta name="author" content="Lars & Louise" />
+	<link href="https://fonts.googleapis.com/css?family=Barlow:300i,400" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
-	</head>
-	<body>
-		<select name="biquadType" id="biquadType">
-		  <option value="lowpass">lowpass</option>
-		  <option value="highpass">highpass</option>
-		  <option value="bandpass">bandpass</option>
-		  <option value="lowshelf">lowshelf</option>
-		  <option value="highshelf">highshelf</option>
-		  <option value="peaking">peaking</option>
-		  <option value="notch">notch</option>
-		  <option value="allpass">allpass</option>
-		</select>
-		<input type="range" name="" value="350" min="350" max="30000" id="biquadValue">
+</head>
 
-		<audio src="" id="audio_controls" controls></audio>
+<body>
+	<section class="information">
+		<div class="information-uitleg">
+			<div class="information-uitleg-text">
+				<h1>TITEL VAN DE APPLICATIE</h1>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+				</p>
+			</div>
+			<img src="assets/arrow.png" alt="Arrow" height="80" width="80">
+		</div>
+
+		<div class="SpRecognition">
+
+			<label for="recipient">Dear,</label>
+			<input type="text" name="recipient" value="" id="recipient_input" placeholder="recipient's name" class="border">
+
+			<label for="recipient">I would like to say..</label>
+			<textarea name="message" id="field" rows="10" cols="80" name="text" placeholder="Your message" class="border"></textarea>
+
+			<button class="button" type="button" id="record">Record your message</button>
+
+			<section class="sound-adjustments">
+				<select name="biquadType" id="biquadType">
+						<option value="lowpass">lowpass</option>
+						<option value="highpass">highpass</option>
+						<option value="bandpass">bandpass</option>
+						<option value="lowshelf">lowshelf</option>
+						<option value="highshelf">highshelf</option>
+						<option value="peaking">peaking</option>
+						<option value="notch">notch</option>
+						<option value="allpass">allpass</option>
+					</select>
+				<input type="range" name="" value="350" min="350" max="30000" id="biquadValue">
+			</section>
+				<audio src="" id="audio_controls" controls></audio>
+
+
+			<label for="name">Love,</label>
+			<input type="text" name="name" value="" id="name_input" placeholder="Your name" class="border">
+
+			<button class="button" type="button" id="save">Opslaan</button>
+		</div>
 
 		<section class="link">
 			<h1 class="to">Stuur jouw unieke santa naar je vrienden met deze link <a href="" class="unique_link"></a></h1>
 		</section>
 
-		<div class="SpRecognition">
-			<input type="text" name="name" value="" id="name_input" placeholder="Jouw naam" class="border">
-			<textarea name="name" id="field" rows="10" cols="80" name="text" placeholder="Jouw boodschap" class="border"></textarea>
-			<div class="buttonsGroup">
-				<button class="button" type="button" id="record">Spreek een boodschap in</button>
-				<button class="button" type="button" id="save">Opslaan</button>
-			</div>
-		</div>
+	</section>
+	<div id="particles-js"></div>
+	<div id="container"></div>
+	<script src="./js/vendors/three.min.js"></script>
+	<script src="./js/vendors/TweenMax.min.js"></script>
+	<script src="./js/vendors/threeCSG.js"></script>
+	<script src="./js/vendors/dat.gui.min.js"></script>
+	<script src="./js/vendors/particles.min.js"></script>
 
-		<div id="particles-js"></div>
-		<div id="container"></div>
+	<script src="./js/script.js" /></script>
+</body>
 
-		<script src="./js/vendors/three.min.js"></script>
-		<script src="./js/vendors/TweenMax.min.js"></script>
-		<script src="./js/vendors/threeCSG.js"></script>
-		<script src="./js/vendors/dat.gui.min.js"></script>
-		<script src="./js/vendors/particles.min.js"></script>
-
-		<script src="./js/script.js"/></script>
-	</body>
 </html>
