@@ -3,21 +3,32 @@
   <head>
     <meta charset="utf-8">
     <title>My Santa</title>
+    <link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
 
-  <h1 class="from">You got a Santa from</h1>
-  <h1 id="name"></h1>
-  <audio src="" id="santa_audio" controls></audio>
+    <button type="button" id="audio">Play</button>
+    <button type="button" id="repeat">Repeat</button>
 
-  <div id="particles-js"></div>
-  <div id="container"></div>
+    <div id="particles-js"></div>
+  	<div id="container">
+  		<section class="information-uitleg">
+  			<div class="information-uitleg-text">
+          <h1 class="from">You recieved a digital christmas card</h1>
+          <h1 id="from"></h1>
+          <h1 id="to"></h1>
+          <!-- <audio src="" id="santa_audio" controls></audio> -->
+  			</div>
+  		</section>
+  	</div>
 
-  <script src="./js/vendors/three.min.js"></script>
-  <script src="./js/vendors/TweenMax.min.js"></script>
-  <script src="./js/vendors/threeCSG.js"></script>
-  <script src="./js/vendors/particles.min.js"></script>
+    <script src="./js/vendors/three.min.js"></script>
+    <script src="./js/vendors/TweenMax.min.js"></script>
+    <script src="./js/vendors/threeCSG.js"></script>
+    <script src="./js/vendors/particles.min.js"></script>
+    <script src="./js/vendors/buffer-loader.js"></script>
 
-  <script src="./js/santa.js"></script>
+    <script src="./js/santa.js"></script>
   </body>
 </html>

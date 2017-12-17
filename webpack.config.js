@@ -74,14 +74,14 @@ module.exports = {
             loader: `postcss-loader`
           }
         ])
-      },
+      }
     ]
   },
 
   plugins: [
     copy,
     new UglifyJsPlugin({
-      sourceMap: true, // false returns errors.. -p + plugin conflict
+      sourceMap: true,
       comments: false
     }),
     extractCSS

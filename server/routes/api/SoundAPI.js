@@ -1,25 +1,26 @@
-const Cart = require('../../schemas/Cart');
+const Sound = require('../../schemas/Sound');
 const Boom = require('boom');
 const path = require('path');
 const fs = require('fs');
 const {omit, pick} = require(`lodash`);
+const rimraf = require('rimraf');
 
 module.exports = [
   {
     method: 'GET',
-      path: '/api/cart',
+      path: '/api/sounds',
       handler: function (request, reply) {
-        Cart.find(function(error, Carts) {
+        Sound.find(function(error, Sounds) {
             if (error) {
                 console.error(error);
             }
-            reply(Carts);
+            reply(Sounds);
         });
       }
   },
   {
     method: ['PUT', 'POST'],
-    path: '/api/cart',
+    path: '/api/sounds',
     config: {
       payload: {
         output: `stream`,
@@ -43,21 +44,18 @@ module.exports = [
         data.sound.on(`end`, () => {
           const d = pick(request.payload);
           d.sound = filename;
-          console.log(d);
-          const cart = new Cart({
-              text: data.text,
+          const sound = new Sound({
               id: data.id,
-              name: data.name,
               isActive: true,
               sound: d.sound,
               date: Date.now()
           });
 
-          cart.save(function(error, cart) {
+          sound.save(function(error, sound) {
             if (error) {
                 console.error(error);
             }
-            reply(cart);
+            reply(sound);
           });
         })
       }
@@ -65,12 +63,12 @@ module.exports = [
   },
   {
     method: 'GET',
-      path: '/api/cart/{id}',
+      path: '/api/sounds/{id}',
       handler: function (request, reply) {
         const {id} = request.params;
         const filter = {id};
 
-        Cart.findOne(filter).then(d => {
+        Sound.findOne(filter).then(d => {
           // no data -> CODE: 404 => NOT FOUND
           if (!d) return reply(
             Boom.notFound(`id ${id} does not exist`)

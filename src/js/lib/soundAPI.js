@@ -1,16 +1,14 @@
 import fetch from 'isomorphic-fetch';
 
-const url = `/api/cart`;
+const url = `/api/sounds`;
 
 export default {
 
-  create: ({text, id, name, blob}) => {
+  create: ({id, blob}) => {
     const method = `POST`;
     const newFileName = `${id.split(` `).join(`_`)}`;
     const body = new FormData();
-    body.append(`text`, text);
     body.append(`id`, id);
-    body.append(`name`, name);
     body.append(`sound`, blob, newFileName);
 
     return fetch(url, {method, body})

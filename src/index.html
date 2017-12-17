@@ -8,50 +8,79 @@
 		<meta name="description" content="Experimental Web Opdracht" />
 		<meta name="keywords" content="three.js, webgl, christmascard, 3d, animation, web development, javascript" />
 		<meta name="author" content="Lars & Louise" />
-		<link href="https://fonts.googleapis.com/css?family=Barlow:300i,400" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Kalam" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<!--[if IE]>
-  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
 
 	</head>
-	<body>
-		<select name="biquadType" id="biquadType">
-		  <option value="lowpass">lowpass</option>
-		  <option value="highpass">highpass</option>
-		  <option value="bandpass">bandpass</option>
-		  <option value="lowshelf">lowshelf</option>
-		  <option value="highshelf">highshelf</option>
-		  <option value="peaking">peaking</option>
-		  <option value="notch">notch</option>
-		  <option value="allpass">allpass</option>
-		</select>
-		<input type="range" name="" value="350" min="350" max="30000" id="biquadValue">
+<body>
+	<section class="information">
+		<section class="information-content">
+			<div class="SpRecognition">
+				<div class="recipient">
+					<label for="recipient">Dear</label>
+					<input type="text" name="recipient" value="" id="recipient_input" placeholder="recipient's name" class="border">
+				</div>
 
-		<audio src="" id="audio_controls" controls></audio>
+				<label for="recipient">What I would like to say is..</label>
+				<textarea name="message" id="field" rows="5" cols="50" name="text" placeholder="Your message" class="border"></textarea>
 
-		<section class="link">
-			<h1 class="to">Stuur jouw unieke santa naar je vrienden met deze link <a href="" class="unique_link"></a></h1>
-		</section>
+				<div class="recording">
+					<button class="button" type="button" id="record">Record message</button>
+				</div>
 
-		<div class="SpRecognition">
-			<input type="text" name="name" value="" id="name_input" placeholder="Jouw naam" class="border">
-			<textarea name="name" id="field" rows="10" cols="80" name="text" placeholder="Jouw boodschap" class="border"></textarea>
-			<div class="buttonsGroup">
-				<button class="button" type="button" id="record">Spreek een boodschap in</button>
-				<button class="button" type="button" id="save">Opslaan</button>
+				<section class="sound-adjustments">
+
+					<section class="sound-buttons">
+						<button type="button" id="audio_controls">Play</button>
+						<button type="button" id="repeat">Repeat</button>
+					</section>
+
+					<section class="sound-ranges">
+						<div class="range">
+							<label>Overlap</label>
+							<input type="range" min="0" max="0.75" step="0.01" id="overlap">
+						</div>
+
+						<div class="range">
+							<label>Pitch</label>
+							<input type="range" step="0.01" value="1" min="0.5" max="2" id="pitch">
+						</div>
+					</section>
+				</section>
+
+				<div class="sender">
+					<label class="senderLabel"for="name">Love,</label>
+					<input type="text" name="name" value="" id="name_input" placeholder="Your name" class="border">
+				</div>
+
+				<button class="button" type="button" id="save">Save message</button>
 			</div>
-		</div>
 
-		<div id="particles-js"></div>
-		<div id="container"></div>
+			<section class="link">
+				<h1 class="to">Stuur jouw unieke santa naar je vrienden met deze link <a href="" class="unique_link"></a></h1>
+			</section>
+		</section>
+	</section>
 
-		<script src="./js/vendors/three.min.js"></script>
-		<script src="./js/vendors/TweenMax.min.js"></script>
-		<script src="./js/vendors/threeCSG.js"></script>
-		<script src="./js/vendors/dat.gui.min.js"></script>
-		<script src="./js/vendors/particles.min.js"></script>
+	<div id="particles-js"></div>
+	<div id="container">
+		<section class="information-uitleg">
+			<div class="information-uitleg-text">
+				<h1>Magical Santa card</h1>
+				<p>
+					Use your own voice to record your personal message & customize Santa's looks with the controls you find at the top.
+				</p>
+			</div>
+		</section>
+	</div>
+	<script src="./js/vendors/three.min.js"></script>
+	<script src="./js/vendors/TweenMax.min.js"></script>
+	<script src="./js/vendors/threeCSG.js"></script>
+	<script src="./js/vendors/dat.gui.min.js"></script>
+	<script src="./js/vendors/particles.min.js"></script>
+	<script src="./js/vendors/buffer-loader.js"></script>
 
-		<script src="./js/script.js"/></script>
-	</body>
+	<script src="./js/script.js" /></script>
+</body>
+
 </html>

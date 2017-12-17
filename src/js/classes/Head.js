@@ -42,69 +42,40 @@ export default class Head {
     return tv;
   }
 
-  updateBody(speed, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY) {
-    //this.eyeBlueRight.rotation.y += (lion.tHeagRotY - this.eyeBlueRight.rotation.y) / speed;
-    //this.eyeBlueRight.rotation.x += (this.eyeBlueRightRotX - this.eyeBlueRight.rotation.x) / speed;
-
+  updateBody(speed, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY) {
     this.eyeBlueRight.position.x += (eyeBlueRightPosX - this.eyeBlueRight.position.x) / speed;
     this.eyeBlueLeft.position.x += (eyeBlueLeftPosX - this.eyeBlueLeft.position.x) / speed;
 
     this.eyeBlueRight.position.y += (eyeBlueRightPosY - this.eyeBlueRight.position.y) / speed;
     this.eyeBlueLeft.position.y += (eyeBlueLeftPosY - this.eyeBlueLeft.position.y) / speed;
 
-    //this.eyeBlueRight.position.y += Math.sin(this.eyeBlueRightPosY - this.eyeBlueRight.position.y) / speed;
-    // this.eyeBlueRight.position.z += (this.eyeBlueRightPosZ - this.eyeBlueRight.position.z) / speed;
+    this.eyeBrowRight.position.y += (eyeBrowRightPosY - this.eyeBrowRight.position.y) / speed;
+    this.eyeBrowLeft.position.y += (eyeBrowLeftPosY - this.eyeBrowLeft.position.y) / speed;
   }
 
   idle(xTarget = 0, yTarget = 0) {
-
-    //console.log(xTarget, yTarget);
-    //console.log(this.eyeBlueRight.position.x);
-    // console.log(this.eyeBlueRight.position.y);
     let distance = 1;
 
     this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.005;
     this.head.rotation.x = Math.sin(Date.now() * 0.004) * Math.PI * 0.03;
 
-    // this.eyeBlueLeft.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
-    // this.eyeBlueRight.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
-
     const eyeBlueRightPosX = this.normalize(xTarget, -200, 200, -0.6, 0.6);
-
     const eyeBlueLeftPosX = this.normalize(xTarget, -200, 200, -0.6, 0.6);
 
     const eyeBlueRightPosY = this.normalize(yTarget, -200, 200, 0.6, -0.6);
-
     const eyeBlueLeftPosY = this.normalize(yTarget, -200, 200, 0.6, -0.6);
 
-    // this.eyeBlueRightRotY = xTarget, -20, 20, -Math.PI / 4, Math.PI / 4;
-    // this.eyeBlueRightRotX = yTarget, -20, 20, -Math.PI / 4, Math.PI / 4;
-    // this.eyeBlueRightPosX = xTarget, -20, 20, 70, -70;
-    // this.eyeBlueRightPosY = yTarget, -140, 260, 20, 100;
-    // this.eyeBlueRightPosZ = 7;
+    const eyeBrowRightPosY = this.normalize(xTarget, -200, 200, -1, 0.8);
+    const eyeBrowLeftPosY = this.normalize(xTarget, -200, 200, -1, 0.8);
 
-    this.eyeBrowRight.position.y = Math.sin(Date.now() * 0.004) * distance / 2;
-    this.eyeBrowLeft.position.y = Math.cos(Date.now() * 0.004) * distance / 2;
-
-    // this.eyeBrowRight.rotation.z = Math.sin(Date.now() * 0.002) * Math.PI * 0.04;
-    // this.eyeBrowLeft.rotation.z = Math.cos(Date.now() * 0.002) * Math.PI * 0.04;
-
-    //this.beard.mouth.position.x = Math.sin(Date.now() * 0.002) * distance / 2;
-
-    // SNOR OMHOOG-OMLAAG
     this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
-    // SNOR OMHOOG-ROTATIE
     this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
 
-    //this.mouth.scale.x = Math.cos(Date.now() * 0.004) * distance / 2;
-
-    //SNELHEID HEEN EN WEER
     this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05;
-    this.updateBody(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY);
+    this.updateBody(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
   }
 
   Beard() {
-
     let beardGeomMerged = new THREE.Geometry();
 
     let beard1Geom = new THREE.BoxGeometry(2, 10, 16);
@@ -195,13 +166,6 @@ export default class Head {
     teeth.receiveShadow = true;
     mouth.add(teeth)
 
-    // let smileGeom = new THREE.TorusGeometry(4, 1.5, 2, 6, -Math.PI);
-    // this.smile = new THREE.Mesh(smileGeom, Mat.blackMat);
-    // this.smile.position.set(0, 2, 10);
-    // this.smile.castShadow = false;
-    // this.smile.receiveShadow = true;
-    //
-    // this.beard.add(beardMerged, mouth, this.smile);
     this.beard.add(beardMerged, mouth);
 
     let moustacheGeom = new THREE.BoxGeometry(14, 3, 3, 3);
@@ -226,14 +190,11 @@ export default class Head {
   }
 
   Glasses() {
-    //GLASSES
-    //////////////////////////////////
 
     this.glasses = new THREE.Object3D();
     this.glasses.position.set(0, 0, 9);
     this.head.add(this.glasses);
     let glassesMat = new THREE.MeshPhongMaterial({color: Colors.glasses, flatShading: true});
-
 
     let frameGeomMerged = new THREE.Geometry();
 
@@ -296,8 +257,6 @@ export default class Head {
   }
 
   Hair() {
-    //HAIR
-    ////////////////////////////////////
 
     this.hair = new THREE.Object3D();
     this.hair.position.set(0, 9, 0);
@@ -437,8 +396,8 @@ export default class Head {
     this.hat = new THREE.Object3D();
     this.hat.position.set(-0.2, 11, 2.4);
     this.head.add(this.hat);
-    let hatMat = new THREE.MeshPhongMaterial({color: Colors.hat, flatShading: true});
 
+    let hatMat = new THREE.MeshPhongMaterial({color: Colors.hat, flatShading: true});
 
     let bandGeom = new THREE.TorusGeometry(9, 2, 16, 100);
     let bigConeGeom = new THREE.CylinderGeometry(1, 11, 12, 15);
@@ -477,10 +436,10 @@ export default class Head {
     this.freckles.position.set(0, 0, 8);
     this.head.add(this.freckles);
 
+    let frecklesMat = new THREE.MeshLambertMaterial({color: Colors.freckles, flatShading: true});
     let frecklesGeomMerged = new THREE.Geometry();
 
     let frecklesGeom = new THREE.PlaneGeometry(0.5, 0.5);
-    let frecklesMat = new THREE.MeshLambertMaterial({color: Colors.freckles, flatShading: true});
 
     let freckle1 = new THREE.Mesh(frecklesGeom, frecklesMat);
     freckle1.applyMatrix(new THREE.Matrix4().makeTranslation(-5, 0, 0.01));

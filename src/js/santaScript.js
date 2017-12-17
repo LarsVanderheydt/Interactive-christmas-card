@@ -1,21 +1,29 @@
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-import getUrlParameter from './objects/getUrlParameter'; 
-import CartAPI from './lib/cartAPI';
-import Head from './classes/Head';
+import handleSantaAudio from './objects/handleSantaAudio';
+import santaScene from './objects/santaPageScene';
+import getUrlParameter from './objects/getUrlParameter';
+import CardAPI from './lib/cardAPI';
 
 let targetId, audioCtx;
-const play = document.getElementById(`play_santa`);
 
 const init = () => {
-  audioCtx = new AudioContext();
-  targetId = getUrlParameter("id");
-  if (!targetId) window.location = "https://localhost:8080";
 
-  CartAPI.readOne(targetId).then(d => {
-    if (d.statusCode) window.location = "https://localhost:8080";
-    document.getElementById(`name`).innerHTML = d.name;
-    document.getElementById(`santa_audio`).src = `./uploads/${d.sound}.ogg`;
+  particlesJS.load('particles-js', '../assets/particles.json', () => {
+    console.log('callback - particles.js config loaded');
   });
+
+  targetId = getUrlParameter("id");
+  if (!targetId) window.location = "https://experimentalweb.herokuapp.com/";
+
+  CardAPI.readOne(targetId).then(d => {
+    if (d.statusCode) window.location = "https://experimentalweb.herokuapp.com/";
+    document.getElementById(`from`).innerHTML = `from: ${d.from}`;
+    document.getElementById(`to`).innerHTML = `to: ${d.to}`;
+
+    handleSantaAudio(d);
+    santaScene(d);
+  });
+
 }
 
 init();
