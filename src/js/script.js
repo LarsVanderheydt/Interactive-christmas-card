@@ -16,6 +16,8 @@ import CartAPI from './lib/cartAPI';
   let mousePos = { x: 0, y: 0};
 
   let starArray = [];
+  let isMobile = /iPhone|Android/i.test(navigator.userAgent);
+  let loaderManager = new THREE.LoadingManager();
 
   const init = () => {
     // create snow
@@ -26,7 +28,7 @@ import CartAPI from './lib/cartAPI';
     createScene();
     createLights();
 
-    audio = new Audio(); // handle audio
+    audio = new Audio(); // handle audio and speechrecognition
     head = new Head(); // show and handle head
     scene.add(head.mesh);
 
@@ -37,10 +39,19 @@ import CartAPI from './lib/cartAPI';
         overlap: audio.overlap
       }
 
+      const headColors = {
+        skin: Colors.skin,
+        freckles: Colors.freckles,
+        eye: Colors.eye,
+        glasses: Colors.glasses,
+        hat: Colors.hat
+      }
+
       handleSave({
         text: audio.txt,
         id: audio.id,
-        audioSettings: JSON.stringify(audioSettings)
+        audioSettings: JSON.stringify(audioSettings),
+        headColors: JSON.stringify(headColors)
       });
     });
 
@@ -141,8 +152,6 @@ import CartAPI from './lib/cartAPI';
     };
   }
 
-  let loaderManager = new THREE.LoadingManager();
-
   const handleWindowResize = e => {
     HEIGHT = window.innerHeight;
     WIDTH = window.innerWidth;
@@ -151,7 +160,6 @@ import CartAPI from './lib/cartAPI';
     camera.updateProjectionMatrix();
   }
 
-  let isMobile = /iPhone|Android/i.test(navigator.userAgent);
 
   const createLights = () => {
 

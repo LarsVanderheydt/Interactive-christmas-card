@@ -12,6 +12,7 @@ var CartSchema = new Schema({
       default: true
     },
     date: String,
-    audioSettings: String
+    audioSettings: String,
+    headColors: String
 });
 module.exports = mongoose.model('Cart', CartSchema);

@@ -130,7 +130,7 @@ export default class Audio {
 
   speechSettings() {
     recognition.continuous = false;
-    recognition.lang = 'nl-BE';
+    recognition.lang = 'en-US';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
   }

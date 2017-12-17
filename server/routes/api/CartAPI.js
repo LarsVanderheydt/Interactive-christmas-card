@@ -31,6 +31,7 @@ module.exports = [
           from: data.from,
           to: data.to,
           audioSettings: data.audioSettings,
+          headColors: data.headColors,
           date: Date.now()
       });
 
