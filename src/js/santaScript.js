@@ -23,9 +23,11 @@ const init = () => {
   if (!targetId) window.location = "https://localhost:8080";
 
   CartAPI.readOne(targetId).then(d => {
+    const audioSettings = JSON.parse(d.audioSettings);
+
     if (d.statusCode) window.location = "https://localhost:8080";
-    document.getElementById(`name`).innerHTML = d.name;
-    document.getElementById(`santa_audio`).src = `./uploads/${d.id}.ogg`;
+    document.getElementById(`name`).innerHTML = d.from;
+    // document.getElementById(`santa_audio`).src = `./uploads/${d.id}.ogg`;
 
     setTimeout(() => {
       const bufferLoader = new BufferLoader(
@@ -39,7 +41,9 @@ const init = () => {
             source.stop();
           });
 
-          pitchRatio = 2;
+          pitchRatio = audioSettings.pitch;
+          overlapRatio = audioSettings.overlap;
+
 
           $audio.addEventListener(`click`, () => {
             source = '';
@@ -47,9 +51,8 @@ const init = () => {
             source.buffer = bufferList[0];
 
             // source.connect(audioCtx.destination)
-
-            source.connect(pitchShifterProcessor);
             source.loop = loop;
+            source.connect(pitchShifterProcessor);
             source.start();
           });
 
@@ -58,7 +61,6 @@ const init = () => {
 
       bufferLoader.load();
       initProcessor();
-      // this.initSliders();
 
     }, 1000);
 

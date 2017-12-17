@@ -4,14 +4,15 @@ const url = `/api/cart`;
 
 export default {
 
-  create: ({text, id, name, blob}) => {
+  create: ({text, id, from, blob, to, audioSettings}) => {
     const method = `POST`;
     // const newFileName = `${id.split(` `).join(`_`)}`;
     const body = new FormData();
     body.append(`text`, text);
     body.append(`id`, id);
-    body.append(`name`, name);
-    // body.append(`sound`, blob, newFileName);
+    body.append(`from`, from);
+    body.append(`to`, to);
+    body.append(`audioSettings`, audioSettings);
 
     return fetch(url, {method, body})
       .then(r => r.json());

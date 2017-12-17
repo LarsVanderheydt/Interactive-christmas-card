@@ -3,6 +3,7 @@ const Boom = require('boom');
 const path = require('path');
 const fs = require('fs');
 const {omit, pick} = require(`lodash`);
+const rimraf = require('rimraf');
 
 module.exports = [
   {

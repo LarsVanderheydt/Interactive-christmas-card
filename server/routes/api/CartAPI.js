@@ -28,8 +28,9 @@ module.exports = [
       const cart = new Cart({
           text: data.text,
           id: data.id,
-          name: data.name,
-          isActive: true,
+          from: data.from,
+          to: data.to,
+          audioSettings: data.audioSettings,
           date: Date.now()
       });
 
@@ -39,22 +40,6 @@ module.exports = [
         }
         reply(cart);
       });
-      // if (data.sound) {
-      //   const {filename} = data.sound.hapi;
-      //   const folder = path.join(__dirname, `../../uploads`);
-      //   const p = `${folder}/${filename}.ogg`;
-      //   const f = fs.createWriteStream(p);
-      //   f.on(`error`, err => {
-      //     console.error(err);
-      //   });
-      //   data.sound.pipe(f);
-      //   data.sound.on(`end`, () => {
-      //     const d = pick(request.payload);
-      //     d.sound = filename;
-      //     console.log(d);
-      //
-      //   })
-      // }
     }
   },
   {

@@ -29,12 +29,18 @@ import CartAPI from './lib/cartAPI';
     audio = new Audio(); // handle audio
     head = new Head(); // show and handle head
     scene.add(head.mesh);
-    console.log(audio.id);
+
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
+      const audioSettings = {
+        pitch: audio.pitchRatio,
+        overlap: audio.overlap
+      }
+
       handleSave({
         text: audio.txt,
-        id: audio.id
+        id: audio.id,
+        audioSettings: JSON.stringify(audioSettings)
       });
     });
 
