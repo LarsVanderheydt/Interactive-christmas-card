@@ -27,5 +27,18 @@ export default {
   readOne: id => {
     const method = `GET`;
     return fetch(`${url}/${id}`, {method}).then(r => r.json());
+  },
+
+  update: ({text, id, from, to, audioSettings, headColors}) => {
+    const method = `PUT`;
+    const body = new FormData();
+    body.append(`text`, text);
+    body.append(`id`, id);
+    body.append(`from`, from);
+    body.append(`to`, to);
+    body.append(`audioSettings`, audioSettings);
+    body.append(`headColors`, headColors);
+
+    return fetch(`${url}/${id}`, {method, body}).then(r => r.json());
   }
 };

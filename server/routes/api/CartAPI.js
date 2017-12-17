@@ -63,5 +63,21 @@ module.exports = [
         Boom.badRequest(err.message) // mongoose, mongodb errors (400)
       ))
     }
+  },
+  {
+    method: 'PUT',
+    path: '/api/cart/{id}',
+    handler: function (request, reply) {
+      const {id} = request.params;
+      const payload = request.payload; // clean payload data
+
+      Cart.update({id}, payload).then(d => {
+        if (d.ok) { // update success?
+          reply(d);
+        } else return ( // update failed
+          Boom.badRequest(`error while updating ${modelName} with _id ${_id}`)
+        );
+      })
+    }
   }
 ];

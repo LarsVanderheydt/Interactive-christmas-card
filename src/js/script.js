@@ -1,7 +1,6 @@
 import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
-import handleSave from './objects/Save';
 import CartAPI from './lib/cartAPI';
 
 {
@@ -18,6 +17,7 @@ import CartAPI from './lib/cartAPI';
   let starArray = [];
   let isMobile = /iPhone|Android/i.test(navigator.userAgent);
   let loaderManager = new THREE.LoadingManager();
+  let saved = false;
 
   const init = () => {
     // create snow
@@ -34,6 +34,10 @@ import CartAPI from './lib/cartAPI';
 
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
+      const from = document.getElementById(`name_input`);
+      const to = document.getElementById(`recipient_input`);
+      const link = document.querySelector(`.unique_link`);
+
       const audioSettings = {
         pitch: audio.pitchRatio,
         overlap: audio.overlap
@@ -47,12 +51,32 @@ import CartAPI from './lib/cartAPI';
         hat: Colors.hat
       }
 
-      handleSave({
-        text: audio.txt,
-        id: audio.id,
-        audioSettings: JSON.stringify(audioSettings),
-        headColors: JSON.stringify(headColors)
-      });
+      if (!saved) {
+        saved = true;
+        CartAPI.create({
+          text: audio.text,
+          id: audio.id,
+          from: from.value || 'Human',
+          to: to.value || 'Fellow Human',
+          audioSettings: JSON.stringify(audioSettings),
+          headColors: JSON.stringify(headColors),
+        });
+
+
+      } else {
+        CartAPI.update({
+          text: audio.text,
+          id: audio.id,
+          from: from.value || 'Human',
+          to: to.value || 'Fellow Human',
+          audioSettings: JSON.stringify(audioSettings),
+          headColors: JSON.stringify(headColors),
+        });
+      }
+
+      link.innerHTML = `https://localhost:8080/santa.html?id=${audio.id}`;
+      link.setAttribute('href', `https://localhost:8080/santa.html?id=${audio.id}`);
+      link.setAttribute('target', `_blank`);
     });
 
     gui = new dat.GUI();
