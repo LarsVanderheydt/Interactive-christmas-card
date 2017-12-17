@@ -20,8 +20,7 @@ let tls = false;
 
 server.connection({
   port: process.env.PORT || 8080,
-  tls,
-  host: '0.0.0.0'
+  tls
 });
 
 Mongoose.connect(MONGO_URL, {'useMongoClient': true});
