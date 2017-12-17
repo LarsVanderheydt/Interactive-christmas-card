@@ -13,10 +13,10 @@ const init = () => {
   });
 
   targetId = getUrlParameter("id");
-  if (!targetId) window.location = "https://localhost:8080";
+  if (!targetId) window.location = "https://experimentalweb.herokuapp.com/";
 
   CardAPI.readOne(targetId).then(d => {
-    if (d.statusCode) window.location = "https://localhost:8080";
+    if (d.statusCode) window.location = "https://experimentalweb.herokuapp.com/";
     document.getElementById(`from`).innerHTML = `from: ${d.from}`;
     document.getElementById(`to`).innerHTML = `to: ${d.to}`;
 

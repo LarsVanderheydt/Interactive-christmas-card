@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-const url = `/api/sound`;
+const url = `/api/sounds`;
 
 export default {
 

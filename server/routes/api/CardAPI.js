@@ -8,7 +8,7 @@ const {omit, pick} = require(`lodash`);
 module.exports = [
   {
     method: 'GET',
-    path: '/api/card',
+    path: '/api/cards',
     handler: function (request, reply) {
       Card.find(function(error, Cards) {
           if (error) {
@@ -20,7 +20,7 @@ module.exports = [
   },
   {
     method: ['PUT', 'POST'],
-    path: '/api/card',
+    path: '/api/cards',
 
     handler: function (request, reply) {
       const data = request.payload;
@@ -45,7 +45,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/api/card/{id}',
+    path: '/api/cards/{id}',
     handler: function (request, reply) {
       const {id} = request.params;
       const filter = {id};
@@ -66,7 +66,7 @@ module.exports = [
   },
   {
     method: 'PUT',
-    path: '/api/card/{id}',
+    path: '/api/cards/{id}',
     handler: function (request, reply) {
       const {id} = request.params;
       const payload = request.payload; // clean payload data
