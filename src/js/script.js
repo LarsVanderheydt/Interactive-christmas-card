@@ -73,8 +73,8 @@ import CardAPI from './lib/cardAPI';
         });
       }
 
-      link.innerHTML = `https://localhost:8080/santa.html?id=${audio.id}`;
-      link.setAttribute('href', `https://localhost:8080/santa.html?id=${audio.id}`);
+      link.innerHTML = `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`;
+      link.setAttribute('href', `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`);
       link.setAttribute('target', `_blank`);
     });
 
