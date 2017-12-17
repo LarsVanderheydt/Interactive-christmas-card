@@ -1,4 +1,4 @@
-const Cart = require('../../schemas/Cart');
+const Card = require('../../schemas/Card');
 const Sound = require('../../schemas/Sound');
 const Boom = require('boom');
 const path = require('path');
@@ -8,24 +8,24 @@ const {omit, pick} = require(`lodash`);
 module.exports = [
   {
     method: 'GET',
-    path: '/api/cart',
+    path: '/api/card',
     handler: function (request, reply) {
-      Cart.find(function(error, Carts) {
+      Card.find(function(error, Cards) {
           if (error) {
               console.error(error);
           }
-          reply(Carts);
+          reply(Cards);
       });
     }
   },
   {
     method: ['PUT', 'POST'],
-    path: '/api/cart',
+    path: '/api/card',
 
     handler: function (request, reply) {
       const data = request.payload;
 
-      const cart = new Cart({
+      const card = new Card({
           text: data.text,
           id: data.id,
           from: data.from,
@@ -35,22 +35,22 @@ module.exports = [
           date: Date.now()
       });
 
-      cart.save(function(error, cart) {
+      card.save(function(error, card) {
         if (error) {
             console.error(error);
         }
-        reply(cart);
+        reply(card);
       });
     }
   },
   {
     method: 'GET',
-    path: '/api/cart/{id}',
+    path: '/api/card/{id}',
     handler: function (request, reply) {
       const {id} = request.params;
       const filter = {id};
 
-      Cart.findOne(filter).then(d => {
+      Card.findOne(filter).then(d => {
         // no data -> CODE: 404 => NOT FOUND
         if (!d) return reply(
           Boom.notFound(`id ${id} does not exist`)
@@ -66,12 +66,12 @@ module.exports = [
   },
   {
     method: 'PUT',
-    path: '/api/cart/{id}',
+    path: '/api/card/{id}',
     handler: function (request, reply) {
       const {id} = request.params;
       const payload = request.payload; // clean payload data
 
-      Cart.update({id}, payload).then(d => {
+      Card.update({id}, payload).then(d => {
         if (d.ok) { // update success?
           reply(d);
         } else return ( // update failed

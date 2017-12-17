@@ -44,7 +44,6 @@ module.exports = [
         data.sound.on(`end`, () => {
           const d = pick(request.payload);
           d.sound = filename;
-          console.log(d);
           const sound = new Sound({
               id: data.id,
               isActive: true,
