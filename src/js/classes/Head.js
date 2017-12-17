@@ -20,6 +20,7 @@ export default class Head {
     this.beard.position.y = -7;
     this.beard.position.z = 0.5;
     this.head.add(this.beard);
+    let stars;
 
     this.Beard();
     this.Glasses();
@@ -30,6 +31,9 @@ export default class Head {
     this.Freckles();
     this.Features();
     this.idle();
+//    this.dizzy();
+//    this.Star();
+//    this.StarsGroup();
     this.normalize();
   }
 
@@ -41,6 +45,91 @@ export default class Head {
     const tv = tmin + (pc * dt);
     return tv;
   }
+
+  // Star() {
+  //   this.mesh = new THREE.Object3D();
+  //
+  //   let pts = [],
+  //     numPts = 5;
+  //   for (let i = 0; i < numPts * 2; i++) {
+  //     let l = i % 2 == 1
+  //       ? 1
+  //       : 2;
+  //     let a = i / numPts * Math.PI;
+  //     pts.push(new THREE.Vector2(Math.cos(a) * l, Math.sin(a) * l));
+  //   }
+  //   let starShape = new THREE.Shape(pts);
+  //
+  //   let extrudeSettings = {
+  //     amount: 0.5,
+  //     steps: 1,
+  //     bevelEnabled: false
+  //   };
+  //   let starGeom = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
+  //
+  //   let star = new THREE.Mesh(starGeom, Mat.whiteMat);
+  //
+  //   star.rotation.x = Math.PI / 2;
+  //
+  //   this.mesh.add(star);
+  // }
+
+  // StarsGroup(){
+  //   this.mesh = new THREE.Object3D();
+  //
+  //   this.nStars = 15;
+  //   const starArray = [];
+  //   let stepAngle = Math.PI * 2 / this.nStars;
+  //
+  //   // Create the Stars
+  //   // for (let i = 0; i < this.nStars; i++) {
+  //   //
+  //   //   // this.s = this.Star();
+  //   //   // let a = stepAngle * i;
+  //   //   // let r = 15;
+  //   //   //
+  //   //   // this.s.mesh.position.y = Math.sin(a) * r;
+  //   //   // this.s.mesh.position.x = Math.cos(a) * r;
+  //   //   //
+  //   //   // this.s.mesh.rotation.z = a + Math.PI / 2;
+  //   //   // this.s.mesh.position.z = 0 - Math.random() * 3;
+  //   //   //
+  //   //   // //  random scale for each cloud
+  //   //   // let sc = 0.5 + Math.random() * .6;
+  //   //   // this.s.mesh.scale.set(sc, sc, sc);
+  //   //   //
+  //   //   // this.mesh.add(this.s.mesh);
+  //   //
+  //   //   starArray.push(this.s);
+  //   //}
+  //   this.mesh.rotation.x = Math.PI / 2;
+  // }
+
+  // spinScale() {
+  //   this.mesh.rotation.z += 0.02;
+  //
+  //   for (let i = 0; i < starArray.length; i++) {
+  //      starArray[i].mesh.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.1 ;
+  //     starArray[i].mesh.rotation.z += 0 - Math.random() * 0.15;
+  //     starArray[i].mesh.rotation.x += 0 - Math.random() * 0.05;
+  //
+  //   }
+  // }
+
+  // dizzy() {
+  //   this.stars = this.StarsGroup();
+  //
+  //   // this.stars.mesh.position.set(0, 10, 0);
+  //   let distance = 1;
+  //
+  //   this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
+  //   this.head.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
+  //   this.head.rotation.y = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
+  //
+  //   this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.05;
+  //
+  //   this.stars.spinScale();
+  // }
 
   updateBody(speed, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY) {
     this.eyeBlueRight.position.x += (eyeBlueRightPosX - this.eyeBlueRight.position.x) / speed;

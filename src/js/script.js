@@ -7,15 +7,13 @@ import CartAPI from './lib/cartAPI';
 {
   let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, HEIGHT, WIDTH;
   let globalLight, shadowLight, backLight, light, renderer, container, loaded;
-  let head, stars, windowHalfX, windowHalfY, color, audio, SpeechText;
+  let head, windowHalfX, windowHalfY, color, audio, SpeechText;
 
   // vars for dat.gui
   let controller, gui;
   const saveBtn = document.getElementById(`save`);
 
   let mousePos = { x: 0, y: 0};
-
-  let starArray = [];
 
   const init = () => {
     // create snow
@@ -29,6 +27,7 @@ import CartAPI from './lib/cartAPI';
     audio = new Audio(); // handle audio
     head = new Head(); // show and handle head
     scene.add(head.mesh);
+    //scene.add(stars.mesh);
     console.log(audio.id);
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
@@ -148,7 +147,6 @@ import CartAPI from './lib/cartAPI';
   let isMobile = /iPhone|Android/i.test(navigator.userAgent);
 
   const createLights = () => {
-
     globalLight = new THREE.HemisphereLight(0xffffff, 0x555555, .9);
 
     shadowLight = new THREE.DirectionalLight(0xffffff, .3);
@@ -168,83 +166,24 @@ import CartAPI from './lib/cartAPI';
     scene.add( new THREE.AmbientLight( 0xeadead, 0.1 ));
   }
 
-  // class Star {
-  //   constructor(){
+  // const createHead = () => {
+  //   head.name = "Head";
+  //   head = new Head();
+  //   console.log("createHead");
+  //   head.idle();
+  //   //head.dizzy();
+  //   scene.add(head.mesh);
   //
-  //   STAR
-  //   //////////////////////////////////
-  //
-  //   this.mesh = new THREE.Object3D();
-  //
-  //   let pts = [],
-  //     numPts = 5;
-  //   for (let i = 0; i < numPts * 2; i++) {
-  //     let l = i % 2 == 1
-  //       ? 1
-  //       : 2;
-  //     let a = i / numPts * Math.PI;
-  //     pts.push(new THREE.Vector2(Math.cos(a) * l, Math.sin(a) * l));
-  //   }
-  //   let starShape = new THREE.Shape(pts);
-  //
-  //   let extrudeSettings = {
-  //     amount: 0.5,
-  //     steps: 1,
-  //     bevelEnabled: false
-  //   };
-  //   let starGeom = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
-  //   let star = new THREE.Mesh(starGeom, yellowMat);
-  //   star.rotation.x = Math.PI / 2;
-  //   this.mesh.add(star);
-  // }
-  // }
-  //
-  // let StarsGroup = function() {
-  //
-  //     this.mesh = new THREE.Object3D();
-  //
-  //     this.nStars = 15;
-  //
-  //     let stepAngle = Math.PI * 2 / this.nStars;
-  //
-  //      Create the Stars
-  //     for (let i = 0; i < this.nStars; i++) {
-  //
-  //       this.s = new Star();
-  //       let a = stepAngle * i;
-  //       let r = 15;
-  //
-  //       this.s.mesh.position.y = Math.sin(a) * r;
-  //       this.s.mesh.position.x = Math.cos(a) * r;
-  //
-  //       this.s.mesh.rotation.z = a + Math.PI / 2;
-  //       this.s.mesh.position.z = 0 - Math.random() * 3;
-  //
-  //         random scale for each cloud
-  //       let sc = 0.5 + Math.random() * .6;
-  //       this.s.mesh.scale.set(sc, sc, sc);
-  //
-  //       this.mesh.add(this.s.mesh);
-  //       starArray.push(this.s);
-  //     }
-  //     this.mesh.rotation.x = Math.PI / 2;
+  //   stars = new StarsGroup();
+  //   scene.add(stars.mesh);
   // }
 
-  const createHead = () => {
-    head.name = "Head";
-    head = new Head();
-    head.idle();
-    scene.add(head.mesh);
-    //stars = new StarsGroup();
-    //scene.add(stars.mesh);
-  }
-
-  const createCharacter = () => {
-    createHead();
-    head.mesh.position.set(0, 2, 0);
-    //stars.mesh.position.set(0, 10, 0);
-  }
-
+  // const createCharacter = () => {
+  //   console.log("CREATE CHARACTER");
+  //   createHead();
+  //   head.mesh.position.set(0, 2, 0);
+  //   stars.mesh.position.set(0, 10, 0);
+  // }
 
   let isBlinking = false;
   const blinkLoop = () => {
@@ -268,44 +207,6 @@ import CartAPI from './lib/cartAPI';
     });
   }
 
-  //HEAD ANIMATIONS
-  ////////////////////
-
-  // Head.prototype.dizzy = function() {
-  //
-  //     let distance = 1;
-  //
-  //     this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
-  //     this.head.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
-  //     this.head.rotation.y = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
-  //
-  //     this.eyeBlueRight.position.x = Math.sin(Date.now() * 0.005) * -distance;
-  //     this.eyeBlueLeft.position.x = Math.sin(Date.now() * 0.005) * distance;
-  //     this.eyeBlueRight.position.y = Math.cos(Date.now() * 0.005) * -distance;
-  //     this.eyeBlueLeft.position.y = Math.cos(Date.now() * 0.005) * distance;
-  //     this.eyeBrowRight.position.y = Math.cos(Date.now() * 0.005) * -distance;
-  //     this.eyeBrowLeft.position.y = Math.cos(Date.now() * 0.005) * distance;
-  //
-  //     this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.05;
-  //
-  //     blinkLoop();
-  //     stars.spinScale();
-  //
-  //   }
-
-  //STARGROUP
-  // StarsGroup.prototype.spinScale = function() {
-  //
-  //     this.mesh.rotation.z += 0.02;
-  //
-  //     for (let i = 0; i < starArray.length; i++) {
-  //        starArray[i].mesh.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.1 ;
-  //       starArray[i].mesh.rotation.z += 0 - Math.random() * 0.15;
-  //       starArray[i].mesh.rotation.x += 0 - Math.random() * 0.05;
-  //
-  //     }
-  //   }
-
   class controllerText {
     constructor (){
       this.skin = Colors.skin;
@@ -319,10 +220,11 @@ import CartAPI from './lib/cartAPI';
   const loop = () => {
     blinkLoop();
     //head.dizzy();
+    head.idle(xTarget, yTarget);
+
     let xTarget = (mousePos.x - windowHalfX);
     let yTarget = (mousePos.y - windowHalfY);
 
-    head.idle(xTarget, yTarget);
     renderer.render(scene, camera);
     requestAnimationFrame(loop);
   }

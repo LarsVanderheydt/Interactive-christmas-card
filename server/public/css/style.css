@@ -144,7 +144,13 @@
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 32px;
-  margin-bottom: 2rem;
+  margin-bottom: 2rem
+}
+
+.recipient p {
+  color: white;
+  font-size: 22.4px;
+  font-size: 1.4rem;
 }
 
 textarea {
