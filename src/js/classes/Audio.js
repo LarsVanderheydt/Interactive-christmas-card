@@ -9,6 +9,7 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 let audioCtx, recognition;
 let transcript = "";
 let audioChunks = [];
+let source;
 
 const $text = document.getElementById(`field`);
 const $record = document.getElementById(`record`);
@@ -18,18 +19,17 @@ const $stop = document.getElementById(`stop`);
 let audioSources = [],
     pitchShifterProcessor;
 
-let audioSourceIndex = 0,
-    audioVisualisationIndex = 0,
-    validGranSizes = [256, 512, 1024, 2048, 4096, 8192],
-    grainSize = validGranSizes[2],
+let grainSize = 512,
     pitchRatio = 1.0,
     overlapRatio = 0.50;
 
-const id = shortId.generate();
-
 export default class Audio {
   constructor() {
-    this.id = id;
+    this.id = shortId.generate();
+    this.pitchRatio = 1.0;
+    this.overlap = 0.50;
+    audioCtx = new AudioContext();
+
     // handle SpeechRecognition
     recognition = new SpeechRecognition();
     this.speechSettings();
@@ -44,77 +44,70 @@ export default class Audio {
 
       /*--------------------Start Recording-----------------------*/
       $record.addEventListener(`click`, () => {
-         this.mediaRecorder.start();
-         recognition.start();
-         $record.disabled = true;
+        this.mediaRecorder.start();
+        recognition.start();
+        $record.disabled = true;
       });
       /*----------------------------------------------------------*/
 
-      this.mediaRecorder.addEventListener(`dataavailable`,  e => audioChunks.push(e.data)); // add audiochunk to array
+      this.mediaRecorder.addEventListener(`dataavailable`,  e => {
+        audioChunks.push(e.data);
+      }); // add audiochunk to array
 
       // when mediaRecorder stops, make and handle audio blob
       this.mediaRecorder.addEventListener(`stop`, () => {
-
         // give link to audio controls to play and control the sound
         this.blob = new Blob(audioChunks, {type : 'audio/ogg'}); // create blob from audiochunks
-        // const blobUrl = URL.createObjectURL(this.blob); // make url from blob stream
-        // $audio.src = blobUrl;
 
         SoundAPI.create({
           id: this.id,
           blob: this.blob
         });
 
-        audioCtx = new AudioContext();
-
-        // const source = audioCtx.createMediaElementSource($audio); // get audio from
-
         setTimeout(() => {
           const bufferLoader = new BufferLoader(
             audioCtx, [`./uploads/${this.id}.ogg`], bufferList => {
+              // to avoid overlapping previous sound, empty bufferList when trying again
+              $record.addEventListener(`click`, () => bufferList = []);
 
               let loop = false;
-              let source;
 
+              // trigger loop
               document.getElementById(`repeat`).addEventListener(`click`,  () => {
                 loop = !loop;
                 source.stop();
               });
 
+              // pitch value
               const $pitch = document.getElementById(`pitch`);
               $pitch.addEventListener(`change`, () => {
                 pitchRatio = parseFloat($pitch.value);
-                console.log(pitchRatio);
+                this.pitchRatio = pitchRatio;
               });
 
+              // play modified sound
               $audio.addEventListener(`click`, () => {
                 source = '';
                 source = audioCtx.createBufferSource();
                 source.buffer = bufferList[0];
-
-                // source.connect(audioCtx.destination)
-
                 source.connect(pitchShifterProcessor);
                 source.loop = loop;
                 source.start();
               });
-
             }
           );
 
           bufferLoader.load();
           this.initProcessor();
-          // this.initSliders();
 
         }, 1000);
 
-
+        // set sound filter overlap
         const overlap = document.getElementById(`overlap`);
         overlap.addEventListener(`change`, () => {
           overlapRatio = overlap.value;
-          console.log(overlap.value);
+          this.overlap = overlapRatio;
         });
-
 
         audioChunks = [];
       });
@@ -137,7 +130,7 @@ export default class Audio {
 
   speechSettings() {
     recognition.continuous = false;
-    recognition.lang = 'nl-BE';
+    recognition.lang = 'en-US';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
   }
@@ -204,7 +197,6 @@ export default class Audio {
     pitchShifterProcessor.connect(audioCtx.destination);
 
   };
-
 
   hannWindow(length) {
     const window = new Float32Array(length);

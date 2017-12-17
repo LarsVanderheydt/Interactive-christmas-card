@@ -1,7 +1,6 @@
 import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
-import handleSave from './objects/Save';
 import CartAPI from './lib/cartAPI';
 
 {
@@ -15,6 +14,14 @@ import CartAPI from './lib/cartAPI';
 
   let mousePos = { x: 0, y: 0};
 
+<<<<<<< HEAD
+=======
+  let starArray = [];
+  let isMobile = /iPhone|Android/i.test(navigator.userAgent);
+  let loaderManager = new THREE.LoadingManager();
+  let saved = false;
+
+>>>>>>> 6d361d520e93cb7d5fbbb7b5c3414dc8964e57ed
   const init = () => {
     // create snow
     particlesJS.load('particles-js', '../assets/particles.json', () => {
@@ -24,17 +31,60 @@ import CartAPI from './lib/cartAPI';
     createScene();
     createLights();
 
-    audio = new Audio(); // handle audio
+    audio = new Audio(); // handle audio and speechrecognition
     head = new Head(); // show and handle head
     scene.add(head.mesh);
+<<<<<<< HEAD
     //scene.add(stars.mesh);
     console.log(audio.id);
+=======
+
+>>>>>>> 6d361d520e93cb7d5fbbb7b5c3414dc8964e57ed
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
-      handleSave({
-        text: audio.txt,
-        id: audio.id
-      });
+      const from = document.getElementById(`name_input`);
+      const to = document.getElementById(`recipient_input`);
+      const link = document.querySelector(`.unique_link`);
+
+      const audioSettings = {
+        pitch: audio.pitchRatio,
+        overlap: audio.overlap
+      }
+
+      const headColors = {
+        skin: Colors.skin,
+        freckles: Colors.freckles,
+        eye: Colors.eye,
+        glasses: Colors.glasses,
+        hat: Colors.hat
+      }
+
+      if (!saved) {
+        saved = true;
+        CartAPI.create({
+          text: audio.text,
+          id: audio.id,
+          from: from.value || 'Human',
+          to: to.value || 'Fellow Human',
+          audioSettings: JSON.stringify(audioSettings),
+          headColors: JSON.stringify(headColors),
+        });
+
+
+      } else {
+        CartAPI.update({
+          text: audio.text,
+          id: audio.id,
+          from: from.value || 'Human',
+          to: to.value || 'Fellow Human',
+          audioSettings: JSON.stringify(audioSettings),
+          headColors: JSON.stringify(headColors),
+        });
+      }
+
+      link.innerHTML = `https://localhost:8080/santa.html?id=${audio.id}`;
+      link.setAttribute('href', `https://localhost:8080/santa.html?id=${audio.id}`);
+      link.setAttribute('target', `_blank`);
     });
 
     gui = new dat.GUI();
@@ -134,8 +184,6 @@ import CartAPI from './lib/cartAPI';
     };
   }
 
-  let loaderManager = new THREE.LoadingManager();
-
   const handleWindowResize = e => {
     HEIGHT = window.innerHeight;
     WIDTH = window.innerWidth;
@@ -144,7 +192,6 @@ import CartAPI from './lib/cartAPI';
     camera.updateProjectionMatrix();
   }
 
-  let isMobile = /iPhone|Android/i.test(navigator.userAgent);
 
   const createLights = () => {
     globalLight = new THREE.HemisphereLight(0xffffff, 0x555555, .9);

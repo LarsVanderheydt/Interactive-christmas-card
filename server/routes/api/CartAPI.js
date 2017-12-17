@@ -28,8 +28,10 @@ module.exports = [
       const cart = new Cart({
           text: data.text,
           id: data.id,
-          name: data.name,
-          isActive: true,
+          from: data.from,
+          to: data.to,
+          audioSettings: data.audioSettings,
+          headColors: data.headColors,
           date: Date.now()
       });
 
@@ -39,22 +41,6 @@ module.exports = [
         }
         reply(cart);
       });
-      // if (data.sound) {
-      //   const {filename} = data.sound.hapi;
-      //   const folder = path.join(__dirname, `../../uploads`);
-      //   const p = `${folder}/${filename}.ogg`;
-      //   const f = fs.createWriteStream(p);
-      //   f.on(`error`, err => {
-      //     console.error(err);
-      //   });
-      //   data.sound.pipe(f);
-      //   data.sound.on(`end`, () => {
-      //     const d = pick(request.payload);
-      //     d.sound = filename;
-      //     console.log(d);
-      //
-      //   })
-      // }
     }
   },
   {
@@ -76,6 +62,22 @@ module.exports = [
       }).catch(err => reply(
         Boom.badRequest(err.message) // mongoose, mongodb errors (400)
       ))
+    }
+  },
+  {
+    method: 'PUT',
+    path: '/api/cart/{id}',
+    handler: function (request, reply) {
+      const {id} = request.params;
+      const payload = request.payload; // clean payload data
+
+      Cart.update({id}, payload).then(d => {
+        if (d.ok) { // update success?
+          reply(d);
+        } else return ( // update failed
+          Boom.badRequest(`error while updating ${modelName} with _id ${_id}`)
+        );
+      })
     }
   }
 ];
