@@ -14,18 +14,6 @@
 	</head>
 <body>
 
-	<label>Overlap</label>
-	<input type="range" min="0" max="0.75" step="0.01" id="overlap">
-
-	<label>Pitch</label>
-	<input type="range" step="0.01" value="1" min="0.5" max="2" id="pitch">
-
-	<button type="button" id="repeat">Repeat</button>
-	<button type="button" id="audio_controls">Play</button>
-
-	<section class="link">
-		<h1 class="to">Stuur jouw unieke santa naar je vrienden met deze link <a href="" class="unique_link"></a></h1>
-	</section>
 	<section class="information">
 		<section class="information-content">
 			<div class="SpRecognition">
@@ -39,21 +27,26 @@
 
 				<div class="recording">
 					<button class="button" type="button" id="record">Record message</button>
-					<audio src="" id="audio_controls" controls></audio>
 				</div>
 
 				<section class="sound-adjustments">
-					<select name="biquadType" id="biquadType">
-						<option value="lowpass">lowpass</option>
-						<option value="highpass">highpass</option>
-						<option value="bandpass">bandpass</option>
-						<option value="lowshelf">lowshelf</option>
-						<option value="highshelf">highshelf</option>
-						<option value="peaking">peaking</option>
-						<option value="notch">notch</option>
-						<option value="allpass">allpass</option>
-					</select>
-					<input type="range" name="" value="350" min="350" max="30000" id="biquadValue">
+
+					<section class="sound-buttons">
+						<button type="button" id="audio_controls">Play</button>
+						<button type="button" id="repeat">Repeat</button>
+					</section>
+
+					<section class="sound-ranges">
+						<div class="range">
+							<label>Overlap</label>
+							<input type="range" min="0" max="0.75" step="0.01" id="overlap">
+						</div>
+
+						<div class="range">
+							<label>Pitch</label>
+							<input type="range" step="0.01" value="1" min="0.5" max="2" id="pitch">
+						</div>
+					</section>
 				</section>
 
 				<div class="sender">

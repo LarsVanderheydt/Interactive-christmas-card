@@ -39,7 +39,7 @@
   }
 
   & p {
-    width: 60%;
+    width: 80%;
     font-style: italic;
     font-family: sans-serif;
   }
@@ -54,7 +54,6 @@
   background-color: black;
   color: rgba(255, 255, 255, 0.9);
 }
-
 
 .information {
   background-color: rgba(0, 0, 0, 0.5);
@@ -105,6 +104,7 @@
 }
 
 .recipient {
+  width: 100%;
   flex-direction: row;
   align-items: center;
   margin-bottom: 2rem;
@@ -143,6 +143,19 @@ input:focus::placeholder {
   color: #ccc;
 }
 
+button {
+  margin-top: 0.5em;
+  font-size: 1rem;
+  background-color: #970022;
+  color: rgba(78, 0, 16, 1);
+  border: none;
+  border-radius: 0.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0.5em;
+  width: 40%;
+}
+
 .border {
   font-size: 16px;
   border: 2px solid #42000d;
@@ -154,60 +167,64 @@ input:focus::placeholder {
 }
 
 .recording {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+  width: 90%;
+  margin: 1rem 0;
   height: 20%;
-  margin-top: 1rem;
-  justify-content: space-between;
 
-  & audio {
-    margin-top: 0.5rem;
-  }
-
-  & audio::-webkit-media-controls-panel {
-    border-radius: 0.5em;
-    background-color: rgba(66, 0, 13, 0.8);
+  & button {
+    width: 100%;
+    background-color: #710018;
   }
 }
 
-button {
-  margin-top: 0.5em;
-  font-size: 1rem;
-  background-color: #970022;
-  color: #fff;
-  border: none;
-  border-radius: 0.5em;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 0.5em;
-  width: 40%;
+.sound-adjustments {
+  display: flex;
+  width: 100%;
+  margin-top: 0.5rem;
+  justify-content: space-around;
+}
+
+.sound-buttons {
+  width: 50%;
+  flex-flow: column;
+  align-items: center;
+  align-content: center;
+
+  & button {
+    width: 40%;
+    background-color: #710018;
+  }
+}
+
+.sound-ranges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  flex-flow: column;
+
+  & .range {
+    width: 100%;
+  }
+
+  & label {
+    font-weight: lighter;
+    font-size: 1rem;
+  }
 }
 
 .topbuttons .button {
   width: 40%;
 }
 
-.sound-adjustments {
-  display: flex;
-  flex-flow: row;
-  width: 50%;
-  margin-left: 50%;
-  margin-top: 0.5rem;
-  justify-content: space-between;
+button:hover {
+  background-color: rgba(113, 0, 24, 0.4);
+  color: rgba(150, 0, 39, 1);
+}
 
-  & select {
-    font-family: sans-serif;
-    width: 8rem;
-    height: 2rem;
-    color: white;
-    background-color: rgba(66, 0, 13, 0.8);
-    border: none;
-  }
-
-  & select:focus {
-    outline: none;
-  }
+button:focus {
+  background-color: rgba(249, 242, 230, 0.2);
+  outline: none;
 }
 
 .sender {
@@ -225,6 +242,14 @@ button {
   margin: 3rem auto 0;
   background-color: 970022;
   border: none;
+
+  &:hover {
+    background-color: rgba(113, 0, 24, 0.4);
+  }
+
+  &:focus {
+    background-color: rgba(113, 0, 24, 0.4);
+  }
 }
 
 .link {

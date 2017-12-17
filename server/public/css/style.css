@@ -55,7 +55,7 @@
 }
 
 .information-uitleg-text p {
-  width: 60%;
+  width: 80%;
   font-style: italic;
   font-family: sans-serif;
 }
@@ -70,7 +70,6 @@
   background-color: black;
   color: rgba(255, 255, 255, .9);
 }
-
 
 .information {
   background-color: rgba(0, 0, 0, .5);
@@ -136,6 +135,7 @@
 }
 
 .recipient {
+  width: 100%;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -218,6 +218,20 @@ input:focus::placeholder {
   color: #ccc;
 }
 
+button {
+  margin-top: 0.5em;
+  font-size: 16px;
+  font-size: 1rem;
+  background-color: #970022;
+  color: rgba(78, 0, 16, 1);
+  border: none;
+  border-radius: 0.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0.5em;
+  width: 40%;
+}
+
 .border {
   font-size: 16px;
   border: 2px solid #42000d;
@@ -242,79 +256,84 @@ input:focus::placeholder {
 }
 
 .recording {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  width: 90%;
+  margin: 16px 0;
+  margin: 1rem 0;
+  height: 20%
+}
+
+.recording button {
   width: 100%;
-  height: 20%;
-  margin-top: 16px;
-  margin-top: 1rem;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between
-}
-
-.recording audio {
-  margin-top: 8px;
-  margin-top: 0.5rem;
-}
-
-.recording audio::-webkit-media-controls-panel {
-  border-radius: 0.5em;
-  background-color: rgba(66, 0, 13, .8);
-}
-
-button {
-  margin-top: 0.5em;
-  font-size: 16px;
-  font-size: 1rem;
-  background-color: #970022;
-  color: #fff;
-  border: none;
-  border-radius: 0.5em;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 0.5em;
-  width: 40%;
-}
-
-.topbuttons .button {
-  width: 40%;
+  background-color: #710018;
 }
 
 .sound-adjustments {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row;
-          flex-flow: row;
-  width: 50%;
-  margin-left: 50%;
+  width: 100%;
   margin-top: 8px;
   margin-top: 0.5rem;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
-.sound-adjustments select {
-  font-family: sans-serif;
-  width: 128px;
-  width: 8rem;
-  height: 32px;
-  height: 2rem;
-  color: white;
-  background-color: rgba(66, 0, 13, .8);
-  border: none;
+.sound-buttons {
+  width: 50%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center
 }
 
-.sound-adjustments select:focus {
+.sound-buttons button {
+  width: 40%;
+  background-color: #710018;
+}
+
+.sound-ranges {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 50%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column
+}
+
+.sound-ranges .range {
+  width: 100%;
+}
+
+.sound-ranges label {
+  font-weight: lighter;
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+.topbuttons .button {
+  width: 40%;
+}
+
+button:hover {
+  background-color: rgba(113, 0, 24, .4);
+  color: rgba(150, 0, 39, 1);
+}
+
+button:focus {
+  background-color: rgba(249, 242, 230, .2);
   outline: none;
 }
 
@@ -339,7 +358,15 @@ button {
   margin: 48px auto 0;
   margin: 3rem auto 0;
   background-color: 970022;
-  border: none;
+  border: none
+}
+
+#save:hover {
+  background-color: rgba(113, 0, 24, .4);
+}
+
+#save:focus {
+  background-color: rgba(113, 0, 24, .4);
 }
 
 .link {
