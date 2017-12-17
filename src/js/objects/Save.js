@@ -1,16 +1,14 @@
-import CartAPI from '../lib/cartAPI';
+import CartAPI from '../lib/CartAPI';
 import shortid from 'shortid';
 const name = document.getElementById(`name_input`);
 const link = document.querySelector(`.unique_link`);
 
-const handleSave = ({text, blob}) => {
-  const id = shortid.generate();
-  console.log(name.value);
+const handleSave = ({text, id}) => {
+
   CartAPI.create({
     text,
     id,
-    name: name.value,
-    blob
+    name: name.value
   });
 
   link.innerHTML = `https://localhost:8080/santa.html?id=${id}`;

@@ -16,19 +16,14 @@
 
 	</head>
 	<body>
-		<select name="biquadType" id="biquadType">
-		  <option value="lowpass">lowpass</option>
-		  <option value="highpass">highpass</option>
-		  <option value="bandpass">bandpass</option>
-		  <option value="lowshelf">lowshelf</option>
-		  <option value="highshelf">highshelf</option>
-		  <option value="peaking">peaking</option>
-		  <option value="notch">notch</option>
-		  <option value="allpass">allpass</option>
-		</select>
-		<input type="range" name="" value="350" min="350" max="30000" id="biquadValue">
+		<label>Overlap</label>
+		<input type="range" min="0" max="0.75" step="0.01" id="overlap">
 
-		<audio src="" id="audio_controls" controls></audio>
+		<label>Pitch</label>
+		<input type="range" step="0.01" value="1" min="0.5" max="2" id="pitch">
+
+		<button type="button" id="repeat">Repeat</button>
+		<button type="button" id="audio_controls">Play</button>
 
 		<section class="link">
 			<h1 class="to">Stuur jouw unieke santa naar je vrienden met deze link <a href="" class="unique_link"></a></h1>
@@ -51,6 +46,10 @@
 		<script src="./js/vendors/threeCSG.js"></script>
 		<script src="./js/vendors/dat.gui.min.js"></script>
 		<script src="./js/vendors/particles.min.js"></script>
+		<script src="./js/vendors/buffer-loader.js"></script>
+		<script src="./js/vendors/jquery/jquery-1.9.1.min.js"></script>
+		<script src="./js/vendors/jquery/jquery-ui.min.js"></script>
+		<script src="./js/vendors/jquery/jquery.ui.slider.min.js"></script>
 
 		<script src="./js/script.js"/></script>
 	</body>

@@ -4,6 +4,7 @@ const Hapi = require('hapi');
 const inert = require('inert');
 const Mongoose = require('mongoose');
 const CartAPI = require('./routes/api/CartAPI');
+const SoundAPI = require('./routes/api/SoundAPI');
 const server = new Hapi.Server();
 require(`dotenv`).load({silent: true});
 
@@ -43,6 +44,7 @@ server.register(inert, err => {
     throw err;
   }
   server.route(CartAPI),
+  server.route(SoundAPI),
 
   server.route({
     method: 'GET',

@@ -29,12 +29,12 @@ import CartAPI from './lib/cartAPI';
     audio = new Audio(); // handle audio
     head = new Head(); // show and handle head
     scene.add(head.mesh);
-
+    console.log(audio.id);
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
       handleSave({
         text: audio.txt,
-        blob: audio.blob // send audioblob to save
+        id: audio.id
       });
     });
 

@@ -176,3 +176,7 @@ button {
   bottom: 0;
   right: 0;
 }
+
+.sliders {
+  z-index: 999;
+}

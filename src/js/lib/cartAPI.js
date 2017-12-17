@@ -6,12 +6,12 @@ export default {
 
   create: ({text, id, name, blob}) => {
     const method = `POST`;
-    const newFileName = `${id.split(` `).join(`_`)}`;
+    // const newFileName = `${id.split(` `).join(`_`)}`;
     const body = new FormData();
     body.append(`text`, text);
     body.append(`id`, id);
     body.append(`name`, name);
-    body.append(`sound`, blob, newFileName);
+    // body.append(`sound`, blob, newFileName);
 
     return fetch(url, {method, body})
       .then(r => r.json());
