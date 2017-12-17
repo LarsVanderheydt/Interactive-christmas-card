@@ -104,7 +104,7 @@ import CartAPI from './lib/cartAPI';
     camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
     camera.position.x = 0;
     camera.position.z = 70;
-    camera.position.y = 0;
+    camera.position.y = -5;
 
     renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
     renderer.setPixelRatio(window.devicePixelRatio? window.devicePixelRatio: 1)

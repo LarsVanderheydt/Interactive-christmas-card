@@ -80,7 +80,7 @@ export default class Audio {
     this.mediaRecorder.stop();
     recognition.stop();
     $record.disabled = false;
-    $record.textContent = 'Opnieuw proberen?';
+    $record.textContent = 'Want to try again?';
     this.txt = $text.value;
   }
 
