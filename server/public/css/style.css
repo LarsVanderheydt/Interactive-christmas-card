@@ -11,8 +11,8 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: -webkit-gradient(linear, left top, left bottom, from(#710018), color-stop(#970022), color-stop(#970022), to(#710018));
-  background: linear-gradient(#710018, #970022, #970022, #710018);
+  background: -webkit-gradient(linear, left top, left bottom, from(#42000d), color-stop(#630017), color-stop(#630017), to(#42000d));
+  background: linear-gradient(#42000d, #630017, #630017, #42000d);
 }
 
 .information-uitleg {
@@ -72,7 +72,7 @@
 }
 
 .information {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .4);
   position: absolute;
   width: 40%;
   height: 100%;
@@ -144,7 +144,17 @@
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 32px;
-  margin-bottom: 2rem;
+  margin-bottom: 2rem
+}
+
+.recipient p {
+  color: white;
+  font-size: 22.4px;
+  font-size: 1.4rem;
+}
+
+.message {
+  color: white;
 }
 
 textarea {
@@ -354,6 +364,10 @@ button:focus {
   width: 80%;
 }
 
+.sender p {
+  color: white;
+}
+
 #save {
   margin: 48px auto 0;
   margin: 3rem auto 0;
@@ -372,6 +386,26 @@ button:focus {
 .link {
   margin: 32px auto;
   margin: 2rem auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center
+}
+
+.link h1 {
+  color: rgba(242, 242, 242, .7);
+  font-weight: lighter;
+}
+
+.newLink {
+  margin-top: 64px;
+  margin-top: 4rem;
 }
 
 .to {

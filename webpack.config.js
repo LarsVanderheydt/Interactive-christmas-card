@@ -24,6 +24,7 @@ const copy = new CopyWebpackPlugin([{
 module.exports = {
   entry: {
     script: './src/js/script.js',
+    notFound: './src/js/notFound.js',
     santa: './src/js/santaScript.js',
     style: './src/css/style.css'
   },

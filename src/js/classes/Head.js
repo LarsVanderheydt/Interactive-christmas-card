@@ -6,6 +6,7 @@ let isBlinking = false;
 export default class Head {
   constructor() {
     this.mesh = new THREE.Object3D();
+    this.mesh.name = "Head";
 
     let headGeom = new THREE.BoxBufferGeometry(16, 16, 16);
     let skinMat = new THREE.MeshLambertMaterial({color: Colors.skin, flatShading: true});
@@ -20,6 +21,7 @@ export default class Head {
     this.beard.position.y = -7;
     this.beard.position.z = 0.5;
     this.head.add(this.beard);
+    let stars;
 
     this.Beard();
     this.Glasses();
@@ -29,8 +31,9 @@ export default class Head {
     this.Hat();
     this.Freckles();
     this.Features();
-    this.idle();
     this.normalize();
+
+    this.mesh.position.x = -17;
   }
 
   normalize(v, vmin, vmax, tmin, tmax) {
@@ -41,6 +44,92 @@ export default class Head {
     const tv = tmin + (pc * dt);
     return tv;
   }
+
+  // Star() {
+  //   const mesh = new THREE.Object3D();
+  //
+  //   let pts = [],
+  //     numPts = 5;
+  //   for (let i = 0; i < numPts * 2; i++) {
+  //     let l = i % 2 == 1
+  //       ? 1
+  //       : 2;
+  //     let a = i / numPts * Math.PI;
+  //     pts.push(new THREE.Vector2(Math.cos(a) * l, Math.sin(a) * l));
+  //   }
+  //   let starShape = new THREE.Shape(pts);
+  //
+  //   let extrudeSettings = {
+  //     amount: 0.5,
+  //     steps: 1,
+  //     bevelEnabled: false
+  //   };
+  //   let starGeom = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
+  //
+  //   let star = new THREE.Mesh(starGeom, Mat.whiteMat);
+  //
+  //   star.rotation.x = Math.PI / 2;
+  //
+  //   mesh.add(star);
+  // }
+  //
+  // StarsGroup(){
+  //   const mesh = new THREE.Object3D();
+  //
+  //   this.nStars = 15;
+  //   const starArray = [];
+  //   let stepAngle = Math.PI * 2 / this.nStars;
+  //
+  //   //Create the Stars
+  //   for (let i = 0; i < this.nStars; i++) {
+  //
+  //     this.s = this.Star();
+  //     let a = stepAngle * i;
+  //     console.log(this.s);
+  //     let r = 15;
+  //
+  //     this.s.mesh.position.y = Math.sin(a) * r;
+  //     this.s.mesh.position.x = Math.cos(a) * r;
+  //
+  //     this.s.mesh.rotation.z = a + Math.PI / 2;
+  //     this.s.mesh.position.z = 0 - Math.random() * 3;
+  //
+  //     //  random scale for each cloud
+  //     let sc = 0.5 + Math.random() * .6;
+  //     this.s.mesh.scale.set(sc, sc, sc);
+  //
+  //     mesh.add(this.s.mesh);
+  //
+  //     starArray.push(this.s);
+  //   }
+  //   mesh.rotation.x = Math.PI / 2;
+  // }
+  //
+  // spinScale() {
+  //   const mesh.rotation.z += 0.02;
+  //
+  //   for (let i = 0; i < starArray.length; i++) {
+  //      starArray[i].mesh.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.1 ;
+  //     starArray[i].mesh.rotation.z += 0 - Math.random() * 0.15;
+  //     starArray[i].mesh.rotation.x += 0 - Math.random() * 0.05;
+  //
+  //   }
+  // }
+  //
+  // dizzy() {
+  //   this.stars = this.StarsGroup();
+  //   console.log(this.stars);
+  //   this.stars.mesh.position.set(0, 10, 0);
+  //   let distance = 1;
+  //
+  //   this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
+  //   this.head.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
+  //   this.head.rotation.y = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
+  //
+  //   this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.05;
+  //
+  //   this.stars.spinScale();
+  // }
 
   updateBody(speed, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY) {
     this.eyeBlueRight.position.x += (eyeBlueRightPosX - this.eyeBlueRight.position.x) / speed;
@@ -71,7 +160,7 @@ export default class Head {
     this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
     this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
 
-    this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05;
+    this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05 + 0.25;
     this.updateBody(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
   }
 
@@ -498,4 +587,19 @@ export default class Head {
 
     this.head.add(earRight, earLeft, nose);
   }
+
+  remove() {
+    scene.remove(this.head);
+  }
+
+  createHead() {
+    this.head = new Head();
+    this.head.name = "Head";
+    this.head.idle();
+    scene.add(this.head.mesh);
+  }
+  //
+  // add() {
+  //   scene.add(this.mesh);
+  // }
 }
