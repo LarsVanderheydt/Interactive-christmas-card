@@ -63,27 +63,6 @@ import ControllerText from './classes/ControllerText';
     });
   }
 
-<<<<<<< HEAD
-  const dec2hex = (i) => {
-    var result = "0x000000";
-    if (i >= 0 && i <= 15) {
-      result = "0x00000" + i.toString(16);
-    } else if (i >= 16 && i <= 255) {
-      result = "0x0000" + i.toString(16);
-    } else if (i >= 256 && i <= 4095) {
-      result = "0x000" + i.toString(16);
-    } else if (i >= 4096 && i <= 65535) {
-      result = "0x00" + i.toString(16);
-    } else if (i >= 65535 && i <= 1048575) {
-      result = "0x0" + i.toString(16);
-    } else if (i >= 1048575) {
-      result = '0x' + i.toString(16);
-    }
-    if (result.length == 8) {
-      return result;
-    }
-  }
-
   const createScene = () => {;
     HEIGHT = window.innerHeight;
     WIDTH = window.innerWidth /1.67;
@@ -138,7 +117,6 @@ import ControllerText from './classes/ControllerText';
     camera.updateProjectionMatrix();
   }
 
-
   const createLights = () => {
     globalLight = new THREE.HemisphereLight(0xffffff, 0x555555, .9);
 
@@ -170,12 +148,11 @@ import ControllerText from './classes/ControllerText';
     head.mesh.position.set(0, 2, 0);
     stars.mesh.position.set(0, 10, 0);
   }
-=======
+
   const handleSave = () => {
     const from = document.getElementById(`name_input`);
     const to = document.getElementById(`recipient_input`);
     const link = document.querySelector(`.unique_link`);
->>>>>>> adc907dfd3aade8feb39982fd83ba2bb7bdf26ab
 
     const audioSettings = {
       pitch: audio.pitchRatio,
@@ -212,20 +189,13 @@ import ControllerText from './classes/ControllerText';
     link.setAttribute('target', `_blank`);
   }
 
+
   const loop = () => {
-<<<<<<< HEAD
-    blinkLoop();
 
     let xTarget = (mousePos.x - windowHalfX);
     let yTarget = (mousePos.y - windowHalfY);
 
-    head.dizzy(xTarget, yTarget);
-    //head.idle(xTarget, yTarget);
-
-    renderer.render(scene, camera);
-=======
     santa.loop();
->>>>>>> adc907dfd3aade8feb39982fd83ba2bb7bdf26ab
     requestAnimationFrame(loop);
   }
 

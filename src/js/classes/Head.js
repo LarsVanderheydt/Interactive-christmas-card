@@ -31,11 +31,6 @@ export default class Head {
     this.Hat();
     this.Freckles();
     this.Features();
-<<<<<<< HEAD
-//    this.Star();
-//    this.StarsGroup();
-=======
->>>>>>> adc907dfd3aade8feb39982fd83ba2bb7bdf26ab
     this.normalize();
 
     this.mesh.position.x = -17;
@@ -50,103 +45,45 @@ export default class Head {
     return tv;
   }
 
-  // Star() {
-  //   const mesh = new THREE.Object3D();
-  //
-  //   let pts = [],
-  //     numPts = 5;
-  //   for (let i = 0; i < numPts * 2; i++) {
-  //     let l = i % 2 == 1
-  //       ? 1
-  //       : 2;
-  //     let a = i / numPts * Math.PI;
-  //     pts.push(new THREE.Vector2(Math.cos(a) * l, Math.sin(a) * l));
-  //   }
-  //   let starShape = new THREE.Shape(pts);
-  //
-  //   let extrudeSettings = {
-  //     amount: 0.5,
-  //     steps: 1,
-  //     bevelEnabled: false
-  //   };
-  //   let starGeom = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
-  //
-  //   let star = new THREE.Mesh(starGeom, Mat.whiteMat);
-  //
-  //   star.rotation.x = Math.PI / 2;
-  //
-  //   mesh.add(star);
-  // }
-  //
-  // StarsGroup(){
-  //   const mesh = new THREE.Object3D();
-  //
-  //   this.nStars = 15;
-  //   const starArray = [];
-  //   let stepAngle = Math.PI * 2 / this.nStars;
-  //
-  //   //Create the Stars
-  //   for (let i = 0; i < this.nStars; i++) {
-  //
-  //     this.s = this.Star();
-  //     let a = stepAngle * i;
-  //     console.log(this.s);
-  //     let r = 15;
-  //
-  //     this.s.mesh.position.y = Math.sin(a) * r;
-  //     this.s.mesh.position.x = Math.cos(a) * r;
-  //
-  //     this.s.mesh.rotation.z = a + Math.PI / 2;
-  //     this.s.mesh.position.z = 0 - Math.random() * 3;
-  //
-  //     //  random scale for each cloud
-  //     let sc = 0.5 + Math.random() * .6;
-  //     this.s.mesh.scale.set(sc, sc, sc);
-  //
-  //     mesh.add(this.s.mesh);
-  //
-  //     starArray.push(this.s);
-  //   }
-  //   mesh.rotation.x = Math.PI / 2;
-  // }
-  //
-  // spinScale() {
-  //   const mesh.rotation.z += 0.02;
-  //
-  //   for (let i = 0; i < starArray.length; i++) {
-  //      starArray[i].mesh.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.1 ;
-  //     starArray[i].mesh.rotation.z += 0 - Math.random() * 0.15;
-  //     starArray[i].mesh.rotation.x += 0 - Math.random() * 0.05;
-  //
-  //   }
-  // }
-  //
+  updateReciever(speed, headPosY, headPosX, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY) {
+    this.eyeBlueRight.position.x += (eyeBlueRightPosX - this.eyeBlueRight.position.x) / speed;
+    this.eyeBlueLeft.position.x += (eyeBlueLeftPosX - this.eyeBlueLeft.position.x) / speed;
 
-  updateDizzy(speed, headPosY, headPosX) {
-    //this.head.mesh.position.x += (headPosX - this.head.mesh.position.x) / speed;
+    this.eyeBlueRight.position.y += (eyeBlueRightPosY - this.eyeBlueRight.position.y) / speed;
+    this.eyeBlueLeft.position.y += (eyeBlueLeftPosY - this.eyeBlueLeft.position.y) / speed;
+
+    this.eyeBrowRight.position.y += (eyeBrowRightPosY - this.eyeBrowRight.position.y) / speed;
+    this.eyeBrowLeft.position.y += (eyeBrowLeftPosY - this.eyeBrowLeft.position.y) / speed;
     this.head.rotation.x += (headPosX - this.head.rotation.x) / speed;
     this.head.rotation.y += (headPosY - this.head.rotation.y) / speed;
   }
 
-  dizzy(xTarget = 0, yTarget = 0) {
-    // this.stars = this.StarsGroup();
-    // console.log(this.stars);
-    // this.stars.mesh.position.set(0, 10, 0);
+  reciever(xTarget = 0, yTarget = 0) {
+
     let distance = 1;
 
-    // this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
-    // this.head.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
-    // this.head.rotation.y = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
-    //this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.05;
     this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.05;
+    this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.02;
 
     const headPosX = this.normalize(yTarget, -200, 200, -0.1, 0.1);
-    const headPosY = this.normalize(xTarget, -200, 200, -0.2, 0.2);
-    this.updateDizzy(10, headPosY, headPosX);
-    // this.stars.spinScale();
+    const headPosY = this.normalize(xTarget, -200, 200, -0.1, 0.1);
+
+    const eyeBlueRightPosX = this.normalize(xTarget, -200, 200, -0.6, 0.6);
+    const eyeBlueLeftPosX = this.normalize(xTarget, -200, 200, -0.6, 0.6);
+
+    const eyeBlueRightPosY = this.normalize(yTarget, -200, 200, 0.6, -0.6);
+    const eyeBlueLeftPosY = this.normalize(yTarget, -200, 200, 0.6, -0.6);
+
+    const eyeBrowRightPosY = this.normalize(xTarget, -200, 200, -1, 0.8);
+    const eyeBrowLeftPosY = this.normalize(xTarget, -200, 200, -1, 0.8);
+
+    this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
+    this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
+
+    this.updateReciever(10, headPosY, headPosX, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
   }
 
-  updateIdle(speed, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY) {
+  updateSender(speed, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY) {
     this.eyeBlueRight.position.x += (eyeBlueRightPosX - this.eyeBlueRight.position.x) / speed;
     this.eyeBlueLeft.position.x += (eyeBlueLeftPosX - this.eyeBlueLeft.position.x) / speed;
 
@@ -157,7 +94,7 @@ export default class Head {
     this.eyeBrowLeft.position.y += (eyeBrowLeftPosY - this.eyeBrowLeft.position.y) / speed;
   }
 
-  idle(xTarget = 0, yTarget = 0) {
+  sender(xTarget = 0, yTarget = 0) {
     let distance = 1;
 
     this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.005;
@@ -175,13 +112,8 @@ export default class Head {
     this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
     this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
 
-<<<<<<< HEAD
-    this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05;
-    this.updateIdle(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
-=======
     this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05 + 0.25;
-    this.updateBody(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
->>>>>>> adc907dfd3aade8feb39982fd83ba2bb7bdf26ab
+    this.updateSender(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
   }
 
   Beard() {
@@ -362,7 +294,6 @@ export default class Head {
     frameMerged.receiveShadow = true;
 
     this.glasses.add(frameMerged);
-
   }
 
   Hair() {
@@ -615,7 +546,7 @@ export default class Head {
   createHead() {
     this.head = new Head();
     this.head.name = "Head";
-    this.head.idle();
+    this.head.sender();
     scene.add(this.head.mesh);
   }
   //

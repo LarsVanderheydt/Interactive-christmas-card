@@ -190,9 +190,9 @@ class SantaScene {
     let yTarget = (mousePos.y - windowHalfY);
 
     this.blinkLoop();
-    //head.dizzy();
+    head.sender(xTarget, yTarget);
 
-    head.idle(xTarget, yTarget);
+    //head.reciever(xTarget, yTarget);
 
     renderer.render(scene, camera);
   }
