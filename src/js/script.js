@@ -13,15 +13,12 @@ import CartAPI from './lib/cartAPI';
   const saveBtn = document.getElementById(`save`);
 
   let mousePos = { x: 0, y: 0};
-
-<<<<<<< HEAD
-=======
+  
   let starArray = [];
   let isMobile = /iPhone|Android/i.test(navigator.userAgent);
   let loaderManager = new THREE.LoadingManager();
   let saved = false;
 
->>>>>>> 6d361d520e93cb7d5fbbb7b5c3414dc8964e57ed
   const init = () => {
     // create snow
     particlesJS.load('particles-js', '../assets/particles.json', () => {
@@ -34,12 +31,8 @@ import CartAPI from './lib/cartAPI';
     audio = new Audio(); // handle audio and speechrecognition
     head = new Head(); // show and handle head
     scene.add(head.mesh);
-<<<<<<< HEAD
     //scene.add(stars.mesh);
     console.log(audio.id);
-=======
-
->>>>>>> 6d361d520e93cb7d5fbbb7b5c3414dc8964e57ed
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
       const from = document.getElementById(`name_input`);
