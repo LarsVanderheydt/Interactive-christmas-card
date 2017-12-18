@@ -205,24 +205,17 @@ import CardAPI from './lib/cardAPI';
     scene.add( new THREE.AmbientLight( 0xeadead, 0.1 ));
   }
 
-  // const createHead = () => {
-  //   head.name = "Head";
-  //   head = new Head();
-  //   console.log("createHead");
-  //   head.idle();
-  //   //head.dizzy();
-  //   scene.add(head.mesh);
-  //
-  //   stars = new StarsGroup();
-  //   scene.add(stars.mesh);
-  // }
+  const createHead = () => {
+    head.name = "Head";
+    head = new Head();
+    scene.add(head.mesh);
+  }
 
-  // const createCharacter = () => {
-  //   console.log("CREATE CHARACTER");
-  //   createHead();
-  //   head.mesh.position.set(0, 2, 0);
-  //   stars.mesh.position.set(0, 10, 0);
-  // }
+  const createCharacter = () => {
+    createHead();
+    head.mesh.position.set(0, 2, 0);
+    stars.mesh.position.set(0, 10, 0);
+  }
 
   let isBlinking = false;
   const blinkLoop = () => {
@@ -258,11 +251,12 @@ import CardAPI from './lib/cardAPI';
 
   const loop = () => {
     blinkLoop();
-    //head.dizzy();
-    head.idle(xTarget, yTarget);
 
     let xTarget = (mousePos.x - windowHalfX);
     let yTarget = (mousePos.y - windowHalfY);
+
+    head.dizzy(xTarget, yTarget);
+    //head.idle(xTarget, yTarget);
 
     renderer.render(scene, camera);
     requestAnimationFrame(loop);

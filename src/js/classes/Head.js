@@ -30,8 +30,6 @@ export default class Head {
     this.Hat();
     this.Freckles();
     this.Features();
-    this.idle();
-//    this.dizzy();
 //    this.Star();
 //    this.StarsGroup();
     this.normalize();
@@ -117,22 +115,32 @@ export default class Head {
   //   }
   // }
   //
-  // dizzy() {
-  //   this.stars = this.StarsGroup();
-  //   console.log(this.stars);
-  //   this.stars.mesh.position.set(0, 10, 0);
-  //   let distance = 1;
-  //
-  //   this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
-  //   this.head.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
-  //   this.head.rotation.y = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
-  //
-  //   this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.05;
-  //
-  //   this.stars.spinScale();
-  // }
 
-  updateBody(speed, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY) {
+  updateDizzy(speed, headPosY, headPosX) {
+    //this.head.mesh.position.x += (headPosX - this.head.mesh.position.x) / speed;
+    this.head.rotation.x += (headPosX - this.head.rotation.x) / speed;
+    this.head.rotation.y += (headPosY - this.head.rotation.y) / speed;
+  }
+
+  dizzy(xTarget = 0, yTarget = 0) {
+    // this.stars = this.StarsGroup();
+    // console.log(this.stars);
+    // this.stars.mesh.position.set(0, 10, 0);
+    let distance = 1;
+
+    // this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
+    // this.head.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
+    // this.head.rotation.y = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;
+    //this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.05;
+    this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.05;
+
+    const headPosX = this.normalize(yTarget, -200, 200, -0.1, 0.1);
+    const headPosY = this.normalize(xTarget, -200, 200, -0.2, 0.2);
+    this.updateDizzy(10, headPosY, headPosX);
+    // this.stars.spinScale();
+  }
+
+  updateIdle(speed, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY) {
     this.eyeBlueRight.position.x += (eyeBlueRightPosX - this.eyeBlueRight.position.x) / speed;
     this.eyeBlueLeft.position.x += (eyeBlueLeftPosX - this.eyeBlueLeft.position.x) / speed;
 
@@ -162,7 +170,7 @@ export default class Head {
     this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
 
     this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05;
-    this.updateBody(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
+    this.updateIdle(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
   }
 
   Beard() {

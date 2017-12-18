@@ -19,6 +19,7 @@ const init = () => {
     if (d.statusCode) window.location = "https://experimentalweb.herokuapp.com/";
     document.getElementById(`from`).innerHTML = `${d.from}`;
     document.getElementById(`to`).innerHTML = `${d.to}`;
+    document.getElementById(`message`).innerHTML = `${d.text}`;
 
     handleSantaAudio(d);
     santaScene(d);

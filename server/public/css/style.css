@@ -107,6 +107,12 @@
 
 .SpRecognition label {
   color: white;
+  font-weight: 300;
+  font-size: 22.4px;
+  font-size: 1.4rem;
+}
+
+.SpRecognition p {
   font-size: 22.4px;
   font-size: 1.4rem;
 }
@@ -136,6 +142,9 @@
 
 .recipient {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -151,6 +160,9 @@
   color: white;
   font-size: 22.4px;
   font-size: 1.4rem;
+  width: 50%;
+  margin-left: 16px;
+  margin-left: 1rem;
 }
 
 .message {
@@ -409,7 +421,7 @@ button:focus {
 }
 
 .to {
-  color: rgba(242, 242, 242, 1);
+  color: #970022;
   font-size: 1em;
   z-index: -2;
   text-align: center;
