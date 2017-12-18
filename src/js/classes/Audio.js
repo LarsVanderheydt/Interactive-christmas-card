@@ -18,7 +18,7 @@ const $stop = document.getElementById(`stop`);
 
 let audioSources = [],
     pitchShifterProcessor;
-
+let loop = false;
 let grainSize = 512,
     pitchRatio = 1.0,
     overlapRatio = 0.50;
@@ -70,10 +70,14 @@ export default class Audio {
               // to avoid overlapping previous sound, empty bufferList when trying again
               $record.addEventListener(`click`, () => bufferList = []);
 
-              let loop = false;
-
               // trigger loop
-              document.getElementById(`repeat`).addEventListener(`click`,  () => {
+              const $repeat = document.getElementById(`repeat`)
+              $repeat.addEventListener(`click`,  () => {
+                if (loop) {
+                  $repeat.style.backgroundColor = 'rgba(113, 0, 24, 0.4)';
+                } else {
+                  $repeat.style.backgroundColor = 'rgba(150, 0, 39, 1)';
+                }
                 loop = !loop;
                 source.stop();
               });

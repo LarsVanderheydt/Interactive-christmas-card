@@ -1,5 +1,4 @@
 import Head from '../classes/Head';
-import CartAPI from '../lib/cartAPI';
 import Colors from './colors';
 
 let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, HEIGHT, WIDTH;

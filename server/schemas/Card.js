@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-var CartSchema = new Schema({
+var CardSchema = new Schema({
     text: String,
     id: String,
     from: String,
@@ -15,4 +15,4 @@ var CartSchema = new Schema({
     audioSettings: String,
     headColors: String
 });
-module.exports = mongoose.model('Cart', CartSchema);
+module.exports = mongoose.model('Card', CardSchema);

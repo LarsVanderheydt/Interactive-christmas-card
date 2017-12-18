@@ -1,5 +1,4 @@
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-import CartAPI from '../lib/cartAPI';
 import Head from '../classes/Head';
 
 let targetId, audioCtx;
@@ -7,16 +6,14 @@ const play = document.getElementById(`play_santa`);
 const $audio = document.getElementById(`audio`);
 
 let pitchShifterProcessor;
-
+let isPlaying = false;
 let grainSize = 512,
     pitchRatio = 1.0,
     overlapRatio = 0.50;
 
 const handleSantaAudio = cart => {
   audioCtx = new AudioContext();
-
   const audioSettings = JSON.parse(cart.audioSettings);
-  // document.getElementById(`santa_audio`).src = `./uploads/${d.id}.ogg`;
 
   setTimeout(() => {
     const bufferLoader = new BufferLoader(
@@ -25,20 +22,26 @@ const handleSantaAudio = cart => {
         let loop = false;
         let source;
 
-        document.getElementById(`repeat`).addEventListener(`click`,  () => {
+        const $repeat = document.getElementById(`repeat`);
+        $repeat.addEventListener(`click`,  () => {
+          if (loop) {
+            $repeat.style.backgroundColor = 'rgba(113, 0, 24, 0.4)';
+          } else {
+            $repeat.style.backgroundColor = 'rgba(150, 0, 39, 1)';
+          }
+
           loop = !loop;
-          source.stop();
+          if (isPlaying) source.stop();
         });
 
         pitchRatio = audioSettings.pitch;
         overlapRatio = audioSettings.overlap;
 
         $audio.addEventListener(`click`, () => {
+          isPlaying = true;
           source = '';
           source = audioCtx.createBufferSource();
           source.buffer = bufferList[0];
-
-          // source.connect(audioCtx.destination)
           source.loop = loop;
           source.connect(pitchShifterProcessor);
           source.start();

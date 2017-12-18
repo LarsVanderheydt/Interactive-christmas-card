@@ -8,7 +8,7 @@ const rimraf = require('rimraf');
 module.exports = [
   {
     method: 'GET',
-      path: '/api/sound',
+      path: '/api/sounds',
       handler: function (request, reply) {
         Sound.find(function(error, Sounds) {
             if (error) {
@@ -20,7 +20,7 @@ module.exports = [
   },
   {
     method: ['PUT', 'POST'],
-    path: '/api/sound',
+    path: '/api/sounds',
     config: {
       payload: {
         output: `stream`,
@@ -44,7 +44,6 @@ module.exports = [
         data.sound.on(`end`, () => {
           const d = pick(request.payload);
           d.sound = filename;
-          console.log(d);
           const sound = new Sound({
               id: data.id,
               isActive: true,
@@ -64,7 +63,7 @@ module.exports = [
   },
   {
     method: 'GET',
-      path: '/api/sound/{id}',
+      path: '/api/sounds/{id}',
       handler: function (request, reply) {
         const {id} = request.params;
         const filter = {id};

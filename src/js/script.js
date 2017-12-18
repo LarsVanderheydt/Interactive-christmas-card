@@ -1,7 +1,7 @@
 import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
-import CartAPI from './lib/cartAPI';
+import CardAPI from './lib/cardAPI';
 
 {
   let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, HEIGHT, WIDTH;
@@ -52,9 +52,10 @@ import CartAPI from './lib/cartAPI';
         hat: Colors.hat
       }
 
+      // when clicking on save, first time save the object, second time update the saved object
       if (!saved) {
         saved = true;
-        CartAPI.create({
+        CardAPI.create({
           text: audio.text,
           id: audio.id,
           from: from.value || 'Human',
@@ -62,10 +63,8 @@ import CartAPI from './lib/cartAPI';
           audioSettings: JSON.stringify(audioSettings),
           headColors: JSON.stringify(headColors),
         });
-
-
       } else {
-        CartAPI.update({
+        CardAPI.update({
           text: audio.text,
           id: audio.id,
           from: from.value || 'Human',
@@ -75,8 +74,8 @@ import CartAPI from './lib/cartAPI';
         });
       }
 
-      link.innerHTML = `https://localhost:8080/santa.html?id=${audio.id}`;
-      link.setAttribute('href', `https://localhost:8080/santa.html?id=${audio.id}`);
+      link.innerHTML = `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`;
+      link.setAttribute('href', `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`);
       link.setAttribute('target', `_blank`);
     });
 

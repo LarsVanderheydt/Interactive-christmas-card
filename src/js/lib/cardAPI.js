@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-const url = `/api/cart`;
+const url = `/api/cards`;
 
 export default {
 
