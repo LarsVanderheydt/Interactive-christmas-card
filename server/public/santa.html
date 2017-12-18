@@ -7,20 +7,42 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
+    <section class="information">
+      <section class="information-content">
+        <div class="SpRecognition">
+          <div class="recipient">
+            <label for="recipient">Dear</label>
+            <p id="to"></p>
+          </div>
 
-    <button type="button" id="audio">Play</button>
-    <button type="button" id="repeat">Repeat</button>
+          <p for="recipient">What I would like to say is..</p>
+
+          <section class="sound-adjustments">
+            <button type="button" id="audio">Play</button>
+            <button type="button" id="repeat">Repeat</button>
+          </section>
+
+          <div class="sender">
+            <p class="senderLabel"for="name">Love,</p>
+            <h1 id="from"></h1>
+          </div>
+
+        <section class="link">
+          <h1 class="new">Send your own Santa<a href="https://experimentalweb.herokuapp.com/"></a></h1>
+        </section>
+      </section>
+    </section>
 
     <div id="particles-js"></div>
   	<div id="container">
-  		<section class="information-uitleg">
-  			<div class="information-uitleg-text">
-          <h1 class="from">You recieved a digital christmas card</h1>
-          <h1 id="from"></h1>
-          <h1 id="to"></h1>
-          <!-- <audio src="" id="santa_audio" controls></audio> -->
-  			</div>
-  		</section>
+      <section class="information-uitleg">
+        <div class="information-uitleg-text">
+          <h1>Magical Santa card</h1>
+          <p>
+          You recieved your own special Santa Christmas card !
+          </p>
+        </div>
+      </section>
   	</div>
 
     <script src="./js/vendors/three.min.js"></script>
