@@ -1,16 +1,14 @@
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 import handleSantaAudio from './objects/handleSantaAudio';
-import santaScene from './objects/santaPageScene';
+import SantaScene from './classes/SantaScene';
 import getUrlParameter from './objects/getUrlParameter';
 import CardAPI from './lib/cardAPI';
 
-let targetId, audioCtx;
+let targetId, audioCtx, santa;
 
 const init = () => {
 
-  particlesJS.load('particles-js', '../assets/particles.json', () => {
-    console.log('callback - particles.js config loaded');
-  });
+  particlesJS.load('particles-js', '../assets/particles.json');
 
   targetId = getUrlParameter("id");
   if (!targetId) window.location = "https://experimentalweb.herokuapp.com/";
@@ -21,10 +19,16 @@ const init = () => {
     document.getElementById(`to`).innerHTML = `${d.to}`;
     document.getElementById(`message`).innerHTML = `${d.text}`;
 
+    santa = new SantaScene();
+    santa.setColors(d);
     handleSantaAudio(d);
-    santaScene(d);
+    loop();
   });
+}
 
+const loop = () => {
+  santa.loop();
+  requestAnimationFrame(loop);
 }
 
 init();

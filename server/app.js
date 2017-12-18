@@ -16,13 +16,20 @@ let tls = false;
      key: fs.readFileSync('./config/sslcerts/key.pem'),
      cert: fs.readFileSync('./config/sslcerts/cert.pem')
   };
+
+  server.connection({
+    port: process.env.PORT || 8080,
+    tls,
+    host: '0.0.0.0'
+  });
+} else {
+  server.connection({
+    port: process.env.PORT || 8080,
+    tls
+  });
 }
 
-server.connection({
-  port: process.env.PORT || 8080,
-  tls,
-  host: '0.0.0.0'
-});
+
 
 Mongoose.connect(MONGO_URL, {'useMongoClient': true});
 

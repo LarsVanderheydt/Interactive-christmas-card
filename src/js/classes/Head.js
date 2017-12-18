@@ -6,6 +6,7 @@ let isBlinking = false;
 export default class Head {
   constructor() {
     this.mesh = new THREE.Object3D();
+    this.mesh.name = "Head";
 
     let headGeom = new THREE.BoxBufferGeometry(16, 16, 16);
     let skinMat = new THREE.MeshLambertMaterial({color: Colors.skin, flatShading: true});
@@ -30,9 +31,14 @@ export default class Head {
     this.Hat();
     this.Freckles();
     this.Features();
+<<<<<<< HEAD
 //    this.Star();
 //    this.StarsGroup();
+=======
+>>>>>>> adc907dfd3aade8feb39982fd83ba2bb7bdf26ab
     this.normalize();
+
+    this.mesh.position.x = -17;
   }
 
   normalize(v, vmin, vmax, tmin, tmax) {
@@ -169,8 +175,13 @@ export default class Head {
     this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
     this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
 
+<<<<<<< HEAD
     this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05;
     this.updateIdle(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
+=======
+    this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05 + 0.25;
+    this.updateBody(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
+>>>>>>> adc907dfd3aade8feb39982fd83ba2bb7bdf26ab
   }
 
   Beard() {
@@ -596,4 +607,19 @@ export default class Head {
 
     this.head.add(earRight, earLeft, nose);
   }
+
+  remove() {
+    scene.remove(this.head);
+  }
+
+  createHead() {
+    this.head = new Head();
+    this.head.name = "Head";
+    this.head.idle();
+    scene.add(this.head.mesh);
+  }
+  //
+  // add() {
+  //   scene.add(this.mesh);
+  // }
 }

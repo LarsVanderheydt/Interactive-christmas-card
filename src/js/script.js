@@ -2,95 +2,50 @@ import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
 import CardAPI from './lib/cardAPI';
+import SantaScene from './classes/SantaScene';
+import ControllerText from './classes/ControllerText';
 
 {
+  let isMobile = /iPhone|Android/i.test(navigator.userAgent);
+  let loaderManager = new THREE.LoadingManager();
+  const saveBtn = document.getElementById(`save`);
+
   let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, HEIGHT, WIDTH;
   let globalLight, shadowLight, backLight, light, renderer, container, loaded;
-  let head, windowHalfX, windowHalfY, color, audio, SpeechText;
+  let head, stars, windowHalfX, windowHalfY, color, audio, SpeechText;
+  let santa;
 
   // vars for dat.gui
   let controller, gui;
-  const saveBtn = document.getElementById(`save`);
 
   let mousePos = { x: 0, y: 0};
 
   let starArray = [];
-  let isMobile = /iPhone|Android/i.test(navigator.userAgent);
-  let loaderManager = new THREE.LoadingManager();
   let saved = false;
 
   const init = () => {
     // create snow
-    particlesJS.load('particles-js', '../assets/particles.json', () => {
-      console.log('callback - particles.js config loaded');
-    });
+    particlesJS.load('particles-js', '../assets/particles.json');
 
-    createScene();
-    createLights();
-
+    santa = new SantaScene();
     audio = new Audio(); // handle audio and speechrecognition
-    head = new Head(); // show and handle head
-    scene.add(head.mesh);
-    //scene.add(stars.mesh);
-    console.log(audio.id);
+
     // send objects to save on click
     saveBtn.addEventListener(`click`, () => {
-      const from = document.getElementById(`name_input`);
-      const to = document.getElementById(`recipient_input`);
-      const link = document.querySelector(`.unique_link`);
-
-      const audioSettings = {
-        pitch: audio.pitchRatio,
-        overlap: audio.overlap
-      }
-
-      const headColors = {
-        skin: Colors.skin,
-        freckles: Colors.freckles,
-        eye: Colors.eye,
-        glasses: Colors.glasses,
-        hat: Colors.hat
-      }
-
-      // when clicking on save, first time save the object, second time update the saved object
-      if (!saved) {
-        saved = true;
-        CardAPI.create({
-          text: audio.text,
-          id: audio.id,
-          from: from.value || 'Human',
-          to: to.value || 'Fellow Human',
-          audioSettings: JSON.stringify(audioSettings),
-          headColors: JSON.stringify(headColors),
-        });
-      } else {
-        CardAPI.update({
-          text: audio.text,
-          id: audio.id,
-          from: from.value || 'Human',
-          to: to.value || 'Fellow Human',
-          audioSettings: JSON.stringify(audioSettings),
-          headColors: JSON.stringify(headColors),
-        });
-      }
-
-      link.innerHTML = `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`;
-      link.setAttribute('href', `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`);
-      link.setAttribute('target', `_blank`);
+      handleSave();
     });
 
-    gui = new dat.GUI();
-    gui.domElement.id = 'gui';
-    gui.closed = true;
-    controller = new controllerText();
+    controller = new ControllerText();
     guiController(['skin', 'freckles', 'eye', 'glasses', 'hat']); // add gui for array object and set colors on color change
-
-    window.scene = scene; // set scene for extension
 
     loop();
   };
 
   const guiController = keys => {
+    gui = new dat.GUI();
+    gui.domElement.id = 'gui';
+    gui.closed = true;
+
     keys.forEach(key => {
       gui.addColor(controller, key).onChange(() => {
 
@@ -103,13 +58,12 @@ import CardAPI from './lib/cardAPI';
           case 'hat': Colors.hat = controller.hat;
         }
 
-        //remove current head and make a new one to set current color
-        scene.remove(head.mesh);
-        createHead();
+        santa.createHead();
       });
     });
   }
 
+<<<<<<< HEAD
   const dec2hex = (i) => {
     var result = "0x000000";
     if (i >= 0 && i <= 15) {
@@ -216,40 +170,50 @@ import CardAPI from './lib/cardAPI';
     head.mesh.position.set(0, 2, 0);
     stars.mesh.position.set(0, 10, 0);
   }
+=======
+  const handleSave = () => {
+    const from = document.getElementById(`name_input`);
+    const to = document.getElementById(`recipient_input`);
+    const link = document.querySelector(`.unique_link`);
+>>>>>>> adc907dfd3aade8feb39982fd83ba2bb7bdf26ab
 
-  let isBlinking = false;
-  const blinkLoop = () => {
-    isBlinking = false;
-
-    if ((!isBlinking) && (Math.random() > 0.99)) {
-      isBlinking = true;
-      blink();
+    const audioSettings = {
+      pitch: audio.pitchRatio,
+      overlap: audio.overlap
     }
-  }
 
-  const blink = () => {
-    head.eyes.scale.y = 1;
-    TweenMax.to(head.eyes.scale, .07, {
-      y: 0,
-      yoyo: true,
-      repeat: 1,
-      onComplete: function() {
-        isBlinking = false;
-      }
-    });
-  }
-
-  class controllerText {
-    constructor (){
-      this.skin = Colors.skin;
-      this.freckles = Colors.freckles;
-      this.eye = Colors.eye;
-      this.glasses = Colors.glasses;
-      this.hat = Colors.hat;
+    const headColors = {
+      skin: Colors.skin,
+      freckles: Colors.freckles,
+      eye: Colors.eye,
+      glasses: Colors.glasses,
+      hat: Colors.hat
     }
+
+    const data = {
+      text: audio.txt,
+      id: audio.id,
+      from: from.value || 'Human',
+      to: to.value || 'Fellow Human',
+      audioSettings: JSON.stringify(audioSettings),
+      headColors: JSON.stringify(headColors)
+    }
+
+    // when clicking on save, first time save the object, second time update the saved object
+    if (!saved) {
+      saved = true;
+      CardAPI.create(data);
+    } else {
+      CardAPI.update(data);
+    }
+
+    link.innerHTML = `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`;
+    link.setAttribute('href', `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`);
+    link.setAttribute('target', `_blank`);
   }
 
   const loop = () => {
+<<<<<<< HEAD
     blinkLoop();
 
     let xTarget = (mousePos.x - windowHalfX);
@@ -259,11 +223,11 @@ import CardAPI from './lib/cardAPI';
     //head.idle(xTarget, yTarget);
 
     renderer.render(scene, camera);
+=======
+    santa.loop();
+>>>>>>> adc907dfd3aade8feb39982fd83ba2bb7bdf26ab
     requestAnimationFrame(loop);
   }
 
-  //window.addEventListener('load', init, false);
-
   init();
-
 }
