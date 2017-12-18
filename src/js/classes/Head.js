@@ -47,7 +47,7 @@ export default class Head {
   }
 
   // Star() {
-  //   this.mesh = new THREE.Object3D();
+  //   const mesh = new THREE.Object3D();
   //
   //   let pts = [],
   //     numPts = 5;
@@ -71,42 +71,43 @@ export default class Head {
   //
   //   star.rotation.x = Math.PI / 2;
   //
-  //   this.mesh.add(star);
+  //   mesh.add(star);
   // }
-
+  //
   // StarsGroup(){
-  //   this.mesh = new THREE.Object3D();
+  //   const mesh = new THREE.Object3D();
   //
   //   this.nStars = 15;
   //   const starArray = [];
   //   let stepAngle = Math.PI * 2 / this.nStars;
   //
-  //   // Create the Stars
-  //   // for (let i = 0; i < this.nStars; i++) {
-  //   //
-  //   //   // this.s = this.Star();
-  //   //   // let a = stepAngle * i;
-  //   //   // let r = 15;
-  //   //   //
-  //   //   // this.s.mesh.position.y = Math.sin(a) * r;
-  //   //   // this.s.mesh.position.x = Math.cos(a) * r;
-  //   //   //
-  //   //   // this.s.mesh.rotation.z = a + Math.PI / 2;
-  //   //   // this.s.mesh.position.z = 0 - Math.random() * 3;
-  //   //   //
-  //   //   // //  random scale for each cloud
-  //   //   // let sc = 0.5 + Math.random() * .6;
-  //   //   // this.s.mesh.scale.set(sc, sc, sc);
-  //   //   //
-  //   //   // this.mesh.add(this.s.mesh);
-  //   //
-  //   //   starArray.push(this.s);
-  //   //}
-  //   this.mesh.rotation.x = Math.PI / 2;
+  //   //Create the Stars
+  //   for (let i = 0; i < this.nStars; i++) {
+  //
+  //     this.s = this.Star();
+  //     let a = stepAngle * i;
+  //     console.log(this.s);
+  //     let r = 15;
+  //
+  //     this.s.mesh.position.y = Math.sin(a) * r;
+  //     this.s.mesh.position.x = Math.cos(a) * r;
+  //
+  //     this.s.mesh.rotation.z = a + Math.PI / 2;
+  //     this.s.mesh.position.z = 0 - Math.random() * 3;
+  //
+  //     //  random scale for each cloud
+  //     let sc = 0.5 + Math.random() * .6;
+  //     this.s.mesh.scale.set(sc, sc, sc);
+  //
+  //     mesh.add(this.s.mesh);
+  //
+  //     starArray.push(this.s);
+  //   }
+  //   mesh.rotation.x = Math.PI / 2;
   // }
-
+  //
   // spinScale() {
-  //   this.mesh.rotation.z += 0.02;
+  //   const mesh.rotation.z += 0.02;
   //
   //   for (let i = 0; i < starArray.length; i++) {
   //      starArray[i].mesh.rotation.x = Math.sin(Date.now() * 0.01) * Math.PI * 0.1 ;
@@ -115,11 +116,11 @@ export default class Head {
   //
   //   }
   // }
-
+  //
   // dizzy() {
   //   this.stars = this.StarsGroup();
-  //
-  //   // this.stars.mesh.position.set(0, 10, 0);
+  //   console.log(this.stars);
+  //   this.stars.mesh.position.set(0, 10, 0);
   //   let distance = 1;
   //
   //   this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.01;

@@ -17,8 +17,8 @@ const init = () => {
 
   CardAPI.readOne(targetId).then(d => {
     if (d.statusCode) window.location = "https://experimentalweb.herokuapp.com/";
-    document.getElementById(`from`).innerHTML = `from: ${d.from}`;
-    document.getElementById(`to`).innerHTML = `to: ${d.to}`;
+    document.getElementById(`from`).innerHTML = `${d.from}`;
+    document.getElementById(`to`).innerHTML = `${d.to}`;
 
     handleSantaAudio(d);
     santaScene(d);

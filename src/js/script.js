@@ -13,7 +13,7 @@ import CardAPI from './lib/cardAPI';
   const saveBtn = document.getElementById(`save`);
 
   let mousePos = { x: 0, y: 0};
-  
+
   let starArray = [];
   let isMobile = /iPhone|Android/i.test(navigator.userAgent);
   let loaderManager = new THREE.LoadingManager();
