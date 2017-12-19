@@ -81,6 +81,7 @@ class SantaScene {
   senderState() {
     let xTarget = (mousePos.x - windowHalfX);
     let yTarget = (mousePos.y - windowHalfY);
+
     head.sender(xTarget, yTarget);
   }
 

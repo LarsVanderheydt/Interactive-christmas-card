@@ -60,7 +60,7 @@ export default class Head {
     this.head.rotation.y += (headPosY - this.head.rotation.y) / speed;
   }
 
-  reciever(xTarget = 0, yTarget = 0) {
+  reciever(xTarget, yTarget) {
 
     // this.head.rotation.y = 0.5;
     let distance = 1;
@@ -91,9 +91,10 @@ export default class Head {
     this.eyeBrowLeft.position.y += (eyeBrowLeftPosY - this.eyeBrowLeft.position.y) / speed;
   }
 
-  sender(xTarget = 0, yTarget = 0) {
+  sender(xTarget, yTarget) {
     let distance = 1;
 
+    this.mesh.rotation.y = 0.3 + Math.sin(Date.now() * 0.002) * Math.PI * 0.05;
     this.head.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.005;
     this.head.rotation.x = Math.sin(Date.now() * 0.004) * Math.PI * 0.03;
 
