@@ -32,7 +32,8 @@ module.exports = [
           to: data.to,
           audioSettings: data.audioSettings,
           headColors: data.headColors,
-          date: Date.now()
+          date: Date.now(),
+          isFileEmpty: data.isFileEmpty
       });
 
       card.save(function(error, card) {

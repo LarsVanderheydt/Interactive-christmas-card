@@ -83,7 +83,8 @@ import ControllerText from './classes/ControllerText';
       from: from.value || 'Human',
       to: to.value || 'Fellow Human',
       audioSettings: JSON.stringify(audioSettings),
-      headColors: JSON.stringify(headColors)
+      headColors: JSON.stringify(headColors),
+      isFileEmpty: audio.isFileEmpty
     }
 
     // when clicking on save, first time save the object, second time update the saved object

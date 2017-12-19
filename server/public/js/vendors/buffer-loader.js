@@ -11,6 +11,7 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
 
   // Load buffer asynchronously
   var request = new XMLHttpRequest();
+
   request.open("GET", url, true);
   request.responseType = "arraybuffer";
 
@@ -42,4 +43,16 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
 BufferLoader.prototype.load = function() {
 
   for (var i = 0; i < this.urlList.length; ++i) this.loadBuffer(this.urlList[i], i);
+}
+
+
+const soundExists = url => {
+
+    const http = new XMLHttpRequest();
+
+    http.open('HEAD', url, false);
+    http.send();
+
+    return http.status != 404;
+
 }

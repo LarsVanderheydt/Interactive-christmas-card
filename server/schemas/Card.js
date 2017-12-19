@@ -13,6 +13,7 @@ var CardSchema = new Schema({
     },
     date: String,
     audioSettings: String,
-    headColors: String
+    headColors: String,
+    isFileEmpty: Boolean
 });
 module.exports = mongoose.model('Card', CardSchema);

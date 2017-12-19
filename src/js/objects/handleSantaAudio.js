@@ -11,13 +11,20 @@ let grainSize = 512,
     pitchRatio = 1.0,
     overlapRatio = 0.50;
 
-const handleSantaAudio = cart => {
+let url;
+
+const handleSantaAudio = card => {
   audioCtx = new AudioContext();
-  const audioSettings = JSON.parse(cart.audioSettings);
+  const audioSettings = JSON.parse(card.audioSettings);
 
   setTimeout(() => {
+    if (!card.isFileEmpty) {
+      url = `./uploads/${card.id}.ogg`;
+    } else {
+      url = `./assets/santa.ogg`;
+    }
     const bufferLoader = new BufferLoader(
-      audioCtx, [`./uploads/${cart.id}.ogg`], bufferList => {
+      audioCtx, [url], bufferList => {
 
         let loop = false;
         let source;
@@ -43,7 +50,9 @@ const handleSantaAudio = cart => {
           source = audioCtx.createBufferSource();
           source.buffer = bufferList[0];
           source.loop = loop;
-          source.connect(pitchShifterProcessor);
+          if (!card.isFileEmpty) source.connect(pitchShifterProcessor);
+          if (card.isFileEmpty) source.connect(audioCtx.destination);
+
           source.start();
         });
 
@@ -51,7 +60,8 @@ const handleSantaAudio = cart => {
     );
 
     bufferLoader.load();
-    initProcessor();
+
+    if (!card.isFileEmpty) initProcessor();
 
   }, 1000);
 }

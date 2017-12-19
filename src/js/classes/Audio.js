@@ -29,6 +29,8 @@ export default class Audio {
     this.pitchRatio = 1.0;
     this.overlap = 0.50;
     audioCtx = new AudioContext();
+    this.isFileEmpty = true;
+    this.txt = "";
 
     // handle SpeechRecognition
     recognition = new SpeechRecognition();
@@ -36,7 +38,9 @@ export default class Audio {
 
     recognition.onresult = event => this.gotResult(event);
     recognition.onspeechend = e => this.onSpeechEnd(e);
-    $text.addEventListener(`blur`, () => this.txt = $text.value);
+    $text.addEventListener(`blur`, () => {
+      this.txt = $text.value;
+    });
 
     navigator.mediaDevices.getUserMedia({ audio: true })
     .then(stream => {
@@ -44,6 +48,7 @@ export default class Audio {
 
       /*--------------------Start Recording-----------------------*/
       $record.addEventListener(`click`, () => {
+        this.isFileEmpty = false;
         this.mediaRecorder.start();
         recognition.start();
         $record.disabled = true;
@@ -119,11 +124,11 @@ export default class Audio {
   }
 
   onSpeechEnd(e) {
-    this.mediaRecorder.stop();
-    recognition.stop();
     $record.disabled = false;
     $record.textContent = 'Want to try again?';
     this.txt = $text.value;
+    this.mediaRecorder.stop();
+    recognition.stop();
   }
 
   gotResult(event) {
