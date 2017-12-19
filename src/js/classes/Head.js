@@ -33,7 +33,7 @@ export default class Head {
     this.Features();
     this.normalize();
 
-    this.mesh.position.x = -17;
+    this.mesh.position.x = -22;
     this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05 + 0.25;
   }
 

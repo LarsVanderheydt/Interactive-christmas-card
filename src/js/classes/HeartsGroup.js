@@ -41,7 +41,7 @@ class HeartsGroup {
     }
 
     this.mesh.rotation.x = Math.PI / 2;
-    this.mesh.position.x = -17;
+    this.mesh.position.x = -22;
     this.mesh.position.y = 8;
   }
 
