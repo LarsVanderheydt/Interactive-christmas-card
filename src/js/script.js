@@ -168,7 +168,7 @@ import ControllerText from './classes/ControllerText';
     }
 
     const data = {
-      text: audio.txt,
+      text: audio.txt || 'Play audio message below',
       id: audio.id,
       from: from.value || 'Human',
       to: to.value || 'Fellow Human',
@@ -188,7 +188,6 @@ import ControllerText from './classes/ControllerText';
     link.setAttribute('href', `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`);
     link.setAttribute('target', `_blank`);
   }
-
 
   const loop = () => {
 

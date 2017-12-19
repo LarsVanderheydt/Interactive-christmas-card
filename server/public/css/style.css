@@ -11,8 +11,8 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: -webkit-gradient(linear, left top, left bottom, from(#42000d), color-stop(#630017), color-stop(#630017), to(#42000d));
-  background: linear-gradient(#42000d, #630017, #630017, #42000d);
+  background: -webkit-gradient(linear, left top, left bottom, from(#0f2634), color-stop(#113b51), color-stop(#113b51), to(#0f2634));
+  background: linear-gradient(#0f2634, #113b51, #113b51, #0f2634);
 }
 
 .information-uitleg {
@@ -108,8 +108,8 @@
 .SpRecognition label {
   color: white;
   font-weight: 300;
-  font-size: 22.4px;
-  font-size: 1.4rem;
+  font-size: 16px;
+  font-size: 1rem;
 }
 
 .SpRecognition p {
@@ -123,21 +123,19 @@
   width: 40%;
   color: white;
   text-transform: uppercase;
-  margin-bottom: 1.6px;
-  margin-bottom: 0.1rem;
-  border: 1px solid #42000d;
-  -webkit-box-shadow: 0 2px 0 0 #42000d;
-          box-shadow: 0 2px 0 0 #42000d;
-  background-color: rgba(99, 0, 23, .7);
+  border: 1px solid #19384e;
+  -webkit-box-shadow: 0 2px 0 0 #19384e;
+          box-shadow: 0 2px 0 0 #19384e;
+  background-color: rgba(49, 105, 149, .9);
 }
 
 .SpRecognition input[type=text]:focus {
-  background-color: #970022;
+  background-color: #316995;
   color: #fff;
   border-radius: 0.5em;
-  border: 1px solid #42000d;
-  -webkit-box-shadow: 0 2px 0 0 #42000d;
-          box-shadow: 0 2px 0 0 #42000d;
+  border: 1px solid #19384e;
+  -webkit-box-shadow: 0 2px 0 0 #19384e;
+          box-shadow: 0 2px 0 0 #19384e;
 }
 
 .recipient {
@@ -152,8 +150,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 32px;
-  margin-bottom: 2rem
+  margin-bottom: 64px;
+  margin-bottom: 4rem
 }
 
 .recipient p {
@@ -161,6 +159,11 @@
   font-size: 22.4px;
   font-size: 1.4rem;
   width: 50%;
+  margin-left: 16px;
+  margin-left: 1rem;
+}
+
+.recipient input[type="text"] {
   margin-left: 16px;
   margin-left: 1rem;
 }
@@ -175,7 +178,7 @@ textarea {
   color: white;
   padding: 16px 0 0 16px;
   padding: 1rem 0 0 1rem;
-  background-color: rgba(99, 0, 23, .7)
+  background-color: rgba(49, 105, 149, .9)
 }
 
 textarea::-webkit-input-placeholder {
@@ -195,12 +198,12 @@ textarea::placeholder {
 }
 
 textarea:focus {
-  background-color: #970022;
+  background-color: #316995;
   color: #fff;
   border-radius: 0.5em;
-  border: 1px solid #42000d;
-  -webkit-box-shadow: 0 2px 0 0 #42000d;
-          box-shadow: 0 2px 0 0 #42000d;
+  border: 1px solid #19384e;
+  -webkit-box-shadow: 0 2px 0 0 #19384e;
+          box-shadow: 0 2px 0 0 #19384e;
   outline: none;
 }
 
@@ -244,8 +247,8 @@ button {
   margin-top: 0.5em;
   font-size: 16px;
   font-size: 1rem;
-  background-color: #970022;
-  color: rgba(78, 0, 16, 1);
+  background-color: #316995;
+  color: #19384e;
   border: none;
   border-radius: 0.5em;
   text-transform: uppercase;
@@ -256,37 +259,38 @@ button {
 
 .border {
   font-size: 16px;
-  border: 2px solid #42000d;
-  -webkit-box-shadow: 0 3px 0 0 #42000d;
-          box-shadow: 0 3px 0 0 #42000d;
+  border: 2px solid #19384e;
+  -webkit-box-shadow: 0 3px 0 0 #19384e;
+          box-shadow: 0 3px 0 0 #19384e;
 }
 
 .border::-webkit-input-placeholder {
-  color: #960027;
+  color: #19384e;
 }
 
 .border:-ms-input-placeholder {
-  color: #960027;
+  color: #19384e;
 }
 
 .border::-ms-input-placeholder {
-  color: #960027;
+  color: #19384e;
 }
 
 .border::placeholder {
-  color: #960027;
+  color: #19384e;
 }
 
 .recording {
   width: 90%;
-  margin: 16px 0;
-  margin: 1rem 0;
+  margin: 0 0 16px;
+  margin: 0 0 1rem;
   height: 20%
 }
 
 .recording button {
   width: 100%;
-  background-color: #710018;
+  color: rgba(12, 26, 39, 1);
+  background-color: #316995;
 }
 
 .sound-adjustments {
@@ -315,7 +319,8 @@ button {
 
 .sound-buttons button {
   width: 40%;
-  background-color: #710018;
+  background-color: rgba(49, 105, 149, .7);
+  color: rgba(12, 26, 39, 1);
 }
 
 .sound-ranges {
@@ -350,18 +355,18 @@ button {
 }
 
 button:hover {
-  background-color: rgba(113, 0, 24, .4);
-  color: rgba(150, 0, 39, 1);
+  background-color: rgba(49, 105, 149, .4);
+  color: rgba(12, 26, 39, 1);
 }
 
 button:focus {
-  background-color: rgba(249, 242, 230, .2);
+  background-color: rgba(18, 120, 38, .7);
   outline: none;
 }
 
 .sender {
-  margin-top: 32px;
-  margin-top: 2rem;
+  margin-top: 64px;
+  margin-top: 4rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -380,19 +385,35 @@ button:focus {
   color: white;
 }
 
+.sound-play {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin-top: 12.8px;
+  margin-top: 0.8rem
+}
+
+.sound-play button {
+  width: 20%;
+  margin-right: 16px;
+  margin-right: 1rem;
+}
+
 #save {
   margin: 48px auto 0;
   margin: 3rem auto 0;
-  background-color: 970022;
   border: none
 }
 
 #save:hover {
-  background-color: rgba(113, 0, 24, .4);
+  background-color: rgba(49, 105, 149, .4);
+  color: rgba(12, 26, 39, 1);
 }
 
 #save:focus {
-  background-color: rgba(113, 0, 24, .4);
+  background-color: rgba(49, 105, 149, .4);
+  color: #316995;
 }
 
 .link {
@@ -411,17 +432,18 @@ button:focus {
 }
 
 .link h1 {
-  color: rgba(242, 242, 242, .7);
-  font-weight: lighter;
+  color: rgba(242, 242, 242, 1);
+  font-weight: 300;
 }
 
 .newLink {
-  margin-top: 64px;
-  margin-top: 4rem;
+  margin-top: 112px;
+  margin-top: 7rem;
+  color: #316995;
 }
 
 .to {
-  color: #970022;
+  color: #316995;
   font-size: 1em;
   z-index: -2;
   text-align: center;
@@ -430,16 +452,10 @@ button:focus {
 }
 
 a {
-  text-decoration: none;
-  margin-top: 16px;
-  margin-top: 1rem;
-  text-transform: none;
-  color: #970022;
-  font-size: 1.3em;
+  color: #316995;
+  font-size: 1.1em;
   text-align: center;
   width: 100%;
-  -webkit-transition: font-size 0.5s, color 0.5s;
-  transition: font-size 0.5s, color 0.5s;
 }
 
 #particles-js {
@@ -449,6 +465,18 @@ a {
   height: 100%;
   background-repeat: no-repeat;
   top: 0;
+}
+
+.homeLink a {
+  font-weight: 200;
+  color: rgba(255, 255, 255, .5);
+  position: fixed;
+  bottom: 64px;
+  bottom: 4rem;
+  right: 32px;
+  right: 2rem;
+  width: 480px;
+  width: 30rem;
 }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjc3Mvc3R5bGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

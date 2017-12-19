@@ -62,7 +62,7 @@ class SantaScene {
       }
 
       const firstGeom = new THREE.TextGeometry('404 Santa', fontSettings);
-      const secondGeom = new THREE.TextGeometry('went missing', fontSettings);
+      const secondGeom = new THREE.TextGeometry('is a bit confused', fontSettings);
 
       const first = new THREE.Mesh(firstGeom, skinMat);
       const second = new THREE.Mesh(secondGeom, skinMat);
@@ -135,7 +135,6 @@ class SantaScene {
 
 
   createLights() {
-
     globalLight = new THREE.HemisphereLight(0xffffff, 0x555555, .9);
 
     shadowLight = new THREE.DirectionalLight(0xffffff, .3);
@@ -177,7 +176,6 @@ class SantaScene {
     });
   }
 
-  // rerender head
   createHead() {
     scene.remove(head.mesh);
     head.name = "Head";
@@ -190,9 +188,9 @@ class SantaScene {
     let yTarget = (mousePos.y - windowHalfY);
 
     this.blinkLoop();
-    head.sender(xTarget, yTarget);
 
-    //head.reciever(xTarget, yTarget);
+    //head.sender(xTarget, yTarget);
+    head.reciever(xTarget, yTarget);
 
     renderer.render(scene, camera);
   }

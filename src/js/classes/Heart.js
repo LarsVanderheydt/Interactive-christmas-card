@@ -22,16 +22,14 @@ class Heart {
       bevelThickness: 1
     };
 
-    this.addShape(heartShape, extrudeSettings, 0xf9c421, 0, 0, 0, 0, 1, Math.PI, 0.03);
+    this.addShape(heartShape, extrudeSettings, 0x970022, 0, 0, 0, 0, 1, Math.PI, 0.03);
   }
 
-
   addShape(shape, extrudeSettings, color, x, y, z, rx, ry, rz, s) {
-    // extruded shape
 
     const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-
     const mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: color}));
+
     mesh.position.set(x, y, z);
     mesh.rotation.set(rx, ry, rz);
     mesh.scale.set(s, s, s);

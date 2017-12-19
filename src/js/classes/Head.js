@@ -54,6 +54,7 @@ export default class Head {
 
     this.eyeBrowRight.position.y += (eyeBrowRightPosY - this.eyeBrowRight.position.y) / speed;
     this.eyeBrowLeft.position.y += (eyeBrowLeftPosY - this.eyeBrowLeft.position.y) / speed;
+    
     this.head.rotation.x += (headPosX - this.head.rotation.x) / speed;
     this.head.rotation.y += (headPosY - this.head.rotation.y) / speed;
   }
@@ -61,9 +62,6 @@ export default class Head {
   reciever(xTarget = 0, yTarget = 0) {
 
     let distance = 1;
-
-    this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.05;
-    this.moustache.rotation.z = Math.sin(Date.now() * 0.005) * Math.PI * 0.02;
 
     const headPosX = this.normalize(yTarget, -200, 200, -0.1, 0.1);
     const headPosY = this.normalize(xTarget, -200, 200, -0.1, 0.1);
@@ -76,9 +74,6 @@ export default class Head {
 
     const eyeBrowRightPosY = this.normalize(xTarget, -200, 200, -1, 0.8);
     const eyeBrowLeftPosY = this.normalize(xTarget, -200, 200, -1, 0.8);
-
-    this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
-    this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
 
     this.updateReciever(10, headPosY, headPosX, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
   }
@@ -546,11 +541,7 @@ export default class Head {
   createHead() {
     this.head = new Head();
     this.head.name = "Head";
-    this.head.sender();
+    this.head.reciever();
     scene.add(this.head.mesh);
   }
-  //
-  // add() {
-  //   scene.add(this.mesh);
-  // }
 }

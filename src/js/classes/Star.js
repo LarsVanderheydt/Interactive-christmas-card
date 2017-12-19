@@ -1,8 +1,6 @@
-import Colors from '../objects/colors'; 
+import Colors from '../objects/colors';
 class Star {
   constructor() {
-    // STAR
-    //////////////////////////////////
     this.mesh = new THREE.Object3D();
 
     let pts = [],
@@ -22,7 +20,7 @@ class Star {
       bevelEnabled: false
     };
     let starGeom = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
-    let mat = new THREE.MeshLambertMaterial({color: Colors.black, flatShading: true})
+    let mat = new THREE.MeshLambertMaterial({color: Colors.glasses, flatShading: true})
     let star = new THREE.Mesh(starGeom, mat);
     star.rotation.x = Math.PI / 2;
     this.mesh.add(star);

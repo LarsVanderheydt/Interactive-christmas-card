@@ -22,12 +22,14 @@ const init = () => {
     santa = new SantaScene();
     santa.setColors(d);
     handleSantaAudio(d);
+    santa.createShapes();
     loop();
   });
 }
 
 const loop = () => {
   santa.loop();
+  santa.startSpinning();
   requestAnimationFrame(loop);
 }
 
