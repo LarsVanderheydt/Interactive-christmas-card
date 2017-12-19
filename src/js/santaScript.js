@@ -11,10 +11,10 @@ const init = () => {
   particlesJS.load('particles-js', '../assets/particles.json');
 
   targetId = getUrlParameter("id");
-  if (!targetId) window.location = "https://experimentalweb.herokuapp.com/";
+  if (!targetId) window.location = "https://experimentalweb.herokuapp.com/notFound.html";
 
   CardAPI.readOne(targetId).then(d => {
-    if (d.statusCode) window.location = "https://experimentalweb.herokuapp.com/";
+    if (d.statusCode) window.location = "https://experimentalweb.herokuapp.com/notFound.html";
     document.getElementById(`from`).innerHTML = `${d.from}`;
     document.getElementById(`to`).innerHTML = `${d.to}`;
     document.getElementById(`message`).innerHTML = `${d.text}`;
