@@ -78,6 +78,18 @@ class SantaScene {
     });
   }
 
+  senderState() {
+    let xTarget = (mousePos.x - windowHalfX);
+    let yTarget = (mousePos.y - windowHalfY);
+    head.sender(xTarget, yTarget);
+  }
+
+  recieverState() {
+    let xTarget = (mousePos.x - windowHalfX - 40);
+    let yTarget = (mousePos.y - windowHalfY);
+    head.reciever(xTarget, yTarget);
+  }
+
   createScene(){;
     HEIGHT = window.innerHeight;
     WIDTH = window.innerWidth;
@@ -104,13 +116,17 @@ class SantaScene {
 
     container = document.getElementById('container')
     container.appendChild(renderer.domElement);
-    window.addEventListener('resize', this.onWindowResize, false);
-    document.addEventListener('mousemove', this.handleMouseMove, false);
+    window.addEventListener('resize', () => {
+      this.onWindowResize();
+    }, false);
+    document.addEventListener('mousemove', () => {
+      this.handleMouseMove();
+    }, false);
   }
 
   onWindowResize() {
     HEIGHT = window.innerHeight;
-    WIDTH = window.innerWidth  / 1.67;
+    WIDTH = window.innerWidth;
     windowHalfX = WIDTH / 2;
     windowHalfY = HEIGHT / 2;
     renderer.setSize(WIDTH, HEIGHT);
@@ -133,7 +149,6 @@ class SantaScene {
     camera.updateProjectionMatrix();
   }
 
-
   createLights() {
     globalLight = new THREE.HemisphereLight(0xffffff, 0x555555, .9);
 
@@ -153,7 +168,6 @@ class SantaScene {
     scene.add(backLight);
     scene.add( new THREE.AmbientLight( 0xeadead, 0.1 ));
   }
-
 
   blinkLoop() {
     isBlinking = false;
@@ -183,14 +197,8 @@ class SantaScene {
     scene.add(head.mesh);
   }
 
-  loop() {
-    let xTarget = (mousePos.x - windowHalfX);
-    let yTarget = (mousePos.y - windowHalfY);
+  render() {
 
-    this.blinkLoop();
-
-    //head.sender(xTarget, yTarget);
-    head.reciever(xTarget, yTarget);
 
     renderer.render(scene, camera);
   }

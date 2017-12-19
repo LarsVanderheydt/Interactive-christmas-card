@@ -34,6 +34,7 @@ export default class Head {
     this.normalize();
 
     this.mesh.position.x = -17;
+    this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05 + 0.25;
   }
 
   normalize(v, vmin, vmax, tmin, tmax) {
@@ -54,13 +55,14 @@ export default class Head {
 
     this.eyeBrowRight.position.y += (eyeBrowRightPosY - this.eyeBrowRight.position.y) / speed;
     this.eyeBrowLeft.position.y += (eyeBrowLeftPosY - this.eyeBrowLeft.position.y) / speed;
-    
+
     this.head.rotation.x += (headPosX - this.head.rotation.x) / speed;
     this.head.rotation.y += (headPosY - this.head.rotation.y) / speed;
   }
 
   reciever(xTarget = 0, yTarget = 0) {
 
+    // this.head.rotation.y = 0.5;
     let distance = 1;
 
     const headPosX = this.normalize(yTarget, -200, 200, -0.1, 0.1);
@@ -107,7 +109,6 @@ export default class Head {
     this.moustache.position.y = Math.cos(Date.now() * 0.01) * distance / 4;
     this.moustache.rotation.z = Math.sin(Date.now() * 0.01) * Math.PI * 0.01;
 
-    this.mesh.rotation.y = Math.sin(Date.now() * 0.002) * Math.PI * 0.05 + 0.25;
     this.updateSender(10, eyeBlueRightPosX, eyeBlueLeftPosX, eyeBlueRightPosY, eyeBlueLeftPosY, eyeBrowRightPosY, eyeBrowLeftPosY);
   }
 

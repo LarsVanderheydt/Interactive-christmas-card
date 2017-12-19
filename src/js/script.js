@@ -6,14 +6,10 @@ import SantaScene from './classes/SantaScene';
 import ControllerText from './classes/ControllerText';
 
 {
-  let isMobile = /iPhone|Android/i.test(navigator.userAgent);
-  let loaderManager = new THREE.LoadingManager();
   const saveBtn = document.getElementById(`save`);
 
-  let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, HEIGHT, WIDTH;
-  let globalLight, shadowLight, backLight, light, renderer, container, loaded;
-  let head, stars, windowHalfX, windowHalfY, color, audio, SpeechText;
-  let santa;
+  let audio;
+  let santaScene;
 
   // vars for dat.gui
   let controller, gui;
@@ -27,7 +23,7 @@ import ControllerText from './classes/ControllerText';
     // create snow
     particlesJS.load('particles-js', '../assets/particles.json');
 
-    santa = new SantaScene();
+    santaScene = new SantaScene();
     audio = new Audio(); // handle audio and speechrecognition
 
     // send objects to save on click
@@ -58,95 +54,9 @@ import ControllerText from './classes/ControllerText';
           case 'hat': Colors.hat = controller.hat;
         }
 
-        santa.createHead();
+        santaScene.createHead();
       });
     });
-  }
-
-  const createScene = () => {;
-    HEIGHT = window.innerHeight;
-    WIDTH = window.innerWidth /1.67;
-    windowHalfX = WIDTH / 2;
-    windowHalfY = HEIGHT / 2;
-
-    scene = new THREE.Scene();
-    aspectRatio = WIDTH / HEIGHT;
-    fieldOfView = 50;
-    nearPlane = 1;
-    farPlane = 2000;
-
-    camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-    camera.position.x = 0;
-    camera.position.z = 70;
-    camera.position.y = -5;
-
-    renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
-    renderer.setPixelRatio(window.devicePixelRatio? window.devicePixelRatio: 1)
-    renderer.setSize(WIDTH, HEIGHT);
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-    container = document.getElementById('container')
-    container.appendChild(renderer.domElement);
-    window.addEventListener('resize', onWindowResize, false);
-    document.addEventListener('mousemove', handleMouseMove, false);
-  }
-
-  const onWindowResize = () => {
-    HEIGHT = window.innerHeight;
-    WIDTH = window.innerWidth  / 1.67;
-    windowHalfX = WIDTH / 2;
-    windowHalfY = HEIGHT / 2;
-    renderer.setSize(WIDTH, HEIGHT);
-    camera.aspect = WIDTH / HEIGHT;
-    camera.updateProjectionMatrix();
-  }
-
-  const handleMouseMove = e => {
-    mousePos = {
-      x: event.clientX,
-      y: event.clientY
-    };
-  }
-
-  const handleWindowResize = e => {
-    HEIGHT = window.innerHeight;
-    WIDTH = window.innerWidth;
-    renderer.setSize(WIDTH, HEIGHT);
-    camera.aspect = WIDTH / HEIGHT;
-    camera.updateProjectionMatrix();
-  }
-
-  const createLights = () => {
-    globalLight = new THREE.HemisphereLight(0xffffff, 0x555555, .9);
-
-    shadowLight = new THREE.DirectionalLight(0xffffff, .3);
-    shadowLight.position.set(100, 250, 175);
-    shadowLight.castShadow = true;
-
-    backLight = new THREE.DirectionalLight(0xffffff, .2);
-    backLight.position.set(-100, 200, 150);
-    backLight.castShadow = true;
-
-    if (isMobile) shadowLight.shadow.mapSize.width = shadowLight.shadow.mapSize.height = 1024;
-    if (!isMobile) shadowLight.shadow.mapSize.width = shadowLight.shadow.mapSize.height = 2048;
-
-    scene.add(globalLight);
-    scene.add(shadowLight);
-    scene.add(backLight);
-    scene.add( new THREE.AmbientLight( 0xeadead, 0.1 ));
-  }
-
-  const createHead = () => {
-    head.name = "Head";
-    head = new Head();
-    scene.add(head.mesh);
-  }
-
-  const createCharacter = () => {
-    createHead();
-    head.mesh.position.set(0, 2, 0);
-    stars.mesh.position.set(0, 10, 0);
   }
 
   const handleSave = () => {
@@ -191,10 +101,10 @@ import ControllerText from './classes/ControllerText';
 
   const loop = () => {
 
-    let xTarget = (mousePos.x - windowHalfX);
-    let yTarget = (mousePos.y - windowHalfY);
+    santaScene.blinkLoop();
+    santaScene.senderState();
+    santaScene.render();
 
-    santa.loop();
     requestAnimationFrame(loop);
   }
 

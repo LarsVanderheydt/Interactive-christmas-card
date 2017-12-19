@@ -28,8 +28,10 @@ const init = () => {
 }
 
 const loop = () => {
-  santa.loop();
+  santa.recieverState();
   santa.startSpinning();
+
+  santa.render();
   requestAnimationFrame(loop);
 }
 

@@ -4,26 +4,27 @@ import SantaScene from './classes/SantaScene';
 import getUrlParameter from './objects/getUrlParameter';
 import CardAPI from './lib/cardAPI';
 
-let audioCtx, santa;
+let audioCtx, santaScene;
 
 const init = () => {
   particlesJS.load('particles-js', '../assets/particles.json');
 
-  santa = new SantaScene();
-  santa.errorText();
+  santaScene = new SantaScene();
+  santaScene.errorText();
 
   // create shapes araound head
   // options:
       // 'hearts' (default)
       // 'stars'
-  santa.createShapes();
+  santaScene.createShapes('stars');
 
   loop();
 }
 
 const loop = () => {
-  santa.loop();
-  santa.startSpinning();
+  santaScene.startSpinning();
+  santaScene.recieverState();
+  santaScene.render();
   requestAnimationFrame(loop);
 }
 
