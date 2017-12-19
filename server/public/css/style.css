@@ -290,7 +290,19 @@ button {
 .recording button {
   width: 100%;
   color: rgba(12, 26, 39, 1);
-  background-color: #316995;
+  background-color: #6c9dc9;
+}
+
+.recording #record:hover {
+  width: 100%;
+  color: #0f1927;
+  background-color: #3d6395;
+}
+
+.recording #record:focus {
+  width: 100%;
+  color: #0f1927;
+  background-color: rgba(18, 120, 38, .7);
 }
 
 .sound-adjustments {
@@ -403,17 +415,18 @@ button:focus {
 #save {
   margin: 48px auto 0;
   margin: 3rem auto 0;
-  border: none
+  border: none;
+  background-color: #6c9dc9
 }
 
 #save:hover {
-  background-color: rgba(49, 105, 149, .4);
+  background-color: #316995);
   color: rgba(12, 26, 39, 1);
 }
 
 #save:focus {
-  background-color: rgba(49, 105, 149, .4);
-  color: #316995;
+  background-color: #316995;
+  color: rgba(12, 26, 39, 1);
 }
 
 .link {
