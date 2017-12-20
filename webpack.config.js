@@ -23,10 +23,11 @@ const copy = new CopyWebpackPlugin([{
 
 module.exports = {
   entry: {
-    script: './src/js/script.js',
-    notFound: './src/js/notFound.js',
-    santa: './src/js/santaScript.js',
-    style: './src/css/style.css'
+    script: `./src/js/script.js`,
+    admin: `./src/js/admin.js`,
+    notFound: `./src/js/notFound.js`,
+    santa: `./src/js/santaScript.js`,
+    style: `./src/css/style.css`
   },
 
   resolve: {
@@ -41,14 +42,25 @@ module.exports = {
     filename: `js/[name].js`
   },
 
-  devtool: 'inline-source-map',
+  devtool: `inline-source-map`,
 
   module: {
     rules: [
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
-        loader: `babel-loader`
+        use: [
+          {
+            loader: `babel-loader`
+          },
+          {
+            loader: `eslint-loader`,
+            options: {
+              fix: true
+            }
+          }
+        ]
+
       },
       {
         test: /\.html$/,
@@ -68,7 +80,8 @@ module.exports = {
           {
             loader: `css-loader`,
             options: {
-              importLoaders: 1
+              importLoaders: 1,
+              syntax: `sugarss`
             }
           },
           {

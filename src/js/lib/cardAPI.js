@@ -4,7 +4,7 @@ const url = `/api/cards`;
 
 export default {
 
-  create: ({text, id, from, blob, to, audioSettings, headColors, isFileEmpty}) => {
+  create: ({text, id, from, to, audioSettings, headColors, isFileEmpty}) => {
     const method = `POST`;
     // const newFileName = `${id.split(` `).join(`_`)}`;
     const body = new FormData();
@@ -30,7 +30,7 @@ export default {
     return fetch(`${url}/${id}`, {method}).then(r => r.json());
   },
 
-  update: ({text, id, from, to, audioSettings, headColors, isFileEmpty}) => {
+  update: ({text, id, from, to, audioSettings, headColors, isFileEmpty}) => {
     const method = `PUT`;
     const body = new FormData();
     body.append(`text`, text);

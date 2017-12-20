@@ -3,25 +3,25 @@ class Star {
   constructor() {
     this.mesh = new THREE.Object3D();
 
-    let pts = [],
+    const pts = [],
       numPts = 5;
-    for (let i = 0; i < numPts * 2; i++) {
-      let l = i % 2 == 1
+    for (let i = 0;i < numPts * 2;i ++) {
+      const l = i % 2 === 1
         ? 1
         : 2;
-      let a = i / numPts * Math.PI;
+      const a = i / numPts * Math.PI;
       pts.push(new THREE.Vector2(Math.cos(a) * l, Math.sin(a) * l));
     }
-    let starShape = new THREE.Shape(pts);
+    const starShape = new THREE.Shape(pts);
 
-    let extrudeSettings = {
+    const extrudeSettings = {
       amount: 0.5,
       steps: 1,
       bevelEnabled: false
     };
-    let starGeom = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
-    let mat = new THREE.MeshLambertMaterial({color: Colors.glasses, flatShading: true})
-    let star = new THREE.Mesh(starGeom, mat);
+    const starGeom = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
+    const mat = new THREE.MeshLambertMaterial({color: Colors.glasses, flatShading: true});
+    const star = new THREE.Mesh(starGeom, mat);
     star.rotation.x = Math.PI / 2;
     this.mesh.add(star);
   }

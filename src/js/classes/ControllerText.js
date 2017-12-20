@@ -1,7 +1,7 @@
 import Colors from '../objects/colors';
 
 class ControllerText {
-  constructor (){
+  constructor () {
     this.skin = Colors.skin;
     this.freckles = Colors.freckles;
     this.eye = Colors.eye;

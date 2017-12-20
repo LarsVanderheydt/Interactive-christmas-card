@@ -1,0 +1,14 @@
+{
+  "extends": "devine/react",
+  "globals": {
+    "THREE": true,
+    "particlesJS": true,
+    "dat": true,
+    "BufferLoader": true,
+    "webkitSpeechRecognitionEvent": true,
+    "webkitSpeechGrammarList": true,
+    "webkitSpeechRecognition": true,
+    "ThreeBSP": true,
+    "TweenMax": true
+  }
+}

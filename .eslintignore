@@ -1,0 +1,3 @@
+/server/public/*
+/src/js/vendors/*
+/src/js/objects/getUrlParameter.js

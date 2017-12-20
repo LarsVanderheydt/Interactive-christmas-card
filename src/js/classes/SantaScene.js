@@ -3,16 +3,14 @@ import Colors from '../objects/colors';
 import HeartsGroup from './HeartsGroup';
 
 let scene, camera, fieldOfView, aspectRatio, nearPlane, farPlane, HEIGHT, WIDTH;
-let globalLight, shadowLight, backLight, light, renderer, container, loaded;
+let globalLight, shadowLight, backLight, renderer, container;
 let head, windowHalfX, windowHalfY;
 let spinningShapes;
 
-let mousePos = { x: 0, y: 0};
-let onErrorPage = false;
-let onHome, isBlinking = false;
+let mousePos = {x: 0, y: 0};
+let isBlinking = false;
 
-let loaderManager = new THREE.LoadingManager();
-let isMobile = /iPhone|Android/i.test(navigator.userAgent);
+const isMobile = /iPhone|Android/i.test(navigator.userAgent);
 
 class SantaScene {
   constructor() {
@@ -25,14 +23,14 @@ class SantaScene {
     window.scene = scene;
   }
 
-  createShapes(type = 'hearts') {
+  createShapes(type = `hearts`) {
     spinningShapes = new HeartsGroup(type);
     scene.add(spinningShapes.mesh);
   }
 
   startSpinning() {
-    spinningShapes.spinScale()
-  };
+    spinningShapes.spinScale();
+  }
 
   setColors(data) {
     const headColors = JSON.parse(data.headColors);
@@ -50,7 +48,7 @@ class SantaScene {
     const loader = new THREE.FontLoader();
     const mesh = new THREE.Object3D();
 
-    loader.load('/assets/helvetiker_bold.typeface.json', function(font) {
+    loader.load(`/assets/helvetiker_bold.typeface.json`, function(font) {
 
       const skinMat = new THREE.MeshLambertMaterial({color: 0xe9ebee, flatShading: true});
       const fontSettings = {
@@ -59,10 +57,10 @@ class SantaScene {
         height: 2,
         curveSegments: 12,
         bevelEnabled: false
-      }
+      };
 
-      const firstGeom = new THREE.TextGeometry('404 Santa', fontSettings);
-      const secondGeom = new THREE.TextGeometry('is a bit confused', fontSettings);
+      const firstGeom = new THREE.TextGeometry(`404 Santa`, fontSettings);
+      const secondGeom = new THREE.TextGeometry(`is a bit confused`, fontSettings);
 
       const first = new THREE.Mesh(firstGeom, skinMat);
       const second = new THREE.Mesh(secondGeom, skinMat);
@@ -72,26 +70,26 @@ class SantaScene {
 
       first.position.y = 5;
       first.position.x = 4;
-      mesh.position.y = -4;
-      mesh.rotation.y = -0.3;
+      mesh.position.y = - 4;
+      mesh.rotation.y = - 0.3;
       scene.add(mesh);
     });
   }
 
   senderState() {
-    let xTarget = (mousePos.x - windowHalfX);
-    let yTarget = (mousePos.y - windowHalfY);
+    const xTarget = (mousePos.x - windowHalfX);
+    const yTarget = (mousePos.y - windowHalfY);
 
     head.sender(xTarget, yTarget);
   }
 
   recieverState() {
-    let xTarget = (mousePos.x - windowHalfX - 40);
-    let yTarget = (mousePos.y - windowHalfY);
+    const xTarget = (mousePos.x - windowHalfX - 40);
+    const yTarget = (mousePos.y - windowHalfY);
     head.reciever(xTarget, yTarget);
   }
 
-  createScene(){;
+  createScene() {
     HEIGHT = window.innerHeight;
     WIDTH = window.innerWidth;
 
@@ -107,20 +105,20 @@ class SantaScene {
     camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
     camera.position.x = 0;
     camera.position.z = 70;
-    camera.position.y = -5;
+    camera.position.y = - 5;
 
     renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
-    renderer.setPixelRatio(window.devicePixelRatio? window.devicePixelRatio: 1)
+    renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
     renderer.setSize(WIDTH, HEIGHT);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    container = document.getElementById('container')
+    container = document.getElementById(`container`);
     container.appendChild(renderer.domElement);
-    window.addEventListener('resize', () => {
+    window.addEventListener(`resize`, () => {
       this.onWindowResize();
     }, false);
-    document.addEventListener('mousemove', () => {
+    document.addEventListener(`mousemove`, () => {
       this.handleMouseMove();
     }, false);
   }
@@ -135,14 +133,14 @@ class SantaScene {
     camera.updateProjectionMatrix();
   }
 
-  handleMouseMove(e) {
+  handleMouseMove() {
     mousePos = {
       x: event.clientX,
       y: event.clientY
     };
   }
 
-  handleWindowResize(e) {
+  handleWindowResize() {
     HEIGHT = window.innerHeight;
     WIDTH = window.innerWidth;
     renderer.setSize(WIDTH, HEIGHT);
@@ -158,7 +156,7 @@ class SantaScene {
     shadowLight.castShadow = true;
 
     backLight = new THREE.DirectionalLight(0xffffff, .2);
-    backLight.position.set(-100, 200, 150);
+    backLight.position.set(- 100, 200, 150);
     backLight.castShadow = true;
 
     if (isMobile) shadowLight.shadow.mapSize.width = shadowLight.shadow.mapSize.height = 1024;
@@ -167,7 +165,7 @@ class SantaScene {
     scene.add(globalLight);
     scene.add(shadowLight);
     scene.add(backLight);
-    scene.add( new THREE.AmbientLight( 0xeadead, 0.1 ));
+    scene.add(new THREE.AmbientLight(0xeadead, 0.1));
   }
 
   blinkLoop() {
@@ -193,7 +191,7 @@ class SantaScene {
 
   createHead() {
     scene.remove(head.mesh);
-    head.name = "Head";
+    head.name = `Head`;
     head = new Head();
     scene.add(head.mesh);
   }

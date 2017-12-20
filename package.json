@@ -12,6 +12,9 @@
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.17",
+    "eslint": "^4.13.1",
+    "eslint-config-devine": "^1.7.1",
+    "eslint-loader": "^1.9.0",
     "rimraf": "^2.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.1"
@@ -38,6 +41,7 @@
     "lodash": "^4.17.4",
     "mongoose": "^4.13.6",
     "nodemon": "^1.12.5",
+    "postcss": "^6.0.14",
     "postcss-cssnext": "^3.0.2",
     "postcss-loader": "^2.0.9",
     "postcss-reporter": "^5.0.0",

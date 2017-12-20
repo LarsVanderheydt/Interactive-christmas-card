@@ -1,4 +1,3 @@
-import Head from './classes/Head';
 import Colors from './objects/colors';
 import Audio from './classes/Audio.js';
 import CardAPI from './lib/cardAPI';
@@ -14,14 +13,11 @@ import ControllerText from './classes/ControllerText';
   // vars for dat.gui
   let controller, gui;
 
-  let mousePos = { x: 0, y: 0};
-
-  let starArray = [];
   let saved = false;
 
   const init = () => {
     // create snow
-    particlesJS.load('particles-js', '../assets/particles.json');
+    particlesJS.load(`particles-js`, `../assets/particles.json`);
 
     santaScene = new SantaScene();
     audio = new Audio(); // handle audio and speechrecognition
@@ -32,14 +28,14 @@ import ControllerText from './classes/ControllerText';
     });
 
     controller = new ControllerText();
-    guiController(['skin', 'freckles', 'eye', 'glasses', 'hat']); // add gui for array object and set colors on color change
+    guiController([`skin`, `freckles`, `eye`, `glasses`, `hat`]); // add gui for array object and set colors on color change
 
     loop();
   };
 
   const guiController = keys => {
     gui = new dat.GUI();
-    gui.domElement.id = 'gui';
+    gui.domElement.id = `gui`;
     gui.closed = true;
 
     keys.forEach(key => {
@@ -47,17 +43,27 @@ import ControllerText from './classes/ControllerText';
 
         // set right color for material
         switch (key) {
-          case 'skin': Colors.skin = controller.skin;
-          case 'freckles': Colors.freckles = controller.freckles;
-          case 'eye': Colors.eye = controller.eye;
-          case 'glasses': Colors.glasses = controller.glasses;
-          case 'hat': Colors.hat = controller.hat;
+        case `skin`:
+          Colors.skin = controller.skin;
+          break;
+        case `freckles`:
+          Colors.freckles = controller.freckles;
+          break;
+        case `eye`:
+          Colors.eye = controller.eye;
+          break;
+        case `glasses`:
+          Colors.glasses = controller.glasses;
+          break;
+        case `hat`:
+          Colors.hat = controller.hat;
+          break;
         }
 
         santaScene.createHead();
       });
     });
-  }
+  };
 
   const handleSave = () => {
     const from = document.getElementById(`name_input`);
@@ -67,7 +73,7 @@ import ControllerText from './classes/ControllerText';
     const audioSettings = {
       pitch: audio.pitchRatio,
       overlap: audio.overlap
-    }
+    };
 
     const headColors = {
       skin: Colors.skin,
@@ -75,17 +81,17 @@ import ControllerText from './classes/ControllerText';
       eye: Colors.eye,
       glasses: Colors.glasses,
       hat: Colors.hat
-    }
+    };
 
     const data = {
-      text: audio.txt || 'Play audio message below',
+      text: audio.txt || `Play audio message below`,
       id: audio.id,
-      from: from.value || 'Human',
-      to: to.value || 'Fellow Human',
+      from: from.value || `Human`,
+      to: to.value || `Fellow Human`,
       audioSettings: JSON.stringify(audioSettings),
       headColors: JSON.stringify(headColors),
       isFileEmpty: audio.isFileEmpty
-    }
+    };
 
     // when clicking on save, first time save the object, second time update the saved object
     if (!saved) {
@@ -96,9 +102,9 @@ import ControllerText from './classes/ControllerText';
     }
 
     link.innerHTML = `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`;
-    link.setAttribute('href', `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`);
-    link.setAttribute('target', `_blank`);
-  }
+    link.setAttribute(`href`, `https://experimentalweb.herokuapp.com/santa.html?id=${audio.id}`);
+    link.setAttribute(`target`, `_blank`);
+  };
 
   const loop = () => {
 
@@ -107,7 +113,7 @@ import ControllerText from './classes/ControllerText';
     santaScene.render();
 
     requestAnimationFrame(loop);
-  }
+  };
 
   init();
 }

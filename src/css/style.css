@@ -353,3 +353,13 @@ a {
   right: 2rem;
   width: 30rem;
 }
+
+.admin_row {
+  display: flex;
+  width: 100vw;
+  justify-content:space-between;
+
+  p {
+    color: red;
+  }
+}
