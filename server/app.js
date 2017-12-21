@@ -1,42 +1,41 @@
-const path = require('path');
-const fs = require('fs');
-const Hapi = require('hapi');
-const inert = require('inert');
-const Mongoose = require('mongoose');
-const CardAPI = require('./routes/api/CardAPI');
-const SoundAPI = require('./routes/api/SoundAPI');
+const path = require(`path`);
+const fs = require(`fs`);
+const Hapi = require(`hapi`);
+const inert = require(`inert`);
+const Mongoose = require(`mongoose`);
+const CardAPI = require(`./routes/api/CardAPI`);
+const SoundAPI = require(`./routes/api/SoundAPI`);
 const server = new Hapi.Server();
 require(`dotenv`).load({silent: true});
 
 const {PORT = 8080, URL, MONGO_URL} = process.env;
 
 let tls = false;
-  if (process.env.NODE_ENV === 'development') {
-   tls = {
-     key: fs.readFileSync('./config/sslcerts/key.pem'),
-     cert: fs.readFileSync('./config/sslcerts/cert.pem')
+if (process.env.NODE_ENV === `development`) {
+  tls = {
+    key: fs.readFileSync(`./config/sslcerts/key.pem`),
+    cert: fs.readFileSync(`./config/sslcerts/cert.pem`)
   };
 
   server.connection({
     port: process.env.PORT || 8080,
     tls,
-    host: '0.0.0.0'
+    host: `0.0.0.0`
   });
 } else {
   server.connection({
-    port: process.env.PORT || 8080,
-    tls
+    port: process.env.PORT || 8080
   });
 }
 
 
 
-Mongoose.connect(MONGO_URL, {'useMongoClient': true});
+Mongoose.connect(MONGO_URL, {useMongoClient: true});
 
 const db = Mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', function callback() {
-    console.log('Connection with database succeeded.');
+db.on(`error`, console.error.bind(console, `connection error`));
+db.once(`open`, function callback() {
+  console.log(`Connection with database succeeded.`);
 });
 
 server.start(err => {
@@ -54,7 +53,7 @@ server.register(inert, err => {
   server.route(SoundAPI),
 
   server.route({
-    method: 'GET',
+    method: `GET`,
     path: `/uploads/{params*}`,
     handler: {
       directory: {
@@ -64,7 +63,7 @@ server.register(inert, err => {
   }),
 
   server.route({
-    method: 'GET',
+    method: `GET`,
     path: `/{params*}`,
     handler: {
       directory: {
