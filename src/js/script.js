@@ -69,6 +69,7 @@ import ControllerText from './classes/ControllerText';
     const from = document.getElementById(`name_input`);
     const to = document.getElementById(`recipient_input`);
     const link = document.querySelector(`.unique_link`);
+    const $text = document.getElementById(`field`);
 
     const audioSettings = {
       pitch: audio.pitchRatio,
@@ -84,7 +85,7 @@ import ControllerText from './classes/ControllerText';
     };
 
     const data = {
-      text: audio.txt || `Play audio message below`,
+      text: $text.value || `Play audio message below`,
       id: audio.id,
       from: from.value || `Human`,
       to: to.value || `Fellow Human`,
